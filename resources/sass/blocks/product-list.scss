@@ -1,0 +1,72 @@
+.products {
+    padding: 100px 0;
+    &__wrapper {
+        display: flex;
+        justify-content: flex-start;
+    }
+    &__filter {
+        min-width: 200px;
+        //border-right: 1px solid $text-grey;
+    }
+    &__list {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
+.product {
+    width: 200px;
+    margin: 0 20px 40px 20px;
+    padding: 10px 5px;
+    //outline: 1px solid red;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: $hover-transition;
+    &:hover {
+        box-shadow: -2px 1px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+    &__img {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        img {
+            width: 100%;
+        }
+    }
+    &__name {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    &__price {
+        margin-bottom: 10px;
+    }
+    &__btn {
+        color: #fff;
+        text-align: center;
+    }
+}
+.products__form {
+    fieldset {
+        border: none;
+        display: flex;
+        flex-flow: column;
+    }
+    legend {
+        display: block;
+        font-size: 18px;
+        margin: 10px 0;
+        font-weight: 700;
+    }
+    input[type="checkbox"] {
+        margin: 0 20px 20px 0;
+    }
+}
+@media (max-width: 902px) {
+    .product {
+        width: 130px;
+    }
+}

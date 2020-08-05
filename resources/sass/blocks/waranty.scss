@@ -1,0 +1,18 @@
+.waranty {
+    padding: 70px 0 70px 0;
+    &__wrapper {
+    }
+    .section__title {
+        margin: 40px 0;
+    }
+    &__image {
+        min-height: 200px;
+    }
+    &__text {
+        & > p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+    }
+}

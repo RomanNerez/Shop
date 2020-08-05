@@ -1,0 +1,109 @@
+.touch {
+    padding: 70px;
+    background: url("../img/contacts-bg.jpg") no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    .section__title h3,
+    .section__title p {
+        color: #fff;
+    }
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 30px 0;
+    }
+    &__item {
+        position: relative;
+        width: 270px;
+        background-color: $main-color;
+        color: #fff;
+        margin: 20px 5px;
+        padding: 50px 50px;
+        h4 {
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.8;
+            text-align: center;
+        }
+    }
+    &__img {
+        position: absolute;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-25px);
+        background-color: $text-red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            width: 30px;
+            height: 25px;
+            fill: #fff;
+        }
+    }
+}
+.questions {
+    padding: 70px 0;
+    .section__title {
+        margin-bottom: 30px;
+    }
+    &__form {
+        form {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            min-width: 100%;
+        }
+
+        input {
+            flex-basis: 33%;
+            flex-flow: row;
+        }
+        input,
+        textarea {
+            background-color: #e7e3e3;
+            border: none;
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+        textarea {
+            flex-basis: 100%;
+        }
+    }
+    &__btn {
+        color: #fff;
+        margin: 20px auto 0 auto;
+        border: none;
+    }
+}
+.map {
+    &__wrapper {
+        min-height: 300px;
+        padding: 50px 0;
+        background: url("../img/map-bg.jpg") no-repeat;
+        background-size: cover;
+    }
+}
+@media (max-width: 902px) {
+    .touch {
+        padding: 70px 0;
+        &__item {
+            width: 100%;
+        }
+    }
+    .questions {
+        &__form {
+            input {
+                flex-basis: 100%;
+            }
+        }
+    }
+}

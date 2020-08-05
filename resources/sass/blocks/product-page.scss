@@ -1,0 +1,122 @@
+.item {
+  background-color: #fff;
+  padding: 50px 0;
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 300px;
+  }
+  &__gallery {
+    flex-basis: 50%;
+    width: 50%;
+    min-width: 500px;
+    text-align: center;
+    //outline: 1px solid red;
+    img {
+      height: 500px;
+    }
+  }
+  &__info {
+    padding: 20px;
+    flex-basis: 50%;
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    & > * {
+      margin-bottom: 20px;
+    }
+  }
+  &__name {
+    font-size: 24px;
+  }
+  &__description {
+    line-height: 1.8;
+  }
+  &__features {
+    line-height: 1.8;
+    span {
+      margin-left: 50px;
+      font-weight: 700;
+    }
+  }
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    & > * {
+      margin: 0 5px;
+    }
+  }
+  &__cart {
+    text-align: center;
+    color: #fff;
+    border: none;
+  }
+  &__purchase {
+    text-align: center;
+    color: #fff;
+    background-color: $text-red;
+    &:hover {
+      background-color: darken($text-red, 10);
+    }
+  }
+  &__quantity {
+    display: flex;
+    align-items: center;
+    span {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      background-color: #fff;
+      border: 1px solid $text-grey;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  &__slider {
+    position: relative;
+    z-index: 0;
+    .slick-track {
+      display: flex;
+      width: 100%;
+    }
+    .slick-list {
+      overflow: hidden;
+    }
+    .slick-slide {
+      cursor: pointer;
+    }
+  }
+  &__thumbnails {
+    margin-top: 30px;
+    .slick-track {
+      display: flex;
+      width: 100%;
+    }
+    .slick-list {
+      overflow: hidden;
+    }
+    .slick-slide {
+      //max-width: 100px;
+      a {
+        cursor: pointer;
+      }
+      img {
+        height: 100px;
+      }
+    }
+  }
+}
+.up-sell {
+  padding: 50px;
+  &__wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+}
