@@ -36,7 +36,7 @@
                                         <svg>
                                             <use xlink:href="#telegram"></use>
                                         </svg>
-                                        info@sitename.com
+                                        yuriy.zieit@gmail.com
                                     </a>
                                 </li>
                             </ul>
