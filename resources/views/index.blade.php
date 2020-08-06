@@ -51,7 +51,7 @@
                                         </svg>
                                         Вхiд / <span> Реєстрація</span></a>
                                     @else
-                                        <a href="{{route('home')}}" class="sign">{{ Auth::user()->name }}</a>
+                                        <a href="{{route(Auth::user()->role.'-home')}}" class="sign">{{ Auth::user()->name }}</a>
                                     @endguest
                                 </li>
                                 <li>
