@@ -20,7 +20,7 @@
                                         <svg>
                                             <use xlink:href="#globe"></use>
                                         </svg>
-                                        Русский язык
+                                        Русский
                                     </a>
                                 </li>
                                 <li>
