@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('css/style.css?v='.time()) }}" />
     </head>
     <body class="page__body">
-        <div class="page__wrapper">
+        <div id="app" class="page__wrapper">
             <header class="header">
                 <div class="header__top top">
                     <div class="container">
@@ -159,7 +159,9 @@
                             <svg>
                                 <use xlink:href="#cart"></use>
                             </svg>
-                            <span>1</span>
+                            <template>
+                                <span v-if="carts.length >= 1">@{{carts.length}}</span>
+                            </template>
                         </a>
                         <div class="cart__popup">
                             <p>

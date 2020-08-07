@@ -83,7 +83,13 @@
                     <button class="item__add">+</button>
                 </div>
                 <div class="item__buttons">
-                    <button type="button" class="item__cart btn">В кошик</button>
+                    <button type="button" class="item__cart btn"
+                        v-if="existsCart({{$product->id}})"
+                    >Добавленно в корзину</button>
+                    <button type="button" class="item__cart btn"
+                        v-else
+                        v-on:click="addToCart({{$product->id}})"
+                    >В кошик</button>
                     <a type="button" class="item__purchase btn">Купити</a>
                 </div>
             </div>

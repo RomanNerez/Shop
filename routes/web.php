@@ -23,8 +23,21 @@ Route::get('/category/{category}/subcatedory/{subcategory}', 'IndexController@pr
 Route::get('/about', 'IndexController@about')->name('about');
 Route::get('/blog', 'IndexController@blog')->name('blog');
 Route::get('/contacts', 'IndexController@contacts')->name('contacts');
-Route::get('/cart', 'IndexController@cart')->name('cart');
 Route::get('/waranty', 'IndexController@waranty')->name('waranty');
+
+Route::group(
+	[
+        'prefix' => 'cart',
+    ],
+	function () {
+		Route::namespace('Cart')->group(function () {
+			Route::get('/', 'CartController@index')->name('cart');
+			Route::post('/add', 'CartController@addCart');
+			Route::post('/all', 'CartController@allCarts');
+		});
+	}
+);
+
 
 Route::group(
 	[
@@ -51,7 +64,7 @@ Route::group(
     	
 	}
 );
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 
 

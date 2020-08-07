@@ -9,8 +9,12 @@
                 <div class="purchase__title">
                     <h4>Корзина</h4>
                 </div>
-                <ul class="purchase__list">
-                    <li class="purchase__item">
+                <ul class="purchase__list"
+                    v-if="carts"
+                >
+                    <li class="purchase__item"
+                        v-for="(item, index) in carts"
+                    >
                         <div class="purchase__icon">
                             <img
                                 src="img/product-2.jpg"
@@ -20,7 +24,7 @@
                         </div>
                         <div class="purchase__name">
                             <h4>
-                                Product name
+                                @{{item.title}}
                             </h4>
                         </div>
                         <div class="purchase__price">
@@ -41,11 +45,11 @@
                                 id="purchase__remove"
                                 title="Видалити товар"
                             ></button>
-                            <p>99.00 <span>грн.</span></p>
+                            <p>@{{item.price}} <span>грн.</span></p>
                         </div>
                     </li>
                 </ul>
-
+                <div v-else>Корзина пуста</div>
                 <div class="purchase__total">
                     <a class="backtomain" href="#"
                         >Продовжити шопiнг</a
