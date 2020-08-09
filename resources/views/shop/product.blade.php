@@ -77,18 +77,27 @@
                 <div class="item__price">
                     <p>Цiна: <span>{{$product->price}}</span>грн.</p>
                 </div>
-                <div class="item__quantity">
-                    <button class="item__delete">-</button>
-                        <span class="item__number">1</span>
-                    <button class="item__add">+</button>
+                <div class="item__quantity"
+                    v-if="!existsCart({{$product->id}})"
+                >
+                    <button class="item__delete"
+                        :disabled="countCart <= 1"
+                        v-on:click="countCart--"
+                    >-</button>
+                        <span class="item__number">@{{countCart}}</span>
+                    <button class="item__add"
+                        v-on:click="countCart++"
+                    >+</button>
                 </div>
                 <div class="item__buttons">
                     <button type="button" class="item__cart btn"
                         v-if="existsCart({{$product->id}})"
-                    >Добавленно в корзину</button>
+                    >
+                        <a href="{{route('cart')}}">Добавленно в корзину</a>
+                    </button>
                     <button type="button" class="item__cart btn"
                         v-else
-                        v-on:click="addToCart({{$product->id}})"
+                        v-on:click="addToCart({{$product->id}}, countCart)"
                     >В кошик</button>
                     <a type="button" class="item__purchase btn">Купити</a>
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Cart\CollectionsCartRepository;
 use App\Repositories\Cart\AddCartRepository;
+use App\Repositories\Cart\DeleteCartRepository;
 use Auth;
 
 class CartController extends Controller
@@ -17,13 +18,14 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-        //$item = 
         return view('shop.cart');
     }
 
     public function addCart(Request $request)
     {
-        $addCart = new AddCartRepository($request->input('id'));
+        $data = $request->input('input');
+        $addCart = new AddCartRepository($data['id'], $data['count']);
+        $addCart->setCountSession();
         return response()->json([
             'status' => 200,
             'done' => 1,
@@ -35,7 +37,7 @@ class CartController extends Controller
         return response()->json([
             'status' => 200,
             'done' => 1,
-            'items' => CollectionsCartRepository::getProduct()
+            'items' => CollectionsCartRepository::getProducts()
         ]);
     }
 
@@ -100,8 +102,13 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        $cart = new DeleteCartRepository($request->input('id'));
+        $cart->deleteCart();
+        return response()->json([
+            'status' => 200,
+            'done' => 1
+        ]);
     }
 }

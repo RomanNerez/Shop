@@ -104,25 +104,59 @@ window.axios = require('axios');
 new Vue({
 	el: '#app',
 	data:{
-        carts: []
+        carts: [],
+        countCart: 1 
 	},
     mounted: function(){
         this.loadCart();
     },
-	methods:{
-		addToCart: async function (id){
-            if(this.existsCart(id)){
-                return;
+    computed:{
+        summeryCart: function (){
+            let count = 0, fullPrice=0.00;
+            if(this.carts.length){
+                this.carts.forEach(item=>{
+                    count += item.count;
+                    fullPrice += item.count * item.price;
+                });
+                return {
+                    allCount: count,
+                    allPrice: Math.trunc((fullPrice*100)) / 100
+                }
             }
-			await axios.post('/cart/add',{id})
-				.then(responce=>{
-                    if(responce.data.item){
-                        this.carts.push(responce.data.item);
-                    }
-				}).catch(err =>{
-					console.log(err);
-				})
+            return {
+                allPrice: fullPrice
+            }
+        }
+    },
+	methods:{
+		addToCart: async function (id, count){
+			await axios.post('/cart/add',{
+                input: {
+                    id, 
+                    count
+                }
+            }).then(responce=>{
+                if(responce.data.item){
+                    this.carts.push(responce.data.item);
+                }
+			}).catch(err =>{
+				console.log(err);
+			})
 		},
+        removeCart: async function (id){
+            await axios.post('/cart/delete',{id})
+                .then(responce=>{
+                    if(responce.data.done){
+                        for(let i = 0; i < this.carts.length; i++){
+                            if(this.carts[i].id === id){
+                                this.carts.splice(i,1);
+                            }
+                        }
+                    }
+                }).catch(err =>{
+                    console.log(err);
+                })
+        },
         existsCart: function (id){
             for(let i = 0; i < this.carts.length; i++){
                 let item = this.carts[i];
@@ -136,7 +170,11 @@ new Vue({
             await axios.post('/cart/all')
                 .then(responce=>{
                     if(responce.data.done){
-                        this.carts = responce.data.items;
+                        if(responce.data.items){
+                            this.carts = responce.data.items;
+                            return;
+                        }
+                        this.carts = [];
                     }
                 }).catch(err =>{
                     console.log(err);

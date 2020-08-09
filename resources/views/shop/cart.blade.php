@@ -10,7 +10,7 @@
                     <h4>Корзина</h4>
                 </div>
                 <ul class="purchase__list"
-                    v-if="carts"
+                    v-if="carts.length"
                 >
                     <li class="purchase__item"
                         v-for="(item, index) in carts"
@@ -29,13 +29,18 @@
                         </div>
                         <div class="purchase__price">
                             <div class="purchase__counter">
-                                <button class="purchase__btn">
+                                <button class="purchase__btn"
+                                    :disabled="item.count <= 1"
+                                    v-on:click="addToCart(item.id, --item.count)"
+                                >
                                     -
                                 </button>
                                 <span class="purchase__summ"
-                                    >1</span
+                                    >@{{item.count}}</span
                                 >
-                                <button class="purchase__btn">
+                                <button class="purchase__btn"
+                                    v-on:click="addToCart(item.id, ++item.count)"
+                                >
                                     +
                                 </button>
                             </div>
@@ -43,6 +48,7 @@
                                 class="purchase__remove"
                                 type="button"
                                 id="purchase__remove"
+                                v-on:click="removeCart(item.id)"
                                 title="Видалити товар"
                             ></button>
                             <p>@{{item.price}} <span>грн.</span></p>
@@ -54,7 +60,7 @@
                     <a class="backtomain" href="#"
                         >Продовжити шопiнг</a
                     >
-                    <p>Всього: <span>99</span>грн.</p>
+                    <p>Всього: <span>@{{summeryCart.allPrice}}</span>грн.</p>
                 </div>
             </div>
             <div class="checkout">

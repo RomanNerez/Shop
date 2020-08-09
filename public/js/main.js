@@ -15270,31 +15270,48 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 new Vue({
   el: '#app',
   data: {
-    carts: []
+    carts: [],
+    countCart: 1
   },
   mounted: function mounted() {
     this.loadCart();
   },
+  computed: {
+    summeryCart: function summeryCart() {
+      var count = 0,
+          fullPrice = 0.00;
+
+      if (this.carts.length) {
+        this.carts.forEach(function (item) {
+          count += item.count;
+          fullPrice += item.count * item.price;
+        });
+        return {
+          allCount: count,
+          allPrice: Math.trunc(fullPrice * 100) / 100
+        };
+      }
+
+      return {
+        allPrice: fullPrice
+      };
+    }
+  },
   methods: {
     addToCart: function () {
-      var _addToCart = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
+      var _addToCart = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id, count) {
         var _this = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!this.existsCart(id)) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt("return");
-
-              case 2:
-                _context.next = 4;
+                _context.next = 2;
                 return axios.post('/cart/add', {
-                  id: id
+                  input: {
+                    id: id,
+                    count: count
+                  }
                 }).then(function (responce) {
                   if (responce.data.item) {
                     _this.carts.push(responce.data.item);
@@ -15303,19 +15320,56 @@ new Vue({
                   console.log(err);
                 });
 
-              case 4:
+              case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee);
       }));
 
-      function addToCart(_x) {
+      function addToCart(_x, _x2) {
         return _addToCart.apply(this, arguments);
       }
 
       return addToCart;
+    }(),
+    removeCart: function () {
+      var _removeCart = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post('/cart/delete', {
+                  id: id
+                }).then(function (responce) {
+                  if (responce.data.done) {
+                    for (var i = 0; i < _this2.carts.length; i++) {
+                      if (_this2.carts[i].id === id) {
+                        _this2.carts.splice(i, 1);
+                      }
+                    }
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function removeCart(_x3) {
+        return _removeCart.apply(this, arguments);
+      }
+
+      return removeCart;
     }(),
     existsCart: function existsCart(id) {
       for (var i = 0; i < this.carts.length; i++) {
@@ -15329,17 +15383,22 @@ new Vue({
       return false;
     },
     loadCart: function () {
-      var _loadCart = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this2 = this;
+      var _loadCart = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this3 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
+                _context3.next = 2;
                 return axios.post('/cart/all').then(function (responce) {
                   if (responce.data.done) {
-                    _this2.carts = responce.data.items;
+                    if (responce.data.items) {
+                      _this3.carts = responce.data.items;
+                      return;
+                    }
+
+                    _this3.carts = [];
                   }
                 })["catch"](function (err) {
                   console.log(err);
@@ -15347,10 +15406,10 @@ new Vue({
 
               case 2:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }));
 
       function loadCart() {
