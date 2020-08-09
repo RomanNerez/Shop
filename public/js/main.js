@@ -15268,7 +15268,7 @@ var Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 new Vue({
-  el: '#app',
+  el: "#app",
   data: {
     carts: []
   },
@@ -15293,7 +15293,7 @@ new Vue({
 
               case 2:
                 _context.next = 4;
-                return axios.post('/cart/add', {
+                return axios.post("/cart/add", {
                   id: id
                 }).then(function (responce) {
                   if (responce.data.item) {
@@ -15337,9 +15337,13 @@ new Vue({
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.post('/cart/all').then(function (responce) {
+                return axios.post("/cart/all").then(function (responce) {
                   if (responce.data.done) {
-                    _this2.carts = responce.data.items;
+                    if (responce.data.items === null) {
+                      _this2.carts = [];
+                    } else {
+                      _this2.carts = responce.data.items;
+                    }
                   }
                 })["catch"](function (err) {
                   console.log(err);
@@ -15382,8 +15386,8 @@ new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Shop\resources\js\main.js */"./resources/js/main.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Shop\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/sass/style.scss */"./resources/sass/style.scss");
 
 
 /***/ })
