@@ -12,7 +12,7 @@
         <div id="app" class="page__wrapper">
             <header class="header">
                 <div class="header__top top">
-                <div class="loader"></div>
+                <div class="loader active"></div>
                     <div class="container">
                         <div class="top__right">
                             <ul>
