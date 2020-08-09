@@ -42,16 +42,16 @@ class AddCartRepository extends CoreRepository
     {
         $data = session('cart');
         $arr = [ 'id' => $this->id, 'count' => $this->count ];
+
         if(!empty($data)){
-            foreach($data as $value) {
-                if(in_array($this->id, $value)){
+            foreach($data as $value) { 
+                if($this->id === $value['id']){
                     return false;
-                }else{
-                    $data[] = $arr;
-                    session()->put('cart', $data);
-                    return true;
                 }
             }
+            $data[] = $arr;
+            session()->put('cart', $data);
+            return true;
         }else{
             $data[] = $arr;
             session()->put('cart', $data);
