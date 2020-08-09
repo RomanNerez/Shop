@@ -18,32 +18,59 @@ class AddCartRepository extends CoreRepository
 
     protected function addCartInSession()
     {
-
         if(session()->has('cart')){
-            $data = session('cart');
-            if(in_array($this->id, $data)){
-                return false;
-            }else{
-                $data[] = $this->id;
-                session()->put('cart', $data);
-                return true;
-            }
+            return $this->existsValue();
         }else{
-            $data = [$this->id];
+            $data = [ [ 'id' => $this->id, 'count' => $this->count ] ];
             session()->put('cart', $data);
             return true;
         }
-        
     }
 
     protected function getCartSession()
     {
         if($this->addCartInSession()){
-            return Products::where('id', $this->id)->first();
+            $product = Products::where('id', $this->id)->first();
+            $product->count = $this->count;
+            return $product;
         }else{
             return null;
         }
     }
 
+    protected function existsValue()
+    {
+        $data = session('cart');
+        $arr = [ 'id' => $this->id, 'count' => $this->count ];
+        if(!empty($data)){
+            foreach($data as $value) {
+                if(in_array($this->id, $value)){
+                    return false;
+                }else{
+                    $data[] = $arr;
+                    session()->put('cart', $data);
+                    return true;
+                }
+            }
+        }else{
+            $data[] = $arr;
+            session()->put('cart', $data);
+            return true;
+        }
+        
+        
+        
+    }
+
+    public function setCountSession()
+    {
+        $data = session('cart');
+        foreach($data as &$value) {
+            if(in_array($this->id, $value)){
+                $value['count'] = $this->count;
+            }
+        }
+        session()->put('cart', $data);
+    }
 
 } 

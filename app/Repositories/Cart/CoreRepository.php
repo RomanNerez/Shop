@@ -13,10 +13,12 @@ abstract class CoreRepository
 	protected $request;
 	protected $sessionCart;
 	protected $id;
+	protected $count;
 
-	public function __construct($id)
+	public function __construct($id, $count=1)
 	{	
 		$this->id = $id;
+		$this->count = $count;
 		$this->userAuth = Auth::check();
 		$this->carts = new Cart();
 

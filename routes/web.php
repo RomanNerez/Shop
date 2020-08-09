@@ -33,6 +33,7 @@ Route::group(
 		Route::namespace('Cart')->group(function () {
 			Route::get('/', 'CartController@index')->name('cart');
 			Route::post('/add', 'CartController@addCart');
+			Route::post('/delete', 'CartController@delete');
 			Route::post('/all', 'CartController@allCarts');
 		});
 	}

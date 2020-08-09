@@ -161,14 +161,14 @@
                                 <use xlink:href="#cart"></use>
                             </svg>
                             <template>
-                                <span v-if="carts.length >= 1">@{{carts.length}}</span>
+                                <span v-if="carts.length >= 1">@{{summeryCart.allCount}}</span>
                             </template>
                         </a>
                         <div class="cart__popup">
                             <p>
-                                <span class="cart__popup-total"> 1 </span> товар
+                                <span class="cart__popup-total">@{{carts.length}}</span> товар
                                 на сумму
-                                <span class="cart__popup-price">99.00 </span
+                                <span class="cart__popup-price">@{{summeryCart.allPrice}}</span
                                 >грн.
                             </p>
                             <a href="{{route('cart')}}" class="btn cart__popup-btn"

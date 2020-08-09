@@ -98,6 +98,7 @@ var Vue = require("vue");
 window.axios = require("axios");
 
 new Vue({
+<<<<<<< HEAD
     el: "#app",
     data: {
         carts: []
@@ -123,6 +124,65 @@ new Vue({
         },
         existsCart: function(id) {
             for (let i = 0; i < this.carts.length; i++) {
+=======
+	el: '#app',
+	data:{
+        carts: [],
+        countCart: 1 
+	},
+    mounted: function(){
+        this.loadCart();
+    },
+    computed:{
+        summeryCart: function (){
+            let count = 0, fullPrice=0.00;
+            if(this.carts.length){
+                this.carts.forEach(item=>{
+                    count += item.count;
+                    fullPrice += item.count * item.price;
+                });
+                return {
+                    allCount: count,
+                    allPrice: Math.trunc((fullPrice*100)) / 100
+                }
+            }
+            return {
+                allPrice: fullPrice
+            }
+        }
+    },
+	methods:{
+		addToCart: async function (id, count){
+			await axios.post('/cart/add',{
+                input: {
+                    id, 
+                    count
+                }
+            }).then(responce=>{
+                if(responce.data.item){
+                    this.carts.push(responce.data.item);
+                }
+			}).catch(err =>{
+				console.log(err);
+			})
+		},
+        removeCart: async function (id){
+            await axios.post('/cart/delete',{id})
+                .then(responce=>{
+                    if(responce.data.done){
+                        for(let i = 0; i < this.carts.length; i++){
+                            if(this.carts[i].id === id){
+                                this.carts.splice(i,1);
+                            }
+                        }
+                    }
+                }).catch(err =>{
+                    console.log(err);
+                })
+        },
+        existsCart: function (id){
+            for(let i = 0; i < this.carts.length; i++){
+>>>>>>> 6f03e58f1fbe50cfa3ec903354f3eed5bbd119e2
                 let item = this.carts[i];
                 if (item.id === id) {
                     return true;
@@ -130,6 +190,7 @@ new Vue({
             }
             return false;
         },
+<<<<<<< HEAD
         loadCart: async function() {
             await axios
                 .post("/cart/all")
@@ -140,11 +201,26 @@ new Vue({
                         } else {
                             this.carts = responce.data.items;
                         }
+=======
+        loadCart: async function(){
+            await axios.post('/cart/all')
+                .then(responce=>{
+                    if(responce.data.done){
+                        if(responce.data.items){
+                            this.carts = responce.data.items;
+                            return;
+                        }
+                        this.carts = [];
+>>>>>>> 6f03e58f1fbe50cfa3ec903354f3eed5bbd119e2
                     }
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
+<<<<<<< HEAD
     }
+=======
+	}
+>>>>>>> 6f03e58f1fbe50cfa3ec903354f3eed5bbd119e2
 });
