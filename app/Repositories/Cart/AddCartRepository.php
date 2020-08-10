@@ -65,12 +65,16 @@ class AddCartRepository extends CoreRepository
     public function setCountSession()
     {
         $data = session('cart');
-        foreach($data as &$value) {
-            if(in_array($this->id, $value)){
-                $value['count'] = $this->count;
-            }
+        if(!empty($data)){
+            foreach($data as &$value) {
+                if(in_array($this->id, $value)){
+                    $value['count'] = $this->count;
+                }
+            } 
+            session()->put('cart', $data);
         }
-        session()->put('cart', $data);
+        
+        
     }
 
 } 
