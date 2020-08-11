@@ -25,7 +25,6 @@ class CartController extends Controller
     {
         $data = $request->input('input');
         $addCart = new AddCartRepository($data['id'], $data['count']);
-        $addCart->setCountSession();
         return response()->json([
             'status' => 200,
             'done' => 1,

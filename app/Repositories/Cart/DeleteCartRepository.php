@@ -9,7 +9,7 @@ class DeleteCartRepository extends CoreRepository
 	public function deleteCart()
 	{
         if($this->userAuth){
-
+            $this->deleteCartInDataBase();
         }else{
             return $this->deleteCartSession();
         }
@@ -32,5 +32,12 @@ class DeleteCartRepository extends CoreRepository
         }
     }
 
+    public function deleteCartInDataBase()
+    {
+        $this->carts->where([
+            ['users_id', $this->userAuth->id],
+            ['products_id', $this->id]
+        ])->delete();
+    }
 
 }

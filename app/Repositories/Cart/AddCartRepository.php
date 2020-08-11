@@ -9,12 +9,47 @@ class AddCartRepository extends CoreRepository
 	public function addCart()
 	{
         if($this->userAuth){
-
+            return $this->addCartInDataBase();
         }else{
+            $this->setCountSession();
             return $this->getCartSession();
         }
         
 	}
+
+    protected function addCartInDataBase()
+    {
+        $exists = $this->carts->where([
+            ['products_id', $this->id],
+            ['users_id', $this->userAuth->id]
+        ])->exists();
+
+        if(!$exists){
+            $this->carts->insert(
+                [
+                    'products_id' => $this->id,
+                    'count_product' => $this->count,
+                    'users_id' => $this->userAuth->id,
+                ]
+            );
+            $product = Products::where('id', $this->id)->first();
+            $product->count = $this->count;
+            return $product;
+        }else{
+            $this->incrementCartCount($exists);
+        }
+        return null;
+    }
+
+    protected function incrementCartCount($e)
+    {
+        if($e){
+            $this->carts->where([
+                ['products_id', $this->id],
+                ['users_id', $this->userAuth->id],
+            ])->update(['count_product' => $this->count]);
+        }
+    }
 
     protected function addCartInSession()
     {
