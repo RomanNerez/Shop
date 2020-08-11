@@ -11,8 +11,15 @@
     &__list {
         flex-grow: 1;
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-around;
         flex-wrap: wrap;
+        & > .product:last-child {
+            margin-right: auto;
+        }
+    }
+    .brand__name {
+        flex-basis: 100%;
+        text-align: center;
     }
 }
 .product {
@@ -26,6 +33,7 @@
     align-items: center;
     justify-content: space-between;
     transition: $hover-transition;
+    cursor: pointer;
     &:hover {
         box-shadow: -2px 1px 5px 0px rgba(0, 0, 0, 0.75);
     }
@@ -61,11 +69,41 @@
         margin: 10px 0;
         font-weight: 700;
     }
+    label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: $text-grey;
+        margin-bottom: 10px;
+    }
     input[type="checkbox"] {
-        margin: 0 20px 20px 0;
+        display: none;
+    }
+    input[type="checkbox"] + i {
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $text-grey;
+        margin-right: 20px;
+    }
+    input[type="checkbox"]:checked + i {
+        background-image: url("../img/svg/tick.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 }
 @media (max-width: 902px) {
+    .products {
+        &__wrapper {
+            flex-flow: column;
+        }
+        &__list {
+            justify-content: space-between;
+        }
+    }
     .product {
         width: 130px;
     }

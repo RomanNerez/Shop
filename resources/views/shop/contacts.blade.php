@@ -43,7 +43,7 @@
             <div class="touch__item">
                 <div class="touch__img">
                     <svg>
-                        <use xlink:href="#like"></use>
+                        <use xlink:href="#heart"></use>
                     </svg>
                 </div>
                 <h4>Соц. мережi</h4>

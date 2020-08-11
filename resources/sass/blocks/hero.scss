@@ -44,7 +44,7 @@
         height: 40px;
         font-size: 0;
         border: none;
-        background-color: $main-color;
+        background-color: transparent;
         cursor: pointer;
         &:after {
             position: absolute;
@@ -52,7 +52,7 @@
             width: 16px;
             height: 16px;
             top: 50%;
-            border: 1px solid #fff;
+            border: 3px solid $main-color;
             border-top-color: transparent;
             border-right-color: transparent;
             transform: translateY(-8px) rotate(45deg);

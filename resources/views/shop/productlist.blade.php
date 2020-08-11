@@ -8,24 +8,21 @@
                 <form action="#" class="products__form">
                     <fieldset class="manufacturer">
                         <legend>Виробник:</legend>
-                        <label for="manufacturer-1">
-                            <input type="checkbox" name="manufacturer-1" id="manufacturer-1"/>
-                            Виробник-1
-                        </label>
-                        <label for="manufacturer-2">
-                            <input type="checkbox" name="manufacturer-2" id="manufacturer-2"/>
-                            Виробник-2
-                        </label>
-                        <label for="manufacturer-3">
-                            <input type="checkbox" name="manufacturer-3" id="manufacturer-3"/>
-                            Виробник-3
-                        </label>
+                        @foreach($subcategories as $items)
+                            <label for="{{$items->title}}">
+                                <input type="checkbox" name="manufacturer-1" id="{{$items->title}}"/>
+                                <i></i>
+                                {{$items->title}}
+                            </label>
+                        @endforeach
                     </fieldset>
                 </form>
             </aside>
             <div class="products__list">
             @foreach($subcategories as $items)
-                {{$items->title}}
+                <!--<div class="brand__name">
+                    <h4>{{$items->title}}</h4>
+                </div>-->
                     @foreach($items->products as $item)   
                         <div class="products__item product">
                             <div class="product__img">

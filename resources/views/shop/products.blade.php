@@ -10,15 +10,8 @@
                         <legend>Виробник:</legend>
                         <label for="manufacturer-1">
                             <input type="checkbox" name="manufacturer-1" id="manufacturer-1"/>
-                            Виробник-1
-                        </label>
-                        <label for="manufacturer-2">
-                            <input type="checkbox" name="manufacturer-2" id="manufacturer-2"/>
-                            Виробник-2
-                        </label>
-                        <label for="manufacturer-3">
-                            <input type="checkbox" name="manufacturer-3" id="manufacturer-3"/>
-                            Виробник-3
+                            <i></i>
+                            iPhone 6
                         </label>
                     </fieldset>
                 </form>
