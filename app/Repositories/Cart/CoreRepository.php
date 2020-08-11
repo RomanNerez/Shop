@@ -19,7 +19,7 @@ abstract class CoreRepository
 	{	
 		$this->id = $id;
 		$this->count = $count;
-		$this->userAuth = Auth::check();
+		$this->userAuth = Auth::user();
 		$this->carts = new Cart();
 
 	}

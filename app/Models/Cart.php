@@ -11,5 +11,10 @@ class Cart extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'cart_id';
+    protected $table = 'cart';
+
+    public function products()
+    {
+        return $this->hasMany('App\Products');
+    }
 }
