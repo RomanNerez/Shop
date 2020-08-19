@@ -9,52 +9,29 @@
                             </div>
                             <div class="waranty__text">
                                 <div class="section__title">
-                                    <h3>Lorem ipsum dolor sit.</h3>
-                                    <p>
+                                    <h3>Доставка и оплата</h3>
+                                    <!--<p>
                                         Lorem ipsum dolor, sit amet consectetur
                                         adipisicing elit. Officia, et.
-                                    </p>
+                                    </p>-->
                                 </div>
+                                <h3>Оплата:</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Distinctio unde odio harum
-                                    sit. Ad labore reprehenderit magni quia
-                                    accusamus incidunt aliquid adipisci,
-                                    consequatur voluptatum eveniet dignissimos
-                                    temporibus nobis obcaecati fugiat eum
-                                    distinctio hic? Sunt qui, commodi quaerat
-                                    exercitationem doloremque deserunt!
+                                    Оплата товара осуществляется на сайте при наличии товара на складе. Расчет за товар клиент может осуществить при наличии банковской карты VISA или Mastercard.
                                 </p>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Distinctio unde odio harum
-                                    sit. Ad labore reprehenderit magni quia
-                                    accusamus incidunt aliquid adipisci,
-                                    consequatur voluptatum eveniet dignissimos
-                                    temporibus nobis obcaecati fugiat eum
-                                    distinctio hic? Sunt qui, commodi quaerat
-                                    exercitationem doloremque deserunt!
+                                    Также, клиент может оплатить товар при получении в отделениях «НОВОЙ ПОЧТЫ», так как МЫ отправляем товары наложенным платежом. 
                                 </p>
-                                <h3>Lorem ipsum dolor sit.</h3>
+                                <h3>Доставка:</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Distinctio unde odio harum
-                                    sit. Ad labore reprehenderit magni quia
-                                    accusamus incidunt aliquid adipisci,
-                                    consequatur voluptatum eveniet dignissimos
-                                    temporibus nobis obcaecati fugiat eum
-                                    distinctio hic? Sunt qui, commodi quaerat
-                                    exercitationem doloremque deserunt!
+                                    Доставка заказов производится ИнТаймом, Деливери и другими актуальными перевозчиками Украины;
+                                </p>
+                                <p>По городу Запорожье возможен самовывоз товара.</p>
+                                <p>
+                                    Внимание! Если Вы отказываетесь от заказа уже после его отправки к Вам, мы вынуждены высчитать все расходы по доставке, в т.ч. возврат и хранение с Вас. Пожалуйста, убедитесь, что Вы сможете принять Ваш заказ в оговоренные сроки. Спасибо за понимание!
                                 </p>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Distinctio unde odio harum
-                                    sit. Ad labore reprehenderit magni quia
-                                    accusamus incidunt aliquid adipisci,
-                                    consequatur voluptatum eveniet dignissimos
-                                    temporibus nobis obcaecati fugiat eum
-                                    distinctio hic? Sunt qui, commodi quaerat
-                                    exercitationem doloremque deserunt!
+                                    При получении товара , убедитесь в месте получения что товар рабочий и упаковка не повреждена, если кондиция товара вызывает у Вас сомнения, откажитесь от товара и не забирайте его. Все товары перед пересылкой проверяются, но нет гарантии от перевозчика что он не был поврежден во время доставки.
                                 </p>
                             </div>
                         </div>

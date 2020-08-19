@@ -125,13 +125,15 @@
     &__btn {
         width: 30px;
         height: 30px;
-        background-color: rgb(0, 222, 251);
+        background-color: transparent;
         border: none;
-        color: #fff;
+        color: $main-color;
+        font-size: 20px;
     }
     &__summ {
         text-align: center;
         width: 30px;
+        font-size: 20px;
     }
 }
 .checkout {
