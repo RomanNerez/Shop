@@ -15441,8 +15441,8 @@ new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\js\main.js */"./resources/asset/js/main.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\sass\style.scss */"./resources/asset/sass/style.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/js/main.js */"./resources/asset/js/main.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/sass/style.scss */"./resources/asset/sass/style.scss");
 
 
 /***/ })
