@@ -4,12 +4,9 @@
 <section class="about">
     <div class="container">
         <div class="section__title">
-            <h3>FreeZ e-commerce</h3>
+            <h3>Інтернет магазин FreeZ</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetuer
-                adipiscing elit, sed diam nonummy nibh euismod
-                tincidunt ut laoreet dolore magna aliquam erat
-                volutpat.
+            Новий, сучасний та зручний online магазин аксесуарів для гаджетів і цифрової техніки.
             </p>
         </div>
         <div class="about__wrapper">
@@ -49,10 +46,7 @@
             <div class="advantages__info">
                 <h4>Чому обирати нас</h4>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetuer
-                    adipiscing elit, sed diam nonummy nibh
-                    euismod. Claritas est etiam processus
-                    dynamicus, qui sequitur mutationem.
+                Серед безлічі магазинів дуже складно знайти найдоброзичливiший, який поважає своїх клієнтів і дарує тільки позитивні емоції. Саме тому існує FreeZ - перший зручний online-магазин з широким вибором товарiв. 
                 </p>
                 <ul class="advantages__list">
                     <li>

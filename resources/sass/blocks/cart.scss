@@ -170,9 +170,10 @@
         text-align: center;
         color: #fff;
         margin-bottom: 10px;
+        background: linear-gradient(to left, #7f00e2, #0095f9);
     }
     &__register {
-        background-color: $text-red;
+        background: linear-gradient(to left, #7f00e2, #b9081f);
         &:hover {
             background-color: $main-color;
         }
