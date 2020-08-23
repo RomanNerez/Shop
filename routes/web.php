@@ -60,12 +60,53 @@ Route::group(
     ],
 	function () {
 		Route::namespace('Admin')->group(function () {
+			// dashboard
 			Route::get('/', 'AdminController@index')->name('admin-home');
+			// all categories
+			Route::prefix('categories')->group(function () {
+				Route::get('/', 'CategoryController@index')->name('admin-categories');
+				// add category
+				Route::get('/add', 'CategoryController@displayAddCategory')->name('display-add-category');
+				Route::post('/add', 'CategoryController@addCategory')->name('add-category');
+				// edit category
+				Route::get('/{id}/edit', 'CategoryController@displayEditCategory')->name('display-edit-category');
+				Route::post('/{id}/edit', 'CategoryController@editCategory')->name('edit-category');
+				// delete category
+				Route::get('/{id}/delete', 'CategoryController@deleteCategory')->name('delete-category');
+			});
+
+			//==================================================================
+
+			Route::prefix('sub_categories')->group(function () {
+				Route::get('/', 'SubCategoryController@index')->name('admin-sub_categories');
+				// add category
+				Route::get('/add', 'SubCategoryController@displayAddCategory')->name('display-add-sub_category');
+				Route::post('/add', 'SubCategoryController@addSubCategory')->name('add-sub_category');
+				// edit category
+				Route::get('/{id}/edit', 'SubCategoryController@displayEditCategory')->name('display-edit-sub_category');
+				Route::post('/{id}/edit', 'SubCategoryController@editCategory')->name('edit-sub_category');
+				// delete category
+				Route::get('/{id}/delete', 'SubCategoryController@deleteCategory')->name('delete-sub_category');
+			});
+
+			//==================================================================
+
+			Route::prefix('product')->group(function () {
+				// all product
+				Route::get('/', 'ProductController@index')->name('admin-product');
+				// add product
+				Route::get('/add', 'ProductController@displayAddProduct')->name('admin-product-add');
+				Route::post('/add', 'ProductController@addProduct');
+				// edit product
+				Route::get('/{id}/edit', 'ProductController@dispalyEditProduct');
+				Route::post('/{id}/edit', 'ProductController@editProduct');
+				// delete product
+				Route::post('/{id}/delete', 'ProductController@index');
+			});
 		});
     	
 	}
 );
-//Route::get('/home', 'HomeController@index')->name('home');
 
 
 

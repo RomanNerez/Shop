@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 $factory->define(SubCategories::class, function (Faker $faker) {
 	
 	$arr = ['Apple', 'ASUS', 'Fly', 'Huawei', 'Lenovo', 'SONY', 'MOTOROLA', 'Dopod', 'EVO', 'Emol'];
-	$title = $arr[rand(0,9)];
+	$title = $arr[rand(0,9)].'_'.rand(10,100);
 	$slug = Str::slug($title, '-');
 	
     return [
