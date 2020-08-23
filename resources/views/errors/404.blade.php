@@ -6,8 +6,8 @@
         <meta charset="UTF-8" />
         <meta name="keywords" content="" />
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{asset('css/404_page.css?v='.time())}}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{asset('css/fontAwesome.cssv='.time())}}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{asset('asset/css/404_page.css?v='.time())}}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{asset('asset/css/fontAwesome.cssv='.time())}}" type="text/css" media="all" />
     </head>
     <body>
         <div class="error-block">

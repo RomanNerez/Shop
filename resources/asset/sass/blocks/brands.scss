@@ -1,0 +1,26 @@
+.brands {
+    background: $text-red url("../../img/contacts-bg.jpg") repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 70px;
+    &__slider {
+        position: relative;
+    }
+    &__slide {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .slick-track {
+        @include dflex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .slick-list {
+        overflow: hidden;
+    }
+    .slick-arrow {
+        display: none !important;
+    }
+}

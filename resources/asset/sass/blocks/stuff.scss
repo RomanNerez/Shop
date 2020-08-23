@@ -1,0 +1,44 @@
+.stuff {
+    padding: 70px 0;
+    background: $main-color url("../../img/contacts-bg.jpg") no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+    .section__title {
+        margin-bottom: 50px;
+    }
+    &__wrapper {
+        @include dflex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    &__item {
+        flex-basis: 270px;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin-bottom: 30px;
+        h4 {
+            font-size: 20px;
+            color: $text-red;
+            margin-bottom: 20px;
+        }
+        p {
+            text-align: center;
+        }
+    }
+    &__stat {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 120px;
+        border: 3px solid $main-color;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        span {
+            display: block;
+            font-size: 30px;
+        }
+    }
+}

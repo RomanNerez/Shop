@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Iнтернет магазин FreeZ</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/style.css?v='.time()) }}" />
+        <link rel="stylesheet" href="{{ asset('asset/css/normalize.css') }}" />
+        <link rel="stylesheet" href="{{ asset('asset/css/style.css?v='.time()) }}" />
     </head>
     <body class="page__body">
         <div id="app" class="page__wrapper">
@@ -418,6 +418,6 @@
         </svg>
         <script src="{{asset('libs/jquery.min.js')}}"></script>
         <script src="{{asset('libs/slick.min.js')}}"></script>
-        <script src="{{asset('js/main.js?v='.time())}}"></script>
+        <script src="{{asset('asset/js/main.js?v='.time())}}"></script>
     </body>
 </html>

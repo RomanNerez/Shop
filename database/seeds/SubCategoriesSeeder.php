@@ -23,7 +23,7 @@ class SubCategoriesSeeder extends Seeder
 			if($t === count($arr)) $t = 0;  
 			SubCategories::create([
 				'title' => $arr[$t],
-	        	'slug'  => Str::slug($arr[$t], '-'),
+	        	'slug'  => Str::slug($arr[$t].'_'.rand(1000,10000), '-'),
 	        	'categories_id' => $c
 			]);
 			$c++;
