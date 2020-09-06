@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->foreign('categories_id')->references('id')->on('categories');
             $table->foreign('sub_categories_id')->references('id')->on('sub_categories');
             $table->string('title', 255);
-            $table->string('slug', 255)->unique();
+            $table->string('slug', 150)->unique();
             $table->longText('description');
             $table->text('photos');
             $table->float('price', 8, 2);
