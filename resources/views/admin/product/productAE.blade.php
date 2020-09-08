@@ -116,6 +116,7 @@
                         <div class="form-group">
                             <label for="choose-photo">Вибрати фото товару (max. 5 шт.)</label>
                             <input type="file" id="choose-photo" multiple>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
                         </div>
                         <div class="form-group">
                             <button
