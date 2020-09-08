@@ -101,7 +101,7 @@
 }
 .bottom {
     background-color: #fff;
-    padding: 20px 0;
+    padding: 10px 0;
     position: sticky;
     left: 0;
     top: 0;
@@ -115,7 +115,7 @@
     &__logo {
         order: 2;
         span {
-            font-size: 50px;
+            font-size: 36px;
             line-height: 0.5;
             font-weight: 700;
             transition: $hover-transition;
@@ -126,7 +126,7 @@
         }
     }
     .logo__red {
-        font-size: 40px;
+        font-size: 24px;
         line-height: 0.5;
         font-weight: 700;
         color: #0095f9;
@@ -137,7 +137,7 @@
             top: -5px;
             left: -10px;
             width: 15px;
-            height: 7px;
+            height: 5px;
             background-color: $text-red;
             transform: skewX(20deg);
         }
@@ -158,7 +158,7 @@
         transition: $hover-transition;
         position: relative;
         font-weight: 700;
-        letter-spacing: 1px;
+        color: $main-color;
         &:hover {
             color: #0095f9;
             &:before {

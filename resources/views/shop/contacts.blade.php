@@ -71,18 +71,21 @@
                     name="name"
                     id="questions__name"
                     placeholder="Ваше iм'я"
+                    required
                 />
                 <input
                     type="email"
                     name="email"
                     id="questions__id"
                     placeholder="Ваш email"
+                    required
                 />
                 <input
                     type="phone"
                     name="phone"
                     id="questions__phone"
                     placeholder="Ваш телефон"
+                    required
                 />
                 <textarea
                     name="text"
@@ -90,6 +93,7 @@
                     cols="30"
                     rows="10"
                     placeholder="Напишiть ваше запитання"
+                    required
                 ></textarea>
                 <button
                     class="btn questions__btn"
@@ -102,7 +106,7 @@
     </div>
 </section>
 
-<section class="map">
+<!--<section class="map">
     <div class="map__wrapper"></div>
-</section>
+</section>-->
 @endsection
