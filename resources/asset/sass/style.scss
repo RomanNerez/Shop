@@ -23,6 +23,7 @@ body {
     padding: 0;
     font-size: 13px;
     font-family: $page-font;
+    background-color: rgb(238, 238, 238);
     color: $text-black;
 }
 body.blocked {
@@ -130,3 +131,4 @@ button {
 @import "./blocks/blog.scss";
 @import "./blocks/login.scss";
 @import "./blocks/waranty.scss";
+@import "./blocks/breadcrumbs.scss";

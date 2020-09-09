@@ -16,8 +16,7 @@
                 </div>
                 <h4>Адреса</h4>
                 <p>
-                    795 South Park Avenue, Door 6 Wonderland, CA
-                    94107, Australia
+                    Україна, Запорiжжя
                 </p>
             </div>
             <div class="touch__item">
@@ -27,8 +26,7 @@
                     </svg>
                 </div>
                 <h4>Телефон</h4>
-                <p>+440 875369208 - Office</p>
-                <p>+440 353363114 - Fax</p>
+                <p>+38-099-036-80-44</p>
             </div>
             <div class="touch__item">
                 <div class="touch__img">
@@ -47,10 +45,29 @@
                     </svg>
                 </div>
                 <h4>Соц. мережi</h4>
-                <p>
-                    795 South Park Avenue, Door 6 Wonderland, CA
-                    94107, Australia
-                </p>
+                <ul class="socials">
+                                <li class="socials__item">
+                                    <a href="#" class="socials__link">
+                                        <svg>
+                                            <use xlink:href="#insta"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="socials__item">
+                                    <a href="#" class="socials__link">
+                                        <svg>
+                                            <use xlink:href="#telegram"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="socials__item">
+                                    <a href="#" class="socials__link">
+                                        <svg>
+                                            <use xlink:href="#facebook"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
             </div>
         </div>
     </div>
@@ -60,8 +77,7 @@
         <div class="section__title">
             <h3>Задай запитання</h3>
             <p>
-                Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. Autem, voluptatem!
+            Будь-які питання будуть розглядатися нашими співробітниками
             </p>
         </div>
         <div class="questions__form">

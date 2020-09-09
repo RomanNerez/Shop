@@ -89,7 +89,7 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="css/normalize.css" />
-        <link rel="stylesheet" href="{{asset('css/style.css?v='.time())}}" />
+        <link rel="stylesheet" href="{{ asset('asset/css/style.css?v='.time()) }}" />
     </head>
     <body class="page__body">
         <div class="page__wrapper">
