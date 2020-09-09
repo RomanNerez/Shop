@@ -1,4 +1,8 @@
 {
+    "/asset/js/admin.js": "/asset/js/admin.js",
     "/asset/js/main.js": "/asset/js/main.js",
-    "/asset/css/style.css": "/asset/css/style.css"
+    "/asset/css/style.css": "/asset/css/style.css",
+    "/asset/css/admin.css": "/asset/css/admin.css",
+    "/asset/js/manifest.js": "/asset/js/manifest.js",
+    "/asset/js/vendor.js": "/asset/js/vendor.js"
 }

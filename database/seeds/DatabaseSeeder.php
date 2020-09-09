@@ -13,6 +13,17 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CategoriesSeeder::class);
         $this->call(SubCategoriesSeeder::class);
+
+        DB::table('langs')->insert([
+            [
+                'title' => 'Русский',
+                'local' => 'ru'
+            ],
+            [
+                'title' => 'Украинский',
+                'local' => 'ua'
+            ]
+        ]);
         
         factory(App\Products::class, 480)->create();
         factory(App\User::class, 1)->create();

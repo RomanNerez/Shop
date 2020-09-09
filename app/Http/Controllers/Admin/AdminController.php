@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Categories;
+use App\SubCategories;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +16,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $sub_categories = SubCategories::orderBy('id', 'desc')->limit(10)->get();
+        foreach ($sub_categories as $value) {
+           $value->category[0];
+        }
+
+        $data = [
+            'categories' => Categories::orderBy('id', 'desc')->limit(10)->get(),
+            'sub_categories' => $sub_categories,
+        ];
+        return view('admin.dashboard', compact('data'));
     }
 
     /**

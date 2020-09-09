@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->unsignedBigInteger('categories_id');
-            $table->unsignedBigInteger('sub_categories_id');
+            $table->unsignedBigInteger('categories_id')->index('categories_id');
+            $table->unsignedBigInteger('sub_categories_id')->index('sub_categories_id');
             $table->foreign('categories_id')->references('id')->on('categories');
             $table->foreign('sub_categories_id')->references('id')->on('sub_categories');
             $table->string('title', 255);
