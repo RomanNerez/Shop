@@ -3380,14 +3380,9 @@ new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\js\main.js */"./resources/asset/js/main.js");
-__webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\sass\style.scss */"./resources/asset/sass/style.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\sass\admin\admin.sass */"./resources/asset/sass/admin/admin.sass");
-=======
 __webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/js/main.js */"./resources/asset/js/main.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/sass/style.scss */"./resources/asset/sass/style.scss");
->>>>>>> cf01e7aef85ddb026b7cbc3479ffbbf287a0777e
+__webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/sass/style.scss */"./resources/asset/sass/style.scss");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/sass/admin/admin.sass */"./resources/asset/sass/admin/admin.sass");
 
 
 /***/ })

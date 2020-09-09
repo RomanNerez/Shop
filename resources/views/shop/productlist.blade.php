@@ -45,7 +45,7 @@
                         <div class="sort__arrows">
                             <button
                                 type="button"
-                                class="arrow arrow__up"
+                                class="arrow arrow__up
                             ></button>
                             <button
                                 type="button"
