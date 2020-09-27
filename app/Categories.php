@@ -25,4 +25,9 @@ class Categories extends Model
     {
         return $this->hasMany('App\Products');
     }
+
+    public function localCategory()
+    {
+        return $this->hasMany('App\LocalCategory', 'category_id', 'id');
+    }
 }

@@ -89,12 +89,19 @@
     </v-list>
 
     <template v-slot:append>
-      <base-item
-        :item="{
-          title: 'Настройки',
-          icon: 'mdi-package-up',
-        }"
-      />
+      <v-list-item
+        :active-class="`primary ${!isDark ? 'black' : 'white'}--text`"
+        link
+        v-on:click="updates = true"
+      >
+        <v-list-item-icon>
+          <v-icon>mdi-package-up</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>Настройки</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </template>
   </v-navigation-drawer>
 </template>
@@ -174,6 +181,14 @@
           this.$store.commit('SET_COMPONENT', val)
         },
       },
+        updates: {
+            get () {
+                return this.$store.state.updates
+            },
+            set (val) {
+                this.$store.commit('SET_UPDATES', val)
+            },
+        },
       computedItems () {
         return this.items.map(this.mapItem)
       },
@@ -186,9 +201,6 @@
     },
 
     methods: {
-      // component: function () {
-      //   console.log('work');
-      // },
       mapItem (item) {
         return {
           ...item,

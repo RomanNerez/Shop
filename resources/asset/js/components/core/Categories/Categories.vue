@@ -1,7 +1,12 @@
 <template>
 	<div>
-		<edit-category></edit-category>
-		<categories-table></categories-table>
+		<edit-category
+			:dialog.sync="dialog"
+		></edit-category>
+		<categories-table
+			:categories="categories"
+			:dialog.sync="dialog"
+		></categories-table>
 	</div>
 </template>
 
@@ -11,7 +16,8 @@
 	export default{
 		data: function () {
 			return {
-
+				categories: this.$store.state.data.categories,
+				dialog: false
 			}
 		},
 		components: {

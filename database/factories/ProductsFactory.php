@@ -13,7 +13,6 @@ $factory->define(Products::class, function (Faker $faker) {
     $slug = Str::slug($title, '-');
 
     return [
-        'categories_id' => rand(1,6),
         'sub_categories_id' => rand(1,48),
         'title' => $title,
         'slug' => $slug,

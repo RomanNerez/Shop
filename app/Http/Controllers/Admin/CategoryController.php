@@ -38,6 +38,7 @@ class CategoryController extends Controller
     public function addCategory (Request $request)
     {
     	$data = $request->all();
+        dd($data);
     	$data['slug'] = Str::slug($data['title'], '-');
     	$active = isset($data['active']) ? '1' : '0';
 

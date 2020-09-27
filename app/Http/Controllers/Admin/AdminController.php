@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Categories;
 use App\SubCategories;
 use Illuminate\Http\Request;
+use DB;
 
 class AdminController extends Controller
 {
@@ -16,14 +17,21 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $categories = Categories::orderBy('id', 'desc')->limit(10)->get();
+        foreach ($categories as $value) {
+           $value->localCategory;
+        }
+        //dd($categories);
+
         $sub_categories = SubCategories::orderBy('id', 'desc')->limit(10)->get();
         foreach ($sub_categories as $value) {
-           $value->category[0];
+           $value->category;
         }
 
         $data = [
-            'categories' => Categories::orderBy('id', 'desc')->limit(10)->get(),
+            'categories' => $categories,
             'sub_categories' => $sub_categories,
+            'langs' => DB::table('langs')->get(),
         ];
         return view('admin.dashboard', compact('data'));
     }

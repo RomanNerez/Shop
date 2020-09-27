@@ -14,13 +14,8 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->unsignedBigInteger('categories_id')->index('categories_id');
             $table->unsignedBigInteger('sub_categories_id')->index('sub_categories_id');
-            $table->foreign('categories_id')->references('id')->on('categories');
             $table->foreign('sub_categories_id')->references('id')->on('sub_categories');
             $table->string('title', 255);
             $table->string('slug', 150)->unique();
