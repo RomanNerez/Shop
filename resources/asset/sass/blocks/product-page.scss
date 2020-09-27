@@ -1,122 +1,133 @@
 .item {
-  background-color: #fff;
-  padding: 50px 0;
-  &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 300px;
-  }
-  &__gallery {
-    flex-basis: 50%;
-    width: 50%;
-    min-width: 500px;
-    text-align: center;
-    //outline: 1px solid red;
-    img {
-      height: 500px;
+    background-color: #fff;
+    padding: 50px 0;
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        min-height: 300px;
     }
-  }
-  &__info {
-    padding: 20px;
-    flex-basis: 50%;
-    width: 50%;
-    display: flex;
-    flex-flow: column;
-    justify-content: flex-start;
-    & > * {
-      margin-bottom: 20px;
+    &__gallery {
+        flex-basis: 50%;
+        width: 50%;
+        min-width: 500px;
+        text-align: center;
+        //outline: 1px solid red;
+        img {
+            height: 500px;
+        }
     }
-  }
-  &__name {
-    font-size: 24px;
-  }
-  &__description {
-    line-height: 1.8;
-  }
-  &__features {
-    line-height: 1.8;
-    span {
-      margin-left: 50px;
-      font-weight: 700;
+    &__info {
+        padding: 20px;
+        flex-basis: 50%;
+        width: 50%;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        & > * {
+            margin-bottom: 20px;
+        }
     }
-  }
-  &__buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
-    & > * {
-      margin: 0 5px;
+    &__name {
+        font-size: 24px;
     }
-  }
-  &__cart {
-    text-align: center;
-    color: #fff;
-    border: none;
-  }
-  &__purchase {
-    text-align: center;
-    color: #fff;
-    background-color: $text-red;
-    &:hover {
-      background-color: darken($text-red, 10);
+    &__description {
+        line-height: 1.8;
     }
-  }
-  &__quantity {
-    display: flex;
-    align-items: center;
-    span {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    &__features {
+        line-height: 1.8;
+        span {
+            margin-left: 50px;
+            font-weight: 700;
+        }
     }
-    button {
-      background-color: #fff;
-      border: 1px solid $text-grey;
-      width: 30px;
-      height: 30px;
+    &__buttons {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 50px;
+        & > * {
+            margin: 0 5px;
+        }
     }
-  }
-  &__slider {
-    position: relative;
-    z-index: 0;
-    .slick-track {
-      display: flex;
-      width: 100%;
+    &__cart {
+        text-align: center;
+        color: #fff;
+        background-color: #7f00e2;
+        border: none;
     }
-    .slick-list {
-      overflow: hidden;
+    &__purchase {
+        text-align: center;
+        color: #fff;
+        background-color: $text-red;
+        &:hover {
+            background-color: darken($text-red, 10);
+        }
     }
-    .slick-slide {
-      cursor: pointer;
+    &__quantity {
+        display: flex;
+        align-items: center;
+        span {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            background-color: #fff;
+            border: 1px solid $text-grey;
+            width: 30px;
+            height: 30px;
+        }
     }
-  }
-  &__thumbnails {
-    margin-top: 30px;
-    .slick-track {
-      display: flex;
-      width: 100%;
+    &__slider {
+        position: relative;
+        z-index: 0;
+        .slick-track {
+            display: flex;
+            width: 100%;
+        }
+        .slick-list {
+            overflow: hidden;
+        }
+        .slick-slide {
+            cursor: pointer;
+        }
     }
-    .slick-list {
-      overflow: hidden;
+    &__thumbnails {
+        margin-top: 30px;
+        .slick-track {
+            display: flex;
+            width: 100%;
+        }
+        .slick-list {
+            overflow: hidden;
+        }
+        .slick-slide {
+            //max-width: 100px;
+            a {
+                cursor: pointer;
+            }
+            img {
+                height: 100px;
+            }
+        }
     }
-    .slick-slide {
-      //max-width: 100px;
-      a {
-        cursor: pointer;
-      }
-      img {
-        height: 100px;
-      }
-    }
-  }
 }
 .up-sell {
-  padding: 50px;
-  &__wrapper {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-  }
+    padding: 50px;
+    &__wrapper {
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+        .aditional__product {
+            max-width: 200px;
+            margin-left: 10px;
+        }
+    }
+    .product__img {
+        img {
+            width: 100px;
+            margin: 0 auto;
+        }
+    }
 }

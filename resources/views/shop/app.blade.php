@@ -86,7 +86,7 @@
                 </ul>
             </div>
             <div class="portfolio__wrapper">
-                <div class="product">
+                <div class="product product__pop">
                     <div class="product__img">
                         <img src="img/cover-1.jpg" alt="1" />
                     </div>
@@ -98,7 +98,7 @@
                         >Купити</a
                     >
                 </div>
-                <div class="product">
+                <div class="product product__pop">
                     <div class="product__img">
                         <img src="img/cover-1.jpg" alt="1" />
                     </div>
@@ -108,7 +108,7 @@
                         >Купити</a
                     >
                 </div>
-                <div class="product">
+                <div class="product product__pop">
                     <div class="product__img">
                         <img src="img/cover-1.jpg" alt="1" />
                     </div>
@@ -118,7 +118,7 @@
                         >Купити</a
                     >
                 </div>
-                <div class="product">
+                <div class="product product__pop">
                     <div class="product__img">
                         <img src="img/cover-1.jpg" alt="1" />
                     </div>
@@ -128,7 +128,7 @@
                         >Купити</a
                     >
                 </div>
-                <div class="product">
+                <div class="product product__pop">
                     <div class="product__img">
                         <img src="img/cover-1.jpg" alt="1" />
                     </div>
@@ -138,7 +138,7 @@
                         >Купити</a
                     >
                 </div>
-                <div class="product">
+                <div class="product product__pop">
                     <div class="product__img">
                         <img src="img/cover-1.jpg" alt="1" />
                     </div>

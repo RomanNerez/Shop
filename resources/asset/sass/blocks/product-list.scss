@@ -1,21 +1,24 @@
 .products {
-    padding: 100px 0;
+    padding: 30px 0;
     &__wrapper {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
     }
     &__filter {
         min-width: 200px;
-        //border-right: 1px solid $text-grey;
     }
     &__list {
+        padding: 20px 0;
+    }
+    &__list-wrapper {
         flex-grow: 1;
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
         flex-wrap: wrap;
-        & > .product:last-child {
-            margin-right: auto;
-        }
+        padding: 50px 0;
+        //& > .product:last-child {
+        //    margin-right: auto;
+        //}
     }
     .brand__name {
         flex-basis: 100%;
@@ -23,11 +26,13 @@
     }
 }
 .product {
-    width: 200px;
-    margin: 0 20px 40px 20px;
-    padding: 10px 5px;
-    //outline: 1px solid red;
-    //border-radius: 10px;
+    width: calc(25% - 4px);
+    padding: 15px 5px;
+    margin: 0 4px 10px 0;
+    //border: 1px solid rgb(230, 230, 230);
+    //border-top-color: transparent;
+    //border-bottom-color: transparent;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -35,7 +40,8 @@
     transition: $hover-transition;
     cursor: pointer;
     &:hover {
-        box-shadow: -2px 1px 5px 0px rgba(51, 51, 51, 0.75);
+        box-shadow: -2px 1px 10px 1px rgba(167, 167, 167, 0.75);
+        transform: scale(1.02);
     }
     &__img {
         width: 100%;
@@ -55,9 +61,15 @@
     &__btn {
         color: #fff;
         text-align: center;
+        background: #0095f9;
+        &:hover {
+            background-color: $text-red;
+        }
     }
 }
+
 .products__form {
+    padding: 40px 0;
     fieldset {
         border: none;
         display: flex;
@@ -105,6 +117,11 @@
         }
     }
     .product {
-        width: 130px;
+        width: calc(33.333% - 4px);
+    }
+}
+@media (max-width: 768px) {
+    .product {
+        width: calc(50% - 4px);
     }
 }

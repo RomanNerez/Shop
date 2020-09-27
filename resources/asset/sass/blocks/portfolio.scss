@@ -30,12 +30,16 @@
     &__wrapper {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
         margin-bottom: 50px;
+        .product__pop {
+            margin: 0 4px 0 0;
+            width: calc(25% - 4px);
+        }
     }
     &__btn {
         display: block;
-        background-color: #000;
+        background-color: rgb(132, 0, 255);
         color: #fff;
         margin: 0 auto;
         border: none;

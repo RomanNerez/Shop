@@ -37,32 +37,16 @@
 		            		<v-row>
 		              			<v-col cols="12" sm="6" md="6">
 		                			<v-text-field
-		                				label="Название (Русский)"
-		                				v-model="category.ru.title"
+		                				label="Название"
+		                				v-model="category.title"
 		                				required
 		                				:rules="requiredRules"
 		                			></v-text-field>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
 		                			<v-text-field
-		                				label="Название (Украинский)"
-		                				v-model="category.ua.title"
-		                				required
-		                				:rules="requiredRules"
-		                			></v-text-field>
-		              			</v-col>
-		              			<v-col cols="12" sm="6" md="6">
-		                			<v-text-field
-		                				label="Meta Название (Русский)"
-		                				v-model="category.ru.metaTitle"
-		                				required
-		                				:rules="requiredRules"
-		                			></v-text-field>
-		              			</v-col>
-		              			<v-col cols="12" sm="6" md="6">
-		                			<v-text-field
-		                				label="Meta Название (Украинский)"
-		                				v-model="category.ua.metaTitle"
+		                				label="Meta Название"
+		                				v-model="category.metaTitle"
 		                				required
 		                				:rules="requiredRules"
 		                			></v-text-field>
@@ -71,8 +55,8 @@
 		                			<v-textarea
 	          							outlined
 	          							name="input-7-4"
-	          							label="Описание (Русский)"
-	          							v-model="category.ru.desc"
+	          							label="Описание"
+	          							v-model="category.desc"
 	          							required
 	          							:rules="requiredRules"
 	        						></v-textarea>
@@ -81,28 +65,8 @@
 		                			<v-textarea
 	          							outlined
 	          							name="input-7-4"
-	          							label="Описание (Украинский)"
-	          							v-model="category.ua.desc"
-	          							required
-	          							:rules="requiredRules"
-	        						></v-textarea>
-		              			</v-col>
-		              			<v-col cols="12" sm="6" md="6">
-		                			<v-textarea
-	          							outlined
-	          							name="input-7-4"
-	          							label="Meta Описание (Русский)"
-	          							v-model="category.ru.metaDesc"
-	          							required
-	          							:rules="requiredRules"
-	        						></v-textarea>
-		              			</v-col>
-		              			<v-col cols="12" sm="6" md="6">
-		                			<v-textarea
-	          							outlined
-	          							name="input-7-4"
-	          							label="Meta Описание (Украинский)"
-	          							v-model="category.ua.metaDesc"
+	          							label="Meta Описание"
+	          							v-model="category.metaDesc"
 	          							required
 	          							:rules="requiredRules"
 	        						></v-textarea>

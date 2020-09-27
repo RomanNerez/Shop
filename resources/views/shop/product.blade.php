@@ -88,6 +88,7 @@
                     <button class="item__add"
                         v-on:click="countCart++"
                     >+</button>
+                    
                 </div>
                 <div class="item__buttons">
                     <button type="button" class="item__cart btn"
@@ -112,7 +113,7 @@
             <p>Ми пiдiбрали для вас найкористнiшi товари</p>
         </div>
         <div class="up-sell__wrapper">
-            <div class="products__item product">
+            <div class="products__item product aditional__product">
                 <div class="product__img">
                     <img src="{{asset('img/product-1.png')}}" alt="1" />
                 </div>
@@ -122,7 +123,7 @@
                     >Купити</a
                 >
             </div>
-            <div class="products__item product">
+            <div class="products__item product aditional__product">
                 <div class="product__img">
                     <img src="{{asset('img/product-1.png')}}" alt="1" />
                 </div>
@@ -132,7 +133,7 @@
                     >Купити</a
                 >
             </div>
-            <div class="products__item product">
+            <div class="products__item product aditional__product">
                 <div class="product__img">
                     <img src="{{asset('img/product-1.png')}}" alt="1" />
                 </div>
@@ -142,7 +143,7 @@
                     >Купити</a
                 >
             </div>
-            <div class="products__item product">
+            <div class="products__item product aditional__product">
                 <div class="product__img">
                     <img src="{{asset('img/product-1.png')}}" alt="1" />
                 </div>
