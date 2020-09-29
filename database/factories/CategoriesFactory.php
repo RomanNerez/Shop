@@ -13,6 +13,9 @@ $factory->define(Categories::class, function (Faker $faker) {
 	
     return [
         'title' => $title,
+        'desc' => 'test',
+        'meta_title' => $title,
+        'meta_desc' => 'test' ,
         'slug' => $slug,
     ];
 });
