@@ -9,13 +9,17 @@ class Categories extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'slug', 'active'];
+    protected $fillable = ['file','title', 'slug', 'active', 'desc', 'meta_title', 'meta_desc'];
 
     protected $casts = [
 	    'created_at' => 'datetime:d.m.Y',
 	];
 
 	protected $hidden = ['updated_at'];
+
+    protected $attributes = [
+        'active' => 1,
+    ];
 
     public function sub_categories()
     {
