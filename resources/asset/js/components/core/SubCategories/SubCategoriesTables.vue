@@ -45,7 +45,7 @@
             <td>{{item.id}}</td>
             <td>{{item.slug}}</td>
             <td>{{item.title}}</td>
-            <td>{{item.category[0].title}}</td>
+            <td>{{item.title}}</td>
             <td>
                 <v-switch
                     v-model="item.active"
