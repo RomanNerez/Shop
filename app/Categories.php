@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Categories extends Model
+class Categories extends Model 
 {
     use SoftDeletes;
 
@@ -25,6 +25,7 @@ class Categories extends Model
     {
         return $this->hasMany('App\SubCategories');
     }
+    
     public function products()
     {
         return $this->hasMany('App\Products');

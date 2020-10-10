@@ -70,22 +70,27 @@ Route::group(
 				Route::post('/edit', 'CategoryController@editCategory');
 				Route::post('/delete', 'CategoryController@deleteCategory');
 				Route::post('/active', 'CategoryController@activeCategory');
+				Route::post('/getdata', 'CategoryController@getCategories');
 			});
 
 			//==================================================================
 
-			Route::prefix('sub_categories')->group(function () {
+			Route::prefix('sub-categories')->group(function () {
 				Route::post('/add', 'SubCategoryController@addSubCategory');
 				Route::post('/{id}/edit', 'SubCategoryController@editCategory');
 				Route::post('/{id}/delete', 'SubCategoryController@deleteCategory');
+				Route::post('/getdata', 'SubCategoryController@getSubCategories');
+				Route::post('/getalldata', 'SubCategoryController@getAllSubCategories');
 			});
 
 			//==================================================================
 
 			Route::prefix('product')->group(function () {
 				Route::post('/add', 'ProductController@addProduct');
-				Route::post('/{id}/edit', 'ProductController@editProduct');
-				Route::post('/{id}/delete', 'ProductController@index');
+				Route::post('/edit', 'ProductController@editProduct');
+				Route::post('/delete', 'ProductController@deleteProduct');
+				Route::post('/active', 'ProductController@activeProduct');
+				Route::post('/getdata', 'ProductController@getProduct');
 			});
 		});
     	

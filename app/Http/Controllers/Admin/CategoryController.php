@@ -10,12 +10,31 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    const DEFAULT_PAGINATION = 15;
+
     public function index ()
     {
     	$data = [
     		'categories' => Categories::orderBy('id', 'desc')->get()
     	];
     	return view('admin.category.categories', compact('data'));
+    }
+
+    public function getCategories (Request $request) {
+        $page = $request->input('page');
+        $page -= 1;
+
+        $products = new Categories();
+
+        return response()->json([
+            'categories' => $products
+                ->orderBy('id', 'desc')
+                ->offset($page*self::DEFAULT_PAGINATION)
+                ->limit(self::DEFAULT_PAGINATION)
+                ->get(),
+            'count' => ceil($products->count()/self::DEFAULT_PAGINATION)
+        ]);
     }
 
     public function addCategory (Request $request)

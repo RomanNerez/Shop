@@ -42,6 +42,26 @@ class SubCategoryController extends Controller
     	return view('admin..sub_category.sub_categoryEdit', compact('data'));
     }
 
+    public function getSubCategories (Request $request) {
+        $page = $request->input('page');
+        $page -= 1;
+
+        $products = new SubCategories();
+
+        return response()->json([
+            'subCategories' => $products->orderBy('id', 'desc')->offset($page*15)->limit(15)->get(),
+            'count' => ceil($products->count()/15)
+        ]);
+    }
+
+    public function getAllSubCategories () 
+    {
+        $sub_categories = new SubCategories();
+        return response()->json([
+            'subCategories' => $sub_categories->orderBy('id', 'desc')->get(),
+        ]);
+    }
+
     public function addSubCategory (Request $request)
     {	
     	$request->merge([
