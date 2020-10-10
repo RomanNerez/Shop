@@ -1,6 +1,8 @@
 <template>
   <v-main>
-    <component :is="component"></component>
+    <keep-alive including="home">
+      <component :is="component"></component>
+    </keep-alive>
     <dashboard-core-footer />
   </v-main>
 </template>
@@ -8,7 +10,7 @@
 <script>
   import DashboardCoreFooter from './Footer';
   import Categories from './Categories/Categories.vue';
-  import SubCategoriesTable from './SubCategories/SubCategoriesTables.vue';
+  import SubCategories from './SubCategories/SubCategories.vue';
   import Products from './Products/Products.vue'; 
     export default {
         name: 'DashboardCoreView',
@@ -16,7 +18,7 @@
         components: {
           DashboardCoreFooter,
           Categories,
-          SubCategoriesTable,
+          SubCategories,
           Products
         },
 
@@ -27,7 +29,7 @@
         },
         computed: {
             component: function () {
-                return this.$store.state.component
+                return this.$store.getters.component
             },
         },
     }

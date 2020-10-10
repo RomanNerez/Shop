@@ -170,7 +170,9 @@
 		        set (val) {
 		          this.$store.commit('SET_UPDATES', val)
 		        },
-		     },
-	    }
+                
+		    },
+
+	    },
 	}
 </script>

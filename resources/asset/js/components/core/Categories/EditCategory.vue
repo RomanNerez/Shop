@@ -75,6 +75,8 @@
 		              			<v-col cols="12">
 			              			<v-checkbox
 								        v-model="category.active"
+								        false-value="0"
+								        true-value="1"
 								        label="Активность"
 								        required
 								    ></v-checkbox>

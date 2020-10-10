@@ -129,14 +129,6 @@
 
     data: () => ({
       items: [
-        // {
-        //   icon: 'mdi-view-dashboard',
-        //   title: 'Dashboard',
-        // },
-        // {
-        //   icon: 'mdi-account',
-        //   title: 'Пользователь',
-        // },
         {
           title: 'Категории',
           icon: 'mdi-clipboard-outline',
@@ -145,42 +137,35 @@
         {
           title: 'Подкатегории',
           icon: 'mdi-format-font',
-          component: 'sub-categories-table'
+          component: 'sub-categories'
         },
         {
           title: 'Продукты',
           icon: 'mdi-chart-bubble',
           component: 'products'
         },
-        // {
-        //   title: 'google',
-        //   icon: 'mdi-map-marker',
-        // },
-        // {
-        //   title: 'notifications',
-        //   icon: 'mdi-bell',
-        // },
       ],
     }),
 
     computed: {
-      ...mapState(['barColor', 'barImage']),
-      drawer: {
-        get () {
-          return this.$store.state.drawer
+        ...mapState(['barColor', 'barImage']),
+        drawer: {
+            get () {
+              return this.$store.state.drawer
+            },
+            set (val) {
+              this.$store.commit('SET_DRAWER', val)
+            },
         },
-        set (val) {
-          this.$store.commit('SET_DRAWER', val)
+        component: {
+            get () {
+              return this.$store.getters.component
+            },
+            set (val) {
+                this.updateGetParam(window.SECTION_PARAM, val);
+                this.$store.commit('SET_COMPONENT', val)
+            },
         },
-      },
-      component: {
-        get () {
-          return this.$store.state.component
-        },
-        set (val) {
-          this.$store.commit('SET_COMPONENT', val)
-        },
-      },
         updates: {
             get () {
                 return this.$store.state.updates
@@ -189,25 +174,34 @@
                 this.$store.commit('SET_UPDATES', val)
             },
         },
-      computedItems () {
-        return this.items.map(this.mapItem)
-      },
-      profile () {
-        return {
-          avatar: true,
-          title: 'Vuetify MD',
-        }
-      },
+        computedItems () {
+            return this.items.map(this.mapItem)
+        },
+        profile () {
+            return {
+              avatar: true,
+              title: 'Vuetify MD',
+            }
+        },
     },
-
     methods: {
-      mapItem (item) {
-        return {
-          ...item,
-          children: item.children ? item.children.map(this.mapItem) : undefined,
-          title: item.title,
-        }
-      },
+        mapItem (item) {
+            return {
+                ...item,
+                children: item.children ? item.children.map(this.mapItem) : undefined,
+                title: item.title,
+            }
+        },
+        updateGetParam: function(param, val) {
+            var url = new URL(window.location.href);
+            url.searchParams.delete(window.PAGE_PARAM);
+            if (!url.searchParams.has(param)){
+                url.searchParams.append(param, val);  
+            } else {
+                url.searchParams.set(param, val);
+            } 
+            window.history.pushState(null, null, url.href);
+        },
     },
   }
 </script>

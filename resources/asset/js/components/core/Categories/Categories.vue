@@ -18,7 +18,7 @@
 	export default{
 		data: function () {
 			return {
-				categories: this.$store.state.data.categories,
+				categories: [],
 				dialog: false,
 				selected: null,
 				edit: {},
