@@ -17,6 +17,7 @@
 			          				width="150"
 			          				contain
 			          				class="grey lighten-2"
+			          				v-on:click="catchPhoto"
 			          				:src="category.file"
 			          			>
 				          			<v-row align="center" justify="center" class="lightbox white--black pa-2 fill-height">
@@ -40,15 +41,15 @@
 		                				label="Название"
 		                				v-model="category.title"
 		                				required
-		                				:rules="requiredRules"
+		                				:error-messages="requiredErrors('title')"
 		                			></v-text-field>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
 		                			<v-text-field
 		                				label="Meta Название"
-		                				v-model="category.metaTitle"
+		                				v-model="category.meta_title"
 		                				required
-		                				:rules="requiredRules"
+		                				:error-messages="requiredErrors('meta_title')"
 		                			></v-text-field>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
@@ -58,7 +59,7 @@
 	          							label="Описание"
 	          							v-model="category.desc"
 	          							required
-	          							:rules="requiredRules"
+	          							:error-messages="requiredErrors('desc')"
 	        						></v-textarea>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
@@ -66,9 +67,9 @@
 	          							outlined
 	          							name="input-7-4"
 	          							label="Meta Описание"
-	          							v-model="category.metaDesc"
+	          							v-model="category.meta_desc"
 	          							required
-	          							:rules="requiredRules"
+	          							:error-messages="requiredErrors('meta_desc')"
 	        						></v-textarea>
 		              			</v-col>
 		              			<v-col cols="12">
@@ -84,56 +85,155 @@
 	        	</v-card-text>
 	        	<v-card-actions>
 	          		<v-spacer></v-spacer>
-	          		<v-btn color="blue darken-1" text @click="$emit('update:dialog', false)">Отмена</v-btn>
+	          		<v-btn color="blue darken-1" text @click="cansel">Отмена</v-btn>
+	          		<v-btn color="blue darken-1" text @click="$v.$reset">Сбросить</v-btn>
 	          		<v-btn color="blue darken-1" text @click="pushForm">Сохранить</v-btn>
 	        	</v-card-actions>
 	      	</v-card>
 	    </v-dialog>
+	    <v-snackbar
+            v-model="snackbar.show"
+        >
+            {{ snackbar.text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar.show = false"
+                >
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
  	</v-row>
 </template>
 
 <script>
 	import axios from 'axios';
+	import { required } from 'vuelidate/lib/validators'
 	export default{
-		props:['dialog'],
+		validations: {
+			category:{
+			    file: {
+			    	required
+			    },
+			    title: {
+			     	required
+			    },
+			    desc:{
+			    	required
+			    },
+			    meta_title:{
+			    	required
+			    },
+			    meta_desc:{
+			    	required
+			    }
+			}
+		},
+		props:['dialog', 'edit', 'selected'],
 		data: function () {
 			return {
-				requiredRules: [
-			        v => !!v || 'Поле обязательное!',
-			    ],
+				snackbar:{
+                    text: '',
+                    show: false
+                },
+				location: window.location.origin,
 				valid: null,
 				category:{
 					file: '',
 					active: 1,
-					ru: {
-						title: '',
-						desc: '',
-						metaTitle: '',
-						metaDesc: ''
-					},
-					ua: {
-						title: '',
-						desc: '',
-						metaTitle: '',
-						metaDesc: ''
-					}
+					title: '',
+					desc: '',
+					meta_title: '',
+					meta_desc: ''
 				}
 			}
+		},
+		watch: {
+			edit: function () {
+				this.category = this.edit
+				if (!this.edit.file) return; 
+				this.category.file = this.location + '/storage/' +this.edit.file
+			} 
 		},
 		mounted: function () {
 			
 		},
 		methods:{
+			snackbarMess: function (text) {
+                this.snackbar.show = true;
+                this.snackbar.text = text; 
+            },
+			cansel: function () {
+				if (this.selected) {
+					this.$emit('update:selected', null);	
+				}
+				this.$emit('update:dialog', false)
+			},
+			requiredErrors: function (key) {
+                const errors = []
+                if (!this.$v.category[key].$dirty) return errors
+                !this.$v.category[key].required && errors.push('Это поле обязательно!')
+                return errors
+            },
+			catchPhoto: function () {
+				let that = this;
+				window.open(
+					'admin/laravel-filemanager' + '?type=file', 
+					'FileManager', 
+					'width=900,height=600'
+				);
+				window.SetUrl = function (items) {
+				    that.category.file = items.map(function (item) {
+				    	return item.url;
+					}).join(',');
+				
+				}
+			},
+			clearCategory: function () {
+				this.category = {
+					file: '',
+					active: 1,
+					title: '',
+					desc: '',
+					meta_title: '',
+					meta_desc: ''
+				}
+			},
 			pushForm() {
-				if (!this.$refs.form.validate()) { 
+				this.$v.$touch()
+				if (this.$v.$invalid) { 
 					return;
 				}
+				let s = this.selected
+				let url = s ? 'admin/category/edit' : 'admin/category/add';
 
-				axios.post('admin/category/add',{
+				this.category.active = Number(this.category.active); 
+
+				axios.post(url,{
 					category: this.category
 				})
 				.then(responce =>{
-					console.log('work');
+					if (s) {
+						for (let i = 0; i < this.$parent.categories.length; i++) {
+							let category = this.$parent.categories[i];
+							if (category.id === s) {
+								this.$parent.categories.splice(i, 1, responce.data);
+								break;
+							}
+						}
+						this.snackbarMess('Категория успешно отредактирована!');
+						this.cansel();
+						this.$v.$reset();
+						return;
+					}
+					this.$parent.categories.unshift(responce.data);
+					this.snackbarMess('Категория успешно создана!');
+					this.clearCategory();
+					this.cansel();
+					this.$v.$reset();
 				}).catch(error =>{
 					console.log('error');
 				});

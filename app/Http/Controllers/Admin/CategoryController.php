@@ -18,104 +18,83 @@ class CategoryController extends Controller
     	return view('admin.category.categories', compact('data'));
     }
 
-    public function displayAddCategory ()
-    {
-        return view('admin.category.categoryAdd');
-    }
-
-    public function displayEditCategory ($id)
-    {
-        $item = Categories::where('id', $id);
-        if($item->doesntExist()){
-            abort(404);
-        }
-        $data = [
-            'item' => $item->first()
-        ];
-        return view('admin.category.categoryEdit', compact('data'));
-    }
-
     public function addCategory (Request $request)
     {
-    	$data = $request->all();
-        dd($data);
+    	$data = $request->all()['category'];
+        $data['file'] = Str::afterLast($data['file'], 'storage/');
     	$data['slug'] = Str::slug($data['title'], '-');
-    	$active = isset($data['active']) ? '1' : '0';
 
     	$messages = [
-    		'required' => 'The :attribute field is required.',
+    		'required' => 'Поле :attribute должно быть заполненое!',
     		'unique' => 'Такое название уже существует'
     	];
 
     	$validator = Validator::make($data, [
             'title' => 'required|max:255',
+            'meta_title' => 'required|max:255',
+            'desc' => 'required',
+            'meta_desc' => 'required',
             'slug' => 'required|unique:categories|max:255',
-        ], $messages);
+        ], $messages)->validate();
 
-        if ($validator->fails()) {
-            return redirect('/admin/categories')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        $category =Categories::create($data);
+        $category->save();
 
-        Categories::create([
-        	'title' => $data['title'],
-        	'slug'  => $data['slug'], 
-        	'active' => $active
-        ]);
-
-    	return redirect('/admin/categories')->with('status', 'Категория создана');
+        return $category;
     }
 
-    public function editCategory (Request $request, $id)
+    public function editCategory (Request $request)
     {   
-        $request->merge([
-            'slug' => Str::slug($request->all()['title']),
-        ]);
+        $data = $request->all()['category'];
 
-        $data = $request->all();
-
-        $data['active'] = isset($data['active']) ? '1' : '0';
+        $data['file'] = Str::afterLast($data['file'], 'storage/');
+        $data['slug'] = Str::slug($data['title'], '-');
 
         $messages = [
             'required' => 'Поле :attribute должно быть заполненое!',
             'unique' => 'Такое название уже существует'
         ];
 
-        $validator = Validator::make($data, [
+        $rulers = [
             'title' => 'required|max:255',
+            'meta_title' => 'required|max:255',
+            'desc' => 'required',
+            'meta_desc' => 'required',
             'slug' => 'required|unique:categories|max:255',
-        ], $messages);
+        ];
 
-        if ($validator->fails()) {
-            return redirect("/admin/categories/{$id}/edit")
-                        ->withErrors($validator)
-                        ->withInput();
+        $slug = Categories::where([ 
+            ['id', $data['id']],
+            ['title', $data['title']]
+        ])->exists();
+
+        if ($slug) {
+            unset($rulers['slug']);
         }
 
-        Categories::where('id', $id)->update([
-            'title' => $data['title'],
-            'slug'  => $data['slug'], 
-            'active' => $data['active']
-        ]);
+        $data['created_at'] = date('Y-m-d H:m:s', strtotime($data['created_at']));
+        $data['updated_at'] = date('Y-m-d H:m:s', time());
 
-        return redirect('/admin/categories')->with('status', 'Категория обновлена');
+        $validator = Validator::make($data, $rulers, $messages)->validate();;
+
+        $category = Categories::where('id', $data['id'])->update($data);
+
+        $data['created_at'] = date('d.m.Y', strtotime($data['created_at']));
+        $data['updated_at'] = date('d.m.Y', time());
+
+        return $data;
     }
 
-    public function deleteCategory ($id)
+    public function deleteCategory (Request $request)
     {
-        $category = Categories::where('id', $id);
-        
-        foreach ($category->first()->sub_categories as &$sub_category) {
-            $sub_category->delete();
-        }
-        foreach ($category->first()->products as &$product) {
-            $product->delete();
-        }
+        $id = $request->input('id');
+        $category = Categories::where('id', $id)->delete();
+    }
 
-    	$category->delete();
-
-    	return redirect('/admin/categories')->with('status', 'Категория удалена!');;
+    public function activeCategory ( Request $request )
+    {
+        $id = $request->input('id');
+        $category = Categories::where('id', $id)->update(['active' => $request->input('active')]);
     }
 
     public function restoreCategory ($id)

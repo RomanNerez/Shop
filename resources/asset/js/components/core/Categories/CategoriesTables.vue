@@ -11,6 +11,7 @@
             icon="mdi-clipboard-text"
             title="Таблица Категорий"
             class="px-5 py-3"
+            :disabled="disabledTable"
         >   
             <v-btn
                 icon
@@ -33,18 +34,21 @@
                 </thead>
                 <tbody>
                     <tr
-                        v-for="(item, index) in categories"
+                        v-for="(category, index) in categories"
                     >
-                        <td>{{item.id}}</td>
-                        <td>{{item.slug}}</td>
-                        <td>{{item.title}}</td>
+                        <td>{{category.id}}</td>
+                        <td>{{category.slug}}</td>
+                        <td>{{category.title}}</td>
                         <td>
                             <v-switch
-                                v-model="item.active"
+                                v-model="category.active"
+                                :false-value="0"
+                                :true-value="1"
+                                @change="active(category.id, category.active)"
                             ></v-switch>
                         </td>
                         <td class="text-right">
-                            {{item.created_at}}
+                            {{category.created_at}}
                         </td>
                         <td>
                             <v-menu offset-y>
@@ -60,15 +64,15 @@
                                 </template>
                                 <v-list>
                                     <v-list-item
-                                        v-for="(item, index) in items"
-                                        :key="index"
-                                        v-on:click="item.function"
+                                        v-for="(param, indexParams) in params"
+                                        :key="indexParams"
+                                        v-on:click="param.function(category.id)"
                                     >
                                         <v-list-item-icon>
-                                            <v-icon>{{item.icon}}</v-icon>
+                                            <v-icon>{{param.icon}}</v-icon>
                                         </v-list-item-icon>
                                         <v-list-item-content>
-                                            <v-list-item-title>{{item.title}}</v-list-item-title>
+                                            <v-list-item-title>{{param.title}}</v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -78,32 +82,115 @@
                 </tbody>
             </v-simple-table>
         </base-material-card>
-        <div class="py-3" />
+        <v-snackbar
+            v-model="snackbar.show"
+        >
+            {{ snackbar.text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar.show = false"
+                >
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
+        <template>
+            <v-row justify="center">
+                <v-dialog v-model="warningModal" max-width="390">
+                    <v-card>
+                        <v-card-title class="headline">Уведомление</v-card-title>
+                        <v-card-text>Вы точно хотите удалить категорию?</v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn 
+                                color="green darken-1" 
+                                text 
+                                @click="warningModal = selectedId = false"
+                            >
+                                Отмена
+                            </v-btn>
+                            <v-btn 
+                                color="green darken-1" 
+                                text 
+                                @click="deleteCategory(selectedId)"
+                            >
+                                Подтвердить
+                            </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+            </v-row>
+        </template>
     </v-container>
 </template>
 
 <script>
+    import axios from 'axios';
     import BaseMaterialCard from '../../base/MaterialCard.vue';
     import BaseVComponent from '../../base/VComponent.vue';
     export default{
         props:['categories'],
         data: function () {
             return {
-                items:[
+                warningModal: false,
+                selectedId: false,
+                snackbar:{
+                    text: '',
+                    show: false
+                },
+                disabledTable: false,
+                params:[
                 {
                     title: 'Удалить',
                     icon: 'mdi-delete',
-                    function: () => {}
+                    function: (id) => {
+                        this.warningModal = true;
+                        this.selectedId = id;
+                    }
                 },
                 {
                     title: 'Редактировать',
                     icon: 'mdi-pencil',
-                    function: () => this.$emit('update:dialog', true)
+                    function: (id) => {
+                        this.$parent.selected = id;
+                        this.$emit('update:dialog', true)
+                    }
                 }
               ]
             }
         },
-
+        methods:{
+            deleteCategory: function (id) {
+                this.warningModal = false;
+                this.disabledTable = true;
+                axios.post('admin/category/delete',{id})
+                .then( response =>{
+                    this.disabledTable = false;
+                    this.$parent.categories = this.$parent.categories.filter(c => c.id !== id);
+                    this.snackbarMess('Категория успешно удалена!');
+                }).catch(err=>{
+                    this.snackbarMess('Произошла ошибка при удалении категории!');
+                });
+            },
+            active (id, active) {
+                this.disabledTable = true;
+                axios.post('admin/category/active',{id, active})
+                .then( response =>{
+                    this.disabledTable = false;
+                    let msg = active ? 'Категория активирована' : 'Категория дезактивирована'
+                    this.snackbarMess(msg)
+                }).catch(err =>{
+                    this.snackbarMess('Произошла ошибка');
+                });
+            },
+            snackbarMess: function (text) {
+                this.snackbar.show = true;
+                this.snackbar.text = text; 
+            }
+        },
         components: {
             BaseMaterialCard,
             BaseVComponent
