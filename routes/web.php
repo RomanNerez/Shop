@@ -57,8 +57,12 @@ Route::group(
 	[
         'prefix' => 'admin',
         'middleware' => ['auth', 'can:admin-panel'],
+
     ],
 	function () {
+		Route::group(['prefix' => 'laravel-filemanager'], function () {
+	     	\UniSharp\LaravelFilemanager\Lfm::routes();
+	 	});
 		Route::namespace('Admin')->group(function () {
 			Route::get('/', 'AdminController@index')->name('admin-home');
 			Route::prefix('category')->group(function () {

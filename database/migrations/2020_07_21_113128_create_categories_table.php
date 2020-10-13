@@ -15,7 +15,11 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('file', 255);
+            $table->text('file')->default('default');
+            $table->string('title', 255);
+            $table->text('desc');
+            $table->string('meta_title', 255);
+            $table->text('meta_desc');
             $table->string('slug', 50)->unique();
             $table->boolean('active')->default(true);
             $table->timestamps();

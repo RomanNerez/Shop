@@ -17,6 +17,7 @@
 			          				width="150"
 			          				contain
 			          				class="grey lighten-2"
+			          				v-on:click="catchPhoto"
 			          				:src="category.file"
 			          			>
 				          			<v-row align="center" justify="center" class="lightbox white--black pa-2 fill-height">
@@ -40,7 +41,7 @@
 		                				label="Название"
 		                				v-model="category.title"
 		                				required
-		                				:rules="requiredRules"
+		                				:error-messages="requiredErrors('title')"
 		                			></v-text-field>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
@@ -48,7 +49,7 @@
 		                				label="Meta Название"
 		                				v-model="category.metaTitle"
 		                				required
-		                				:rules="requiredRules"
+		                				:error-messages="requiredErrors('metaTitle')"
 		                			></v-text-field>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
@@ -58,7 +59,7 @@
 	          							label="Описание"
 	          							v-model="category.desc"
 	          							required
-	          							:rules="requiredRules"
+	          							:error-messages="requiredErrors('desc')"
 	        						></v-textarea>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
@@ -68,7 +69,7 @@
 	          							label="Meta Описание"
 	          							v-model="category.metaDesc"
 	          							required
-	          							:rules="requiredRules"
+	          							:error-messages="requiredErrors('metaDesc')"
 	        						></v-textarea>
 		              			</v-col>
 		              			<v-col cols="12">
@@ -85,6 +86,7 @@
 	        	<v-card-actions>
 	          		<v-spacer></v-spacer>
 	          		<v-btn color="blue darken-1" text @click="$emit('update:dialog', false)">Отмена</v-btn>
+	          		<v-btn color="blue darken-1" text @click="$v.$reset">Сбросить</v-btn>
 	          		<v-btn color="blue darken-1" text @click="pushForm">Сохранить</v-btn>
 	        	</v-card-actions>
 	      	</v-card>
@@ -94,7 +96,27 @@
 
 <script>
 	import axios from 'axios';
+	import { required } from 'vuelidate/lib/validators'
 	export default{
+		validations: {
+			category:{
+			    file: {
+			    	required
+			    },
+			    title: {
+			     	required
+			    },
+			    desc:{
+			    	required
+			    },
+			    metaTitle:{
+			    	required
+			    },
+			    metaDesc:{
+			    	required
+			    }
+			}
+		},
 		props:['dialog'],
 		data: function () {
 			return {
@@ -105,18 +127,10 @@
 				category:{
 					file: '',
 					active: 1,
-					ru: {
-						title: '',
-						desc: '',
-						metaTitle: '',
-						metaDesc: ''
-					},
-					ua: {
-						title: '',
-						desc: '',
-						metaTitle: '',
-						metaDesc: ''
-					}
+					title: '',
+					desc: '',
+					meta_title: '',
+					meta_desc: ''
 				}
 			}
 		},
@@ -124,8 +138,29 @@
 			
 		},
 		methods:{
+			requiredErrors: function (key) {
+                const errors = []
+                if (!this.$v.category[key].$dirty) return errors
+                !this.$v.category[key].required && errors.push('Это поле обязательно!')
+                return errors
+            },
+			catchPhoto: function () {
+				let that = this;
+				window.open(
+					'admin/laravel-filemanager' + '?type=file', 
+					'FileManager', 
+					'width=900,height=600'
+				);
+				window.SetUrl = function (items) {
+				    that.category.file = items.map(function (item) {
+				    	return item.url;
+					}).join(',');
+				
+				}
+			},
 			pushForm() {
-				if (!this.$refs.form.validate()) { 
+				this.$v.$touch()
+				if (this.$v.$invalid) { 
 					return;
 				}
 

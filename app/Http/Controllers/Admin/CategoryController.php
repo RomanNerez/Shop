@@ -18,53 +18,27 @@ class CategoryController extends Controller
     	return view('admin.category.categories', compact('data'));
     }
 
-    public function displayAddCategory ()
-    {
-        return view('admin.category.categoryAdd');
-    }
-
-    public function displayEditCategory ($id)
-    {
-        $item = Categories::where('id', $id);
-        if($item->doesntExist()){
-            abort(404);
-        }
-        $data = [
-            'item' => $item->first()
-        ];
-        return view('admin.category.categoryEdit', compact('data'));
-    }
-
     public function addCategory (Request $request)
     {
-    	$data = $request->all();
-        dd($data);
+    	$data = $request->all()['category'];
+        $data['file'] = Str::afterLast($data['file'], 'storage/');
     	$data['slug'] = Str::slug($data['title'], '-');
     	$active = isset($data['active']) ? '1' : '0';
 
     	$messages = [
-    		'required' => 'The :attribute field is required.',
+    		'required' => 'Поле обязательно',
     		'unique' => 'Такое название уже существует'
     	];
 
     	$validator = Validator::make($data, [
             'title' => 'required|max:255',
+            'meta_title' => 'required|max:255',
+            'desc' => 'required',
+            'meta_desc' => 'required',
             'slug' => 'required|unique:categories|max:255',
-        ], $messages);
+        ], $messages)->validate();
 
-        if ($validator->fails()) {
-            return redirect('/admin/categories')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        Categories::create([
-        	'title' => $data['title'],
-        	'slug'  => $data['slug'], 
-        	'active' => $active
-        ]);
-
-    	return redirect('/admin/categories')->with('status', 'Категория создана');
+        Categories::create($data)->save();
     }
 
     public function editCategory (Request $request, $id)

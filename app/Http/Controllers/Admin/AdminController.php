@@ -18,15 +18,8 @@ class AdminController extends Controller
     public function index()
     {
         $categories = Categories::orderBy('id', 'desc')->limit(10)->get();
-        foreach ($categories as $value) {
-           $value->localCategory;
-        }
-        //dd($categories);
-
+        
         $sub_categories = SubCategories::orderBy('id', 'desc')->limit(10)->get();
-        foreach ($sub_categories as $value) {
-           $value->category;
-        }
 
         $data = [
             'categories' => $categories,

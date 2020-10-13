@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(CategoriesSeeder::class);
+        factory(App\Categories::class, 6)->create();
         $this->call(SubCategoriesSeeder::class);
 
         DB::table('langs')->insert([
