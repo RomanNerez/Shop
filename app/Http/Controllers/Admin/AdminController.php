@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Categories;
 use App\SubCategories;
+use App\Products;
 use Illuminate\Http\Request;
 use DB;
 
@@ -15,17 +16,24 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $categories = Categories::orderBy('id', 'desc')->limit(10)->get();
         
         $sub_categories = SubCategories::orderBy('id', 'desc')->limit(10)->get();
 
+        $products = Products::orderBy('id', 'desc')->limit(15)->get();
+
         $data = [
-            'categories' => $categories,
             'sub_categories' => $sub_categories,
+            'params' => [
+                'section' => $request->get('section') ? $request->get('section') : 'categories',
+                'page' => $request->get('page') ? $request->get('page') : 1,   
+            ],
             'langs' => DB::table('langs')->get(),
         ];
+
         return view('admin.dashboard', compact('data'));
     }
 
