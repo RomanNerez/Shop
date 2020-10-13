@@ -67,8 +67,9 @@ Route::group(
 			Route::get('/', 'AdminController@index')->name('admin-home');
 			Route::prefix('category')->group(function () {
 				Route::post('/add', 'CategoryController@addCategory');
-				Route::post('/{id}/edit', 'CategoryController@editCategory');
-				Route::post('/{id}/delete', 'CategoryController@deleteCategory');
+				Route::post('/edit', 'CategoryController@editCategory');
+				Route::post('/delete', 'CategoryController@deleteCategory');
+				Route::post('/active', 'CategoryController@activeCategory');
 			});
 
 			//==================================================================

@@ -10,12 +10,15 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     public function index(){
-    	$categories = Categories::get();
+    	$categories = Categories::where('active', 1)->get();
     	return view('shop.app', compact('categories'));
     }
 
     public function productList($category){
-        $subcategories = Categories::where('slug', $category)->first()->sub_categories;
+        $subcategories = Categories::where([
+            ['slug', $category],
+            ['active', 1]
+        ])->first()->sub_categories;
         return view('shop.productlist', compact('subcategories'));
     }
 
