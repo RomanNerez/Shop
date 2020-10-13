@@ -2,7 +2,7 @@
 <html lang="en" class="page">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
         <title>Iнтернет магазин FreeZ</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('asset/css/normalize.css') }}" />
@@ -134,7 +134,7 @@
                                 <span v-if="carts.length >= 1">@{{summeryCart.allCount}}</span>
                             </template>
                         </a>
-                        <div class="cart__popup">
+                        <!--<div class="cart__popup">
                             <p>
                                 <span class="cart__popup-total">@{{carts.length}}</span> товар
                                 на сумму
@@ -144,7 +144,7 @@
                             <a href="{{route('cart')}}" class="btn cart__popup-btn"
                                 >Оформити</a
                             >
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </nav>
@@ -281,6 +281,167 @@
                     </div>
                 </div>
             </footer>
+            <!--<section class="cart-modal">
+                <div class="cart-modal__wrapper">
+                    <div class="cart-modal__header">
+                        <div class="cart-modal__title">
+                            <svg>
+                                <use xlink:href="#cart"></use>
+                            </svg>
+                            <h4>Кор<span>Z</span>ина</h4>
+                        </div>
+                        <button type="button" class="cart-modal__close">
+                            <span></span>
+                        </button>
+                </div>
+                <hr>
+                <table class="cart-modal__table">
+                        <tr class="cart-item">
+                            <td class="cart-item__image">
+                                <img src="https://static.thenounproject.com/png/2034632-200.png" alt="product image" width="50px">
+                             </td>
+                             <td class="cart-item__name">
+                                 <h4>Product name Lorem ipsum dolor sit amet.</h4>
+                             </td>
+                             <td class="cart-item__price">
+                                 <span>199.00</span>грн.
+                             </td>
+                             <td class="cart-item__quantity">
+                                 <form action="#">
+                                    <input type="number" id="points" name="quantity" step="1" placeholder="1">
+                                 </form>
+                             </td>
+                             <td class="cart-item__total">
+                                 <span>199.00</span>грн.
+                             </td>
+                             <td class="cart-item__delete">
+                                 <button type="btn">Видалити</button>
+                             </td>
+                        </tr>
+                        <tr class="cart-item">
+                            <td class="cart-item__image">
+                                <img src="https://static.thenounproject.com/png/2034632-200.png" alt="product image" width="50px">
+                             </td>
+                             <td class="cart-item__name">
+                                 <h4>Product name Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quidem perspiciatis eum eligendi ea architecto.</h4>
+                             </td>
+                             <td class="cart-item__price">
+                                 <span>199.00</span>грн.
+                             </td>
+                             <td class="cart-item__quantity">
+                                 <form action="#">
+                                    <input type="number" id="points" name="quantity" step="1" placeholder="1">
+                                 </form>
+                             </td>
+                             <td class="cart-item__total">
+                                 <span>199.00</span>грн.
+                             </td>
+                             <td class="cart-item__delete">
+                                 <button type="btn">Видалити</button>
+                             </td>
+                        </tr>
+                </table>
+                <hr>
+                <div class="cart-modal__summ">
+                        <h3>До сплати:</h3>
+                        <b><span>309</span>грн.</b>
+                </div>
+                <div class="cart-modal__buttons">
+                        <button class="btn" type="button">Закрити</button>
+                        <button class="btn" type="button">Оформити</button>
+                </div>
+                </div>
+                <div class="checkout">
+                    <div class="checkout__steps">
+                        <div class="step active">
+                            <span class="step__image">1</span>
+                            <p>Вашi даннi</p>
+                        </div>
+                        <div class="step">
+                            <span class="step__image ">2</span>
+                            <p>Cпосiб <br>оплати</p>
+                        </div>
+                        <div class="step">
+                            <span class="step__image ">3</span>
+                            <p>Пiдтвердження</p>
+                        </div>
+                    </div>
+                    <div class="checkout__form">
+                        <h2>Заповнiть анкету</h2>
+                        <form action="#">
+                            <div class="checkout__wrapper">
+                                <div class="checkout__input">
+                                    <label for="checkout-name">Iм'я</label>
+                                    <input type="text" id="checkout-name" name="checkout-name" required>
+                                </div>
+                                <div class="checkout__input">
+                                    <label for="checkout-surname">Фамiлiя</label>
+                                    <input type="text" id="checkout-surname" name="checkout-surname" required>
+                                </div>
+                                <div class="checkout__input">
+                                    <label for="checkout-phone">Телефон</label>
+                                    <input type="phone" id="checkout-phone" name="checkout-phone" required>
+                                </div>
+                                <div class="checkout__input">
+                                    <label for="checkout-email">Email</label>
+                                    <input type="email" id="checkout-email" name="checkout-email" required>
+                                </div>
+                                <div class="checkout__input">
+                                    <p>або</p>
+                                    <div class="login__link">
+                                        <a href="#">Вхiд</a>
+                                    </div>
+                                </div>
+                                <div class="checkout__input">
+                                    <button class="btn checkout__btn" type="submit">Далi</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="checkout">
+                    <div class="checkout__steps">
+                        <div class="step completed">
+                            <span class="step__image">
+                                <svg width="10px">
+                                    <use xlink:href="#tick"></use>
+                                </svg>
+                            </span>
+                            <p>Вашi даннi</p>
+                        </div>
+                        <div class="step active">
+                            <span class="step__image ">2</span>
+                            <p>Cпосiб <br>оплати</p>
+                        </div>
+                        <div class="step">
+                            <span class="step__image ">3</span>
+                            <p>Пiдтвердження</p>
+                        </div>
+                    </div>
+                    <div class="checkout__form">
+                        <h2>Виберiть спосiб оплати</h2>
+                        <form action="#">
+                            <div class="checkout__wrapper">
+                                
+                                    <input type="radio" id="cash" name="payment">
+                                    <label for="cash">Готiвкою при отриманнi</label>
+                                    
+                                
+                                
+                                    <input type="radio" id="card" name="payment">
+                                    <label for="card">Сплатити картою</label>
+                                    
+                                
+                                <div class="checkout__input">
+                                    <button class="btn checkout__btn" type="submit">Далi</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>-->
         </div>
 
         <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" display="none">
@@ -418,6 +579,9 @@
             </symbol>
             <symbol id="cover" viewBox="0 0 448 512">
                 <g id="svgg"><path d="M132.067 19.527 C 120.126 20.815,109.219 29.155,104.800 40.378 C 102.357 46.581,102.381 45.773,102.381 121.729 L 102.381 192.381 98.690 192.388 C 65.643 192.454,40.211 205.103,23.771 229.650 C -11.462 282.259,22.295 352.850,85.646 359.042 C 88.499 359.321,106.209 359.524,127.670 359.524 L 164.762 359.524 164.762 373.595 C 164.762 390.182,165.047 391.265,170.100 393.856 C 176.368 397.070,177.209 396.474,203.194 370.408 C 229.107 344.412,229.049 344.495,226.152 338.095 C 224.895 335.319,181.281 291.869,178.333 290.457 C 174.316 288.533,168.837 290.086,166.340 293.856 L 165.000 295.880 164.762 310.440 L 164.524 325.000 129.048 325.143 C 84.332 325.323,81.498 325.062,71.059 319.813 C 37.358 302.866,34.598 255.973,66.070 235.077 C 74.449 229.514,81.275 227.565,93.434 227.262 L 102.344 227.041 102.483 265.544 C 102.601 298.380,102.727 304.328,103.337 305.952 L 104.052 307.857 125.597 307.981 C 137.447 308.049,147.156 307.942,147.172 307.743 C 147.189 307.544,147.272 304.702,147.358 301.429 C 147.952 278.832,167.237 266.018,186.667 275.310 C 190.718 277.248,237.821 323.850,240.554 328.625 L 242.143 331.400 255.519 331.414 C 277.940 331.438,286.676 327.290,293.846 313.213 C 297.458 306.122,297.308 308.080,297.495 265.357 L 297.661 227.143 305.140 227.149 C 332.686 227.172,353.164 245.162,355.722 271.586 C 358.418 299.429,338.426 322.241,308.939 324.970 C 296.385 326.132,290.478 331.286,290.078 341.429 C 289.585 353.950,298.442 360.528,313.842 359.077 C 386.240 352.253,416.587 264.040,363.476 214.800 C 347.775 200.243,330.501 193.554,306.082 192.577 L 297.640 192.239 297.506 119.572 C 297.357 38.583,297.632 45.136,294.067 37.857 C 289.890 29.327,281.736 22.674,272.381 20.161 C 269.038 19.263,139.926 18.680,132.067 19.527 M168.333 41.122 C 185.326 45.650,187.403 69.004,171.504 76.782 L 168.333 78.333 152.143 78.333 L 135.952 78.333 132.742 76.813 C 116.555 69.145,118.792 45.065,136.069 40.993 C 139.093 40.281,165.572 40.386,168.333 41.122 M137.857 50.287 C 125.874 56.814,134.321 74.396,146.519 68.318 C 153.236 64.971,153.874 55.567,147.681 51.205 C 145.189 49.450,140.243 48.988,137.857 50.287 M163.990 54.475 C 161.878 55.421,160.952 56.980,160.952 59.593 C 160.952 65.665,169.775 66.960,171.386 61.126 C 172.634 56.606,168.178 52.600,163.990 54.475 " stroke="none" fill="#000000" fill-rule="evenodd"></path>
+            </symbol>
+            <symbol id="tick" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
             </symbol>
         </svg>
         <script src="{{asset('libs/jquery.min.js')}}"></script>

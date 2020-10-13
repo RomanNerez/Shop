@@ -81,6 +81,8 @@ button {
     display: inline-block;
     padding: 12px 25px;
     background-color: $main-color;
+    border: none;
+    color: #fff;
     border-radius: 5px;
     text-transform: uppercase;
     transition: $hover-transition;
@@ -132,3 +134,4 @@ button {
 @import "./blocks/login.scss";
 @import "./blocks/waranty.scss";
 @import "./blocks/breadcrumbs.scss";
+@import "./blocks/cart-modal.scss";
