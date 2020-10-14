@@ -7,6 +7,9 @@ import vuetify from './components/plugins/vuetify.js';
 Vue.use(Vuelidate); 
 Vue.use(Vuex);
 
+window.SECTION_PARAM = 'section';
+window.PAGE_PARAM = 'page';
+
 
 const store = new Vuex.Store({
     state: {
@@ -14,8 +17,11 @@ const store = new Vuex.Store({
         barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
         barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
         drawer: null,
-        component: 'categories',
-        updates: false
+        updates: false,
+        componentInfo:{}
+    },
+    getters:{
+        component: (state) => state.data.params[window.SECTION_PARAM]
     },
     mutations: {
         SET_BAR_IMAGE (state, payload) {
@@ -25,14 +31,11 @@ const store = new Vuex.Store({
             state.drawer = payload
         },
         SET_COMPONENT (state, payload) {
-            if (!payload) {
-                payload = 'categories'
-            }
-            state.component = payload;
+            state.data.params[window.SECTION_PARAM] = payload;
         },
         SET_UPDATES (state, payload) {
             state.updates = payload;
-        }
+        },
     },
     actions: {
 

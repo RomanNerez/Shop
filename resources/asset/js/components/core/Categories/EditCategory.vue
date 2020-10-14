@@ -47,9 +47,9 @@
 		              			<v-col cols="12" sm="6" md="6">
 		                			<v-text-field
 		                				label="Meta Название"
-		                				v-model="category.metaTitle"
+		                				v-model="category.meta_title"
 		                				required
-		                				:error-messages="requiredErrors('metaTitle')"
+		                				:error-messages="requiredErrors('meta_title')"
 		                			></v-text-field>
 		              			</v-col>
 		              			<v-col cols="12" sm="6" md="6">
@@ -67,14 +67,16 @@
 	          							outlined
 	          							name="input-7-4"
 	          							label="Meta Описание"
-	          							v-model="category.metaDesc"
+	          							v-model="category.meta_desc"
 	          							required
-	          							:error-messages="requiredErrors('metaDesc')"
+	          							:error-messages="requiredErrors('meta_desc')"
 	        						></v-textarea>
 		              			</v-col>
 		              			<v-col cols="12">
 			              			<v-checkbox
 								        v-model="category.active"
+								        false-value="0"
+								        true-value="1"
 								        label="Активность"
 								        required
 								    ></v-checkbox>
@@ -85,12 +87,27 @@
 	        	</v-card-text>
 	        	<v-card-actions>
 	          		<v-spacer></v-spacer>
-	          		<v-btn color="blue darken-1" text @click="$emit('update:dialog', false)">Отмена</v-btn>
+	          		<v-btn color="blue darken-1" text @click="cansel">Отмена</v-btn>
 	          		<v-btn color="blue darken-1" text @click="$v.$reset">Сбросить</v-btn>
 	          		<v-btn color="blue darken-1" text @click="pushForm">Сохранить</v-btn>
 	        	</v-card-actions>
 	      	</v-card>
 	    </v-dialog>
+	    <v-snackbar
+            v-model="snackbar.show"
+        >
+            {{ snackbar.text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar.show = false"
+                >
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
  	</v-row>
 </template>
 
@@ -109,20 +126,22 @@
 			    desc:{
 			    	required
 			    },
-			    metaTitle:{
+			    meta_title:{
 			    	required
 			    },
-			    metaDesc:{
+			    meta_desc:{
 			    	required
 			    }
 			}
 		},
-		props:['dialog'],
+		props:['dialog', 'edit', 'selected'],
 		data: function () {
 			return {
-				requiredRules: [
-			        v => !!v || 'Поле обязательное!',
-			    ],
+				snackbar:{
+                    text: '',
+                    show: false
+                },
+				location: window.location.origin,
 				valid: null,
 				category:{
 					file: '',
@@ -134,10 +153,27 @@
 				}
 			}
 		},
+		watch: {
+			edit: function () {
+				this.category = this.edit
+				if (!this.edit.file) return; 
+				this.category.file = this.location + '/storage/' +this.edit.file
+			} 
+		},
 		mounted: function () {
 			
 		},
 		methods:{
+			snackbarMess: function (text) {
+                this.snackbar.show = true;
+                this.snackbar.text = text; 
+            },
+			cansel: function () {
+				if (this.selected) {
+					this.$emit('update:selected', null);	
+				}
+				this.$emit('update:dialog', false)
+			},
 			requiredErrors: function (key) {
                 const errors = []
                 if (!this.$v.category[key].$dirty) return errors
@@ -158,17 +194,48 @@
 				
 				}
 			},
+			clearCategory: function () {
+				this.category = {
+					file: '',
+					active: 1,
+					title: '',
+					desc: '',
+					meta_title: '',
+					meta_desc: ''
+				}
+			},
 			pushForm() {
 				this.$v.$touch()
 				if (this.$v.$invalid) { 
 					return;
 				}
+				let s = this.selected
+				let url = s ? 'admin/category/edit' : 'admin/category/add';
 
-				axios.post('admin/category/add',{
+				this.category.active = Number(this.category.active); 
+
+				axios.post(url,{
 					category: this.category
 				})
 				.then(responce =>{
-					console.log('work');
+					if (s) {
+						for (let i = 0; i < this.$parent.categories.length; i++) {
+							let category = this.$parent.categories[i];
+							if (category.id === s) {
+								this.$parent.categories.splice(i, 1, responce.data);
+								break;
+							}
+						}
+						this.snackbarMess('Категория успешно отредактирована!');
+						this.cansel();
+						this.$v.$reset();
+						return;
+					}
+					this.$parent.categories.unshift(responce.data);
+					this.snackbarMess('Категория успешно создана!');
+					this.clearCategory();
+					this.cansel();
+					this.$v.$reset();
 				}).catch(error =>{
 					console.log('error');
 				});

@@ -624,6 +624,7 @@ button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  outline: none;
 }
 
 .hero .slick-arrow:after {
@@ -652,7 +653,7 @@ button {
   display: flex;
   flex-flow: column;
   position: relative;
-  min-height: 400px;
+  height: 400px;
 }
 
 .categories__item:hover > .categories__inner {
