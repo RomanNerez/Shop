@@ -91,6 +91,13 @@
                 				></v-text-field>
               				</v-col>
               				<v-col cols="12">
+                				<v-text-field 
+                					v-model="editor.sale"
+                					label="Скидка %" 
+                					type="number"
+                				></v-text-field>
+              				</v-col>
+              				<v-col cols="12">
                 				<v-text-field
                 					v-model="editor.brand"
                 					label="Бранд*"
@@ -115,6 +122,14 @@
           							:false-value="0"
 								    :true-value="1"
           							label="Активность"
+          							type="checkbox"
+          							required
+        						></v-checkbox>
+        						<v-checkbox
+          							v-model="editor.popular"
+          							:false-value="0"
+								    :true-value="1"
+          							label="Популярный"
           							type="checkbox"
           							required
         						></v-checkbox>
@@ -193,7 +208,9 @@
 					material: '',
 					photos: [''],
 					sub_categories_id: null,
-					active: 1
+					active: 1,
+					sale: 0,
+					popular: 0
 				}
 			}
 		},

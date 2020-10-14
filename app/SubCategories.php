@@ -9,7 +9,7 @@ class SubCategories extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['categories_id', 'title', 'slug', 'active'];
+    protected $fillable = ['categories_id', 'file','title', 'slug', 'active', 'desc', 'meta_title', 'meta_desc'];
 
     protected $casts = [
 	    'created_at' => 'datetime:d.m.Y',

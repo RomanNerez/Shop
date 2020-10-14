@@ -14,7 +14,20 @@ class Products extends Model
 	    'updated_at' => 'datetime:d.m.Y',
 	];
 
-	protected $fillable = ['sub_categories_id','title', 'slug', 'description', 'photos', 'price', 'brand', 'manufacturer', 'material', 'active'];
+	protected $fillable = [
+		'sub_categories_id',
+		'title', 
+		'slug', 
+		'description', 
+		'photos', 
+		'price', 
+		'brand', 
+		'manufacturer', 
+		'material', 
+		'active', 
+		'popular', 
+		'sale'
+	];
 
 	public function sub_category()
     {

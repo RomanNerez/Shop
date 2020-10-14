@@ -14,6 +14,12 @@
       class="px-5 py-3"
       :disabled="disabledTable"
     >
+        <v-btn
+            icon
+            v-on:click="$emit('update:dialog', true)"
+        >
+            <v-icon>mdi-plus</v-icon>
+        </v-btn>
         <v-skeleton-loader
             v-if="!subCategories.length"
             type="table"
@@ -32,9 +38,6 @@
                       Название
                     </th>
                     <th class="primary--text">
-                      Категория
-                    </th>
-                    <th class="primary--text">
                       Активность
                     </th>
                     <th class="text-right primary--text">
@@ -46,19 +49,20 @@
 
                 <tbody>
                   <tr
-                    v-for="(item, index) in subCategories"
+                    v-for="(subCategory, index) in subCategories"
                   >
-                    <td>{{item.id}}</td>
-                    <td>{{item.slug}}</td>
-                    <td>{{item.title}}</td>
-                    <td>{{item.title}}</td>
+                    <td>{{subCategory.id}}</td>
+                    <td>{{subCategory.slug}}</td>
+                    <td>{{subCategory.title}}</td>
                     <td>
                         <v-switch
-                            v-model="item.active"
-                        >
-                        </v-switch></td>
+                            v-model="subCategory.active"
+                            :false-value="0"
+                            :true-value="1"
+                            @change="active(subCategory.id, subCategory.active)"
+                        ></v-switch>
                     <td class="text-right">
-                      {{item.created_at}}
+                      {{subCategory.created_at}}
                     </td>
                     <td class="text-right">
                         <v-menu offset-y>
@@ -76,7 +80,7 @@
                             <v-list-item
                                 v-for="(item, index) in items"
                                 :key="index"
-                                @click=""
+                                @click="item.function(subCategory.id)"
                             >
                                 <v-list-item-icon>
                                     <v-icon>{{item.icon}}</v-icon>
@@ -104,6 +108,48 @@
             </div>
         </template>
     </base-material-card>
+    <v-snackbar
+            v-model="snackbar.show"
+        >
+            {{ snackbar.text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar.show = false"
+                >
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
+        <template>
+            <v-row justify="center">
+                <v-dialog v-model="warningModal" max-width="390">
+                    <v-card>
+                        <v-card-title class="headline">Уведомление</v-card-title>
+                        <v-card-text>Вы точно хотите удалить категорию?</v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn 
+                                color="green darken-1" 
+                                text 
+                                @click="warningModal = selectedId = false"
+                            >
+                                Отмена
+                            </v-btn>
+                            <v-btn 
+                                color="green darken-1" 
+                                text 
+                                @click="deleteCategory(selectedId)"
+                            >
+                                Подтвердить
+                            </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+            </v-row>
+        </template>
   </v-container>
 </template>
 
@@ -112,10 +158,15 @@
     import BaseMaterialCard from '../../base/MaterialCard.vue';
     import BaseVComponent from '../../base/VComponent.vue';
     export default{
-        props: ['subCategories'],
+        props: ['subCategories', 'dialog', 'selected'],
         data: function () {
             return {
+                warningModal: false,
                 disabledTable: false,
+                snackbar:{
+                    text: '',
+                    show: false
+                },
                 pagination:{
                     page:1,
                     length: 15
@@ -123,11 +174,19 @@
                 items:[
                     {
                         title: 'Удалить',
-                        icon: 'mdi-delete'
+                        icon: 'mdi-delete',
+                        function: (id) => {
+                            this.warningModal = true;
+                            this.selectedId = id;
+                        }
                     },
                     {
                         title: 'Редактировать',
-                        icon: 'mdi-pencil'
+                        icon: 'mdi-pencil',
+                        function: (id) => {
+                            this.$parent.selected = id;
+                            this.$emit('update:dialog', true)
+                        }
                     }
                 ]
             }
@@ -166,7 +225,7 @@
             },
             getSubCategoryData: function (page) {
                 this.disabledTable = true;
-                axios.post('admin/sub_categories/getdata',{page})
+                axios.post('admin/sub-categories/getdata',{page})
                 .then(response =>{
                     this.$parent.subCategories = response.data.subCategories;
                     this.pagination.length = response.data.count;
@@ -174,6 +233,18 @@
                 }).catch(err=>{
                     this.disabledTable = false;
                 })
+            },
+            deleteCategory: function (id) {
+                this.warningModal = false;
+                this.disabledTable = true;
+                axios.post('admin/sub-categories/delete',{id})
+                .then( response =>{
+                    this.disabledTable = false;
+                    this.$parent.subCategories = this.$parent.subCategories.filter(c => c.id !== id);
+                    this.snackbarMess('Категория успешно удалена!');
+                }).catch(err=>{
+                    this.snackbarMess('Произошла ошибка при удалении категории!');
+                });
             },
             updateGetParam: function(param, val) {
                 var url = new URL(window.location.href);
@@ -184,6 +255,21 @@
                 } 
                 window.history.pushState(null, null, url.href);
             },
+            active (id, active) {
+                this.disabledTable = true;
+                axios.post('admin/sub-categories/active',{id, active})
+                .then( response =>{
+                    this.disabledTable = false;
+                    let msg = active ? 'Подкатегория активирована' : 'Подкатегория дезактивирована'
+                    this.snackbarMess(msg)
+                }).catch(err =>{
+                    this.snackbarMess('Произошла ошибка');
+                });
+            },
+            snackbarMess: function (text) {
+                this.snackbar.show = true;
+                this.snackbar.text = text; 
+            }
         }
         
     }
