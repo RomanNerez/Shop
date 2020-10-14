@@ -8,13 +8,12 @@ use Illuminate\Support\Str;
 
 $factory->define(SubCategories::class, function (Faker $faker) {
 	
-	$arr = ['Apple', 'ASUS', 'Fly', 'Huawei', 'Lenovo', 'SONY', 'MOTOROLA', 'Dopod', 'EVO', 'Emol'];
-	$title = $arr[rand(0,9)].'_'.rand(10,100);
-	$slug = Str::slug($title, '-');
-	
     return [
-        'title' => $title,
-        'slug' => $slug,
-        'categories_id' => rand(1,6)
+    	'categories_id' => rand(1,6),
+        'title' => ucfirst($faker->word()),
+        'meta_title' => $faker->sentence(3),
+        'slug' => Str::slug($faker->sentence(3), '-'),
+        'desc' => $faker->sentence(105),
+        'meta_desc' => $faker->sentence(105),
     ];
 });

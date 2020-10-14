@@ -29,7 +29,7 @@ class ProductController extends Controller
         $items = $products->orderBy('id', 'desc')->offset($page*15)->limit(15)->get();
         
         foreach ($items as &$value) {
-            $value->sub_category;
+            $value->sub_category->first();
         }
 
     	return response()->json([
@@ -87,7 +87,7 @@ class ProductController extends Controller
             'unique' => 'Такое название уже существует'
         ];
 
-        $validator = Validator::make($data, [
+        $rulers = [
             'title' => 'required|max:255',
             'description' => 'required',
             'price' => 'required',
@@ -96,7 +96,18 @@ class ProductController extends Controller
             'material' => 'required',
             'sub_categories_id' => 'required',
             'slug' => 'required|unique:products|max:255',
-        ], $messages)->validate();
+        ];
+
+        $existsProduct = Products::where([
+            [ 'id', '!=', $data['id'] ],
+            [ 'slug', $data['slug'] ]
+        ])->exists();
+
+        if (!$existsProduct) {
+            unset($rulers['slug']);
+        }
+
+        $validator = Validator::make($data, $rulers, $messages)->validate();
         
         $data['created_at'] = date('Y-m-d H:m:s', strtotime($data['created_at']));
         $data['updated_at'] = date('Y-m-d H:m:s', time());
