@@ -17,11 +17,16 @@ class SubCategories extends Model
 
     public function products()
     {
-        return $this->hasMany('App\Products');
+        return $this->hasMany('App\Products')->active();
     }
 
     public function category()
     {
         return $this->hasMany('App\Categories', 'id', 'categories_id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
     }
 }

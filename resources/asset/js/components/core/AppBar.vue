@@ -50,13 +50,15 @@
 
         <div class="mx-3" />
 
-        <!-- <v-btn
+        <v-btn
             class="ml-2"
             min-width="0"
             text
+            link
+            :href="location"
         >
-            <v-icon>mdi-view-dashboard</v-icon>
-        </v-btn> -->
+            <v-icon>mdi-home</v-icon>
+        </v-btn>
 
         <v-menu
             bottom
@@ -107,8 +109,8 @@
             min-width="0"
             text
         >
-      <v-icon>mdi-account</v-icon>
-    </v-btn>
+            <v-icon>mdi-account</v-icon>
+        </v-btn>
   </v-app-bar>
 </template>
 
@@ -156,6 +158,7 @@
     },
 
     data: () => ({
+        location: window.location.origin,
       notifications: [
         'Mike John Responded to your email',
         'You have 5 new tasks',

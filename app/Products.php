@@ -9,6 +9,11 @@ class Products extends Model
 {
     use SoftDeletes;
 
+    public function scopeActive($query)
+  	{
+    	return $query->where('active', 1);
+  	}
+
     protected $casts = [
 	    'created_at' => 'datetime:d.m.Y',
 	    'updated_at' => 'datetime:d.m.Y',
@@ -31,6 +36,7 @@ class Products extends Model
 
 	public function sub_category()
     {
-        return $this->hasMany('App\SubCategories', 'id', 'sub_categories_id');
+        return $this->hasMany('App\SubCategories', 'id', 'sub_categories_id')
+        		->active();
     }
 }

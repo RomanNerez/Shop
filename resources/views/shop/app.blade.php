@@ -11,36 +11,42 @@
             </h2>
             <ul class="categories">
                 @foreach($categories as $category)
-                <li class="categories__item">
-                    <a class="categories__link" 
-                        href="{{
-                            route('product-list', ['category' => $category->slug])
-                        }}"
-                    >
-                        {{$category->title}}
-                    </a>
-                    <ul class="categories__inner">
-                        @foreach($category->sub_categories as $sub_category)
-                        <li>
-                            <a class="categories__link product__link" 
-                                href="{{
-                                    route('products', 
-                                        [
-                                            'category' => $category->slug, 
-                                            'subcategory' => $sub_category->slug
-                                        ]   
-                                    )
-                                }}"
-                            >
-                                {{$sub_category->title}}
-                                (<span class="poduct__quantity">
-                                    {{$sub_category->products->count()}}
-                                </span>)
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
-                </li>
+                    @if(!$category->productsTwo()->count() )
+                        @continue
+                    @endif
+                    <li class="categories__item">
+                        <a class="categories__link" 
+                            href="{{
+                                route('product-list', ['category' => $category->slug])
+                            }}"
+                        >
+                            {{$category->title}}
+                        </a>
+                        <ul class="categories__inner">
+                            @foreach($category->sub_categories as $sub_category)
+                            @if(!$sub_category->products->count())
+                                @continue
+                            @endif
+                            <li>
+                                <a class="categories__link product__link" 
+                                    href="{{
+                                        route('products', 
+                                            [
+                                                'category' => $category->slug, 
+                                                'subcategory' => $sub_category->slug
+                                            ]   
+                                        )
+                                    }}"
+                                >
+                                    {{$sub_category->title}}
+                                    (<span class="poduct__quantity">
+                                        {{$sub_category->products->count()}}
+                                    </span>)
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </li>
                 @endforeach
             </ul>
         </section>
@@ -86,68 +92,30 @@
                 </ul>
             </div>
             <div class="portfolio__wrapper">
-                <div class="product product__pop">
-                    <div class="product__img">
-                        <img src="img/cover-1.jpg" alt="1" />
-                    </div>
-                    <h3 class="product__name">
-                        Product name Lorem ipsum dolor sit.
-                    </h3>
-                    <span class="product__price">99.00</span>
-                    <a class="btn product__btn" href="product.html"
+                @foreach($popularProducts as $popularProduct)
+                    <div class="product product__pop">
+                        <div class="product__img">
+                            <img src="{{
+                                url(
+                                    '/storage/'.json_decode($popularProduct->photos)[0]
+                                )
+                            }}" alt="1" />
+                        </div>
+                        <h3 class="product__name">
+                            {{$popularProduct->title}}
+                        </h3>
+                        <span class="product__price">{{$popularProduct->price}}</span>
+                        <a class="btn product__btn" href="{{
+                                route('producting',
+                                    [
+                                        'slug'=> $popularProduct->slug
+                                    ]
+                                )
+                            }}"
                         >Купити</a
-                    >
-                </div>
-                <div class="product product__pop">
-                    <div class="product__img">
-                        <img src="img/cover-1.jpg" alt="1" />
+                        >
                     </div>
-                    <h3 class="product__name">Product name</h3>
-                    <span class="product__price">99.00</span>
-                    <a class="btn product__btn" href="product.html"
-                        >Купити</a
-                    >
-                </div>
-                <div class="product product__pop">
-                    <div class="product__img">
-                        <img src="img/cover-1.jpg" alt="1" />
-                    </div>
-                    <h3 class="product__name">Product name</h3>
-                    <span class="product__price">99.00</span>
-                    <a class="btn product__btn" href="product.html"
-                        >Купити</a
-                    >
-                </div>
-                <div class="product product__pop">
-                    <div class="product__img">
-                        <img src="img/cover-1.jpg" alt="1" />
-                    </div>
-                    <h3 class="product__name">Product name</h3>
-                    <span class="product__price">99.00</span>
-                    <a class="btn product__btn" href="product.html"
-                        >Купити</a
-                    >
-                </div>
-                <div class="product product__pop">
-                    <div class="product__img">
-                        <img src="img/cover-1.jpg" alt="1" />
-                    </div>
-                    <h3 class="product__name">Product name</h3>
-                    <span class="product__price">99.00</span>
-                    <a class="btn product__btn" href="product.html"
-                        >Купити</a
-                    >
-                </div>
-                <div class="product product__pop">
-                    <div class="product__img">
-                        <img src="img/cover-1.jpg" alt="1" />
-                    </div>
-                    <h3 class="product__name">Product name</h3>
-                    <span class="product__price">99.00</span>
-                    <a class="btn product__btn" href="product.html"
-                        >Купити</a
-                    >
-                </div>
+                @endforeach
             </div>
         </div>
 

@@ -4,17 +4,21 @@
         <div class="breadcrumbs">
             <ul class="breadcrumbs__wrapper">
                 <li class="breadcrumbs__item">
-                    <a>
+                    <a href="{{route('index')}}">
                         <svg>
                             <use xlink:href="#home"></use>
                         </svg>
                     </a>
                 </li>
                 <li class="breadcrumbs__item">
-                    <a>Захисники екранiв</a>
+                    <a href="{{
+                        route('product-list', 
+                            ['category' => $category->slug])
+                        }}"
+                    >{{$category->title}}</a>
                 </li>
                 <li class="breadcrumbs__item">
-                    <a>Asus</a>
+                    <a>{{$sub_category->title}}</a>
                 </li>
             </ul>
         </div>

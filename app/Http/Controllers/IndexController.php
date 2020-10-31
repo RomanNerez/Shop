@@ -10,26 +10,29 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     public function index(){
-    	$categories = Categories::where('active', 1)->get();
-    	return view('shop.app', compact('categories'));
+    	$categories = Categories::active()->get();
+
+        $popularProducts = Products::active()->where('popular', 1)->limit(8)->get();
+
+    	return view('shop.app', compact('categories', 'popularProducts'));
     }
 
     public function productList($category){
-        $subcategories = Categories::where([
-            ['slug', $category],
-            ['active', 1]
-        ])->first()->sub_categories;
-        return view('shop.productlist', compact('subcategories'));
+        $category = Categories::active()->where('slug', $category)->first();
+        $subcategories = $category->sub_categories;
+        return view('shop.productlist', compact('subcategories', 'category'));
     }
 
     public function producting($slug){
-        $product = Products::where('slug', $slug)->first();
+        $product = Products::active()->where('slug', $slug)->first();
     	return view('shop.product', compact('product'));
     }
 
     public function products($category, $subcategory){
-        $products = SubCategories::where('slug', $subcategory)->first()->products;
-        return view('shop.products', compact('products'));
+        $category = Categories::active()->where('slug', $category)->first();
+        $sub_category = SubCategories::active()->where('slug', $subcategory)->first();
+        $products = $sub_category->products;
+        return view('shop.products', compact('products', 'category', 'sub_category'));
     }
 
     public function about(){
