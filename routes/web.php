@@ -71,14 +71,16 @@ Route::group(
 				Route::post('/delete', 'CategoryController@deleteCategory');
 				Route::post('/active', 'CategoryController@activeCategory');
 				Route::post('/getdata', 'CategoryController@getCategories');
+				Route::post('/getalldata', 'CategoryController@getAllCategories');
 			});
 
 			//==================================================================
 
 			Route::prefix('sub-categories')->group(function () {
 				Route::post('/add', 'SubCategoryController@addSubCategory');
-				Route::post('/{id}/edit', 'SubCategoryController@editCategory');
-				Route::post('/{id}/delete', 'SubCategoryController@deleteCategory');
+				Route::post('/edit', 'SubCategoryController@editSubCategory');
+				Route::post('/delete', 'SubCategoryController@deleteSubCategory');
+				Route::post('/active', 'SubCategoryController@activeSubCategory');
 				Route::post('/getdata', 'SubCategoryController@getSubCategories');
 				Route::post('/getalldata', 'SubCategoryController@getAllSubCategories');
 			});

@@ -13,12 +13,12 @@
 						show-arrows-on-hover
 						>
 						<v-carousel-item
-  							v-for="(slide, i) in slides"
+  							v-for="(photo, i) in product.photos"
   							:key="i"
 						>
   							<v-img
             					class="elevation-6"
-            					src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            					:src="location + '/storage/' + photo"
           					></v-img>
 						</v-carousel-item>
 					</v-carousel>
@@ -160,6 +160,7 @@
 		props: ['infoModel', 'product'],
 		data: function () {
 			return {
+                location: window.location.origin,
 				colors: [
           			'indigo',
           			'warning',
