@@ -281,7 +281,7 @@
                     </div>
                 </div>
             </footer>
-            <!--<section class="cart-modal">
+            <section class="cart-modal" style="display:none">
                 <div class="cart-modal__wrapper">
                     <div class="cart-modal__header">
                         <div class="cart-modal__title">
@@ -441,7 +441,7 @@
                         </form>
                     </div>
                 </div>
-            </section>-->
+            </section>
         </div>
 
 
