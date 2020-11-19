@@ -11,52 +11,33 @@ use Illuminate\Support\Str;
 
 class SubCategoryController extends Controller
 {
-    public function index ()
+    
+    public function activeSubCategory (Request $request)
     {
-    	$data = [
-    		'categories' => Categories::orderBy('id', 'desc')->get(),
-    		'sub_categories' => SubCategories::orderBy('id', 'desc')->paginate(10)
-    	];
-
-    	return view('admin.sub_category.subcategories', compact('data'));
-    }
-
-    public function displayAddCategory ()
-    {
-    	$data = [
-    		'categories' => Categories::orderBy('id', 'desc')->get()
-    	];
-    	return view('admin..sub_category.sub_categoryAdd', compact('data'));
-    }
-
-    public function displayEditCategory ($id)
-    {
-    	$item = SubCategories::where('id', $id);
-    	if($item->doesntExist()){
-    		abort(404);
-    	}
-    	$data = [
-    		'categories' => Categories::orderBy('id', 'desc')->get(),
-    		'item' => $item->first()
-    	];
-    	return view('admin..sub_category.sub_categoryEdit', compact('data'));
+        $id = $request->input('id');
+        $category = SubCategories::where('id', $id)
+            ->update(['active' => $request->input('active')]);
     }
 
     public function getSubCategories (Request $request) {
         $page = $request->input('page');
         $page -= 1;
 
-        $products = new SubCategories();
-
+        $subCategories = new SubCategories();
+        $items = $subCategories->orderBy('id', 'desc')->offset($page*15)->limit(15)->get();
+        foreach ($items as &$value) {
+            $value->category;
+        }
         return response()->json([
-            'subCategories' => $products->orderBy('id', 'desc')->offset($page*15)->limit(15)->get(),
-            'count' => ceil($products->count()/15)
+            'subCategories' => $items,
+            'count' => ceil($subCategories->count()/15)
         ]);
     }
 
     public function getAllSubCategories () 
     {
         $sub_categories = new SubCategories();
+
         return response()->json([
             'subCategories' => $sub_categories->orderBy('id', 'desc')->get(),
         ]);
@@ -64,87 +45,76 @@ class SubCategoryController extends Controller
 
     public function addSubCategory (Request $request)
     {	
-    	$request->merge([
-	        'slug' => Str::slug($request->all()['title']),
-	    ]);
+    	$data = $request->all()['sub_category'];
+        $data['file'] = Str::afterLast($data['file'], 'storage/');
+        $data['slug'] = Str::slug($data['title'], '-');
 
-    	$data = $request->all();
+        $messages = [
+            'required' => 'Поле :attribute должно быть заполненое!',
+            'unique' => 'Такое название уже существует'
+        ];
 
-    	$active = isset($data['active']) ? '1' : '0';
-
-    	$messages = [
-    		'required' => 'Поле :attribute должно быть заполненое!',
-    		'unique' => 'Такое название уже существует'
-    	];
-
-    	$validator = Validator::make($data, [
-    		'categories_id' => 'required',
+        $validator = Validator::make($data, [
             'title' => 'required|max:255',
-            'slug' => 'required|unique:sub_categories|max:255',
-        ], $messages);
+            'meta_title' => 'required|max:255',
+            'desc' => 'required',
+            'meta_desc' => 'required',
+            'slug' => 'required|unique:categories|max:255',
+        ], $messages)->validate();
 
-        if ($validator->fails()) {
-            return redirect('/admin/sub_categories/add')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        $category = SubCategories::create($data);
+        $category->save();
+        $category->category;
+        $category->active = (int)$category->active;
 
-        SubCategories::create([
-        	'categories_id' => $data['categories_id'],
-        	'title' => $data['title'],
-        	'slug'  => $data['slug'], 
-        	'active' => $active
-        ]);
-
-    	return redirect('/admin/sub_categories')->with('status', 'Подкатегория создана');
+        return response()->json($category);
     }
 
-    public function editCategory (Request $request, $id)
+    public function editSubCategory (Request $request)
     {	
-    	$request->merge([
-	        'slug' => Str::slug($request->all()['title']),
-	    ]);
+    	$data = $request->all()['sub_category'];
+        unset($data['category']);
+        $data['file'] = Str::afterLast($data['file'], 'storage/');
+        $data['slug'] = Str::slug($data['title'], '-');
 
-    	$data = $request->all();
+        $messages = [
+            'required' => 'Поле :attribute должно быть заполненое!',
+            'unique' => 'Такое название уже существует'
+        ];
 
-    	$data['active'] = isset($data['active']) ? '1' : '0';
-
-    	$messages = [
-    		'required' => 'Поле :attribute должно быть заполненое!',
-    		'unique' => 'Такое название уже существует'
-    	];
-
-    	$validator = Validator::make($data, [
-    		'categories_id' => 'required',
+        $rulers = [
             'title' => 'required|max:255',
-            'slug' => 'required|unique:sub_categories|max:255',
-        ], $messages);
+            'meta_title' => 'required|max:255',
+            'desc' => 'required',
+            'meta_desc' => 'required',
+            'slug' => 'required|unique:categories|max:255',
+        ];
 
-        if ($validator->fails()) {
-            return redirect("/admin/sub_categories/{$id}/edit")
-                        ->withErrors($validator)
-                        ->withInput();
+        $slug = SubCategories::where([ 
+            ['id', $data['id']],
+            ['title', $data['title']]
+        ])->exists();
+
+        if ($slug) {
+            unset($rulers['slug']);
         }
 
-        SubCategories::where('id', $id)->update([
-        	'categories_id' => $data['categories_id'],
-        	'title' => $data['title'],
-        	'slug'  => $data['slug'], 
-        	'active' => $data['active']
-        ]);
+        $data['created_at'] = date('Y-m-d H:m:s', strtotime($data['created_at']));
+        $data['updated_at'] = date('Y-m-d H:m:s', time());
 
-    	return redirect('/admin/sub_categories')->with('status', 'Подкатегория обновлена');
+        $validator = Validator::make($data, $rulers, $messages)->validate();;
+
+        $category = SubCategories::where('id', $data['id'])->update($data);
+
+        $data['created_at'] = date('d.m.Y', strtotime($data['created_at']));
+        $data['updated_at'] = date('d.m.Y', time());
+
+        return $data;
     }
 
-    public function deleteCategory ($id)
+    public function deleteSubCategory (Request $request)
     {
-    	$sub_category = SubCategories::where('id', $id);
-
-        foreach ($sub_category->first()->products as &$product) {
-            $product->delete();
-        }
-
-        $sub_category->delete();
-    	return redirect('/admin/sub_categories')->with('status', 'Подкатегория удалена');
+        $id = $request->input('id');
+        $category = SubCategories::where('id', $id)->delete();
     }
 }

@@ -21,9 +21,14 @@ class Categories extends Model
         'active' => 1,
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+
     public function sub_categories()
     {
-        return $this->hasMany('App\SubCategories');
+        return $this->hasMany('App\SubCategories')->active();
     }
     
     public function products()
@@ -31,8 +36,15 @@ class Categories extends Model
         return $this->hasMany('App\Products');
     }
 
-    public function localCategory()
+    public function productsTwo()
     {
-        return $this->hasMany('App\LocalCategory', 'category_id', 'id');
+        return $this->hasOneThrough(
+            'App\Products',
+            'App\SubCategories',
+            'categories_id',
+            'sub_categories_id',
+            'id',
+            'id' 
+        );
     }
 }

@@ -19,8 +19,10 @@ $factory->define(Products::class, function (Faker $faker) {
         'description' => $faker->text,
         'photos' => $json,
         'price' => rand(100, 1000).'.'.rand(0, 99),
+        'sale' => rand(10, 50),
         'brand' => $faker->company,
         'manufacturer' => $faker->lastName,
-        'material' => $faker->word
+        'material' => $faker->word,
+        'popular' => rand(0,1)
     ];
 });

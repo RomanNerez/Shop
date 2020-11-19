@@ -22,10 +22,12 @@ class CreateProductsTable extends Migration
             $table->longText('description');
             $table->text('photos');
             $table->float('price', 8, 2);
+            $table->integer('sale')->default(0);
             $table->string('brand', 255);
             $table->string('manufacturer', 255);
             $table->string('material', 255);
             $table->boolean('active')->default(true);
+            $table->boolean('popular')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

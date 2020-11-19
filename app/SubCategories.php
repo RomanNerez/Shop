@@ -9,7 +9,7 @@ class SubCategories extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['categories_id', 'title', 'slug', 'active'];
+    protected $fillable = ['categories_id', 'file','title', 'slug', 'active', 'desc', 'meta_title', 'meta_desc'];
 
     protected $casts = [
 	    'created_at' => 'datetime:d.m.Y',
@@ -17,11 +17,16 @@ class SubCategories extends Model
 
     public function products()
     {
-        return $this->hasMany('App\Products');
+        return $this->hasMany('App\Products')->active();
     }
 
     public function category()
     {
         return $this->hasMany('App\Categories', 'id', 'categories_id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
     }
 }

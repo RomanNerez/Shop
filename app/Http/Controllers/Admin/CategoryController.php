@@ -21,6 +21,14 @@ class CategoryController extends Controller
     	return view('admin.category.categories', compact('data'));
     }
 
+    public function getAllCategories () 
+    {
+        $categories = new Categories();
+        return response()->json([
+            'categories' => $categories->orderBy('id', 'desc')->get(),
+        ]);
+    }
+
     public function getCategories (Request $request) {
         $page = $request->input('page');
         $page -= 1;

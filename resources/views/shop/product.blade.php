@@ -6,63 +6,23 @@
         <div class="item__wrapper">
             <div class="item__gallery">
                 <div class="item__slider">
+                    @foreach(json_decode($product->photos) as $photo)
                     <div class="item__slide">
                         <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                            <img src="{{url('/storage/'.$photo)}}" alt="{{$photo}}" />
                         </a>
                     </div>
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="item__thumbnails">
+                    @foreach(json_decode($product->photos) as $photo)
                     <div class="item__slide">
                         <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                            <img src="{{url('/storage/'.$photo)}}" alt="{{$photo}}" />
                         </a>
                     </div>
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
