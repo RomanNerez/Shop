@@ -6,8 +6,10 @@
         <div class="item__wrapper">
             <div class="item__gallery">
                 <div class="item__slider">
+                    @foreach(json_decode($product->photos) as $photo)
                     <div class="item__slide">
                         <a>
+<<<<<<< HEAD
                             <img src="{{asset('img/product-1.png')}}" alt="" />
                         </a>
                     </div>
@@ -21,11 +23,19 @@
                             <img src="{{asset('img/product-1.png')}}" alt="" />
                         </a>
                     </div>
+=======
+                            <img src="{{url('/storage/'.$photo)}}" alt="{{$photo}}" />
+                        </a>
+                    </div>
+                    @endforeach
+>>>>>>> bda7e2e3148e7c289000adbf9bd6abcb63db013d
                 </div>
 
                 <div class="item__thumbnails">
+                    @foreach(json_decode($product->photos) as $photo)
                     <div class="item__slide">
                         <a>
+<<<<<<< HEAD
                             <img src="{{asset('img/product-1.png')}}" alt="" />
                         </a>
                     </div>
@@ -39,6 +49,12 @@
                             <img src="{{asset('img/product-1.png')}}" alt="" />
                         </a>
                     </div>
+=======
+                            <img src="{{url('/storage/'.$photo)}}" alt="{{$photo}}" />
+                        </a>
+                    </div>
+                    @endforeach
+>>>>>>> bda7e2e3148e7c289000adbf9bd6abcb63db013d
                 </div>
             </div>
 
