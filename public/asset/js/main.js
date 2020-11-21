@@ -3190,7 +3190,7 @@ $(document).ready(function () {
     focusOnSelect: true,
     draggable: false
   });
-});
+}); //vue starts here
 
 var Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 

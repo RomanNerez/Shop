@@ -21,18 +21,6 @@
                             <img src="{{asset('img/product-1.png')}}" alt="" />
                         </a>
                     </div>
-
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
                 </div>
 
                 <div class="item__thumbnails">
@@ -46,18 +34,6 @@
                             <img src="{{asset('img/product-1.png')}}" alt="" />
                         </a>
                     </div>
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="item__slide">
-                        <a>
-                            <img src="{{asset('img/product-1.png')}}" alt="" />
-                        </a>
-                    </div>
-
                     <div class="item__slide">
                         <a>
                             <img src="{{asset('img/product-1.png')}}" alt="" />
@@ -88,7 +64,6 @@
                     <button class="item__add"
                         v-on:click="countCart++"
                     >+</button>
-                    
                 </div>
                 <div class="item__buttons">
                     <button type="button" class="item__cart btn"
