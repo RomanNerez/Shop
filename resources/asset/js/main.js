@@ -34,6 +34,7 @@ $(document).ready(function() {
         autoplay: true
     });
 });
+
 //brands slider
 $(document).ready(function() {
     $(".brands__slider").slick({
@@ -94,6 +95,7 @@ $(document).ready(function() {
     });
 });
 
+//vue starts here
 var Vue = require("vue");
 window.axios = require("axios");
 

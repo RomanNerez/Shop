@@ -2,14 +2,17 @@
 <html lang="en" class="page">
     <head>
         <meta charset="UTF-8" />
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Iнтернет магазин FreeZ</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('asset/css/normalize.css') }}" />
         <link rel="stylesheet" href="{{ asset('asset/css/style.css?v='.time()) }}" />
     </head>
+
     <body class="page__body">
+
         <div id="app" class="page__wrapper">
+
             <header class="header">
                 <div class="header__top top">
                 <div class="loader active"></div>
@@ -21,7 +24,7 @@
                                         <svg>
                                             <use xlink:href="#globe"></use>
                                         </svg>
-                                        Русский
+                                        RU
                                     </a>
                                 </li>
                                 <li>
@@ -87,12 +90,14 @@
                     </div>
                 </div>
             </header>
+
             <nav class="header__bottom bottom">
                 <div class="container">
                     <div class="bottom__logo">
                         <a href="{{route('index')}}">
-                            <b class="logo__red">free</b>
-                            <span>Z</span>
+                            <!--<b class="logo__red">free</b>
+                            <span>Z</span>-->
+                            <img src="{{asset('img/Header-logo.png')}}" alt="Slider-background" width="90px" />
                         </a>
                     </div>
                     <button type="button" class="burger">
@@ -104,7 +109,7 @@
                         </button>
                         <ul class="menu__list">
                             <li class="menu__item">
-                                <a class="menu__link current__page" href="{{route('index')}}">Головна</a>
+                                <a class="menu__link" href="{{route('index')}}">Головна</a>
                             </li>
                             <li class="menu__item">
                                 <a class="menu__link" href="{{route('about')}}">Про нас</a>
@@ -148,9 +153,11 @@
                     </div>
                 </div>
             </nav>
+
             <main class="main">
                 @yield('content')
             </main>
+
             <footer class="footer">
                 <div class="container">
                     <div class="footer__wrapper">
@@ -281,7 +288,8 @@
                     </div>
                 </div>
             </footer>
-            <section class="cart-modal" style="display:none">
+
+            <!--<section class="cart-modal">
                 <div class="cart-modal__wrapper">
                     <div class="cart-modal__header">
                         <div class="cart-modal__title">
@@ -293,159 +301,170 @@
                         <button type="button" class="cart-modal__close">
                             <span></span>
                         </button>
-                </div>
-                <hr>
-                <table class="cart-modal__table">
-                        <tr class="cart-item">
-                            <td class="cart-item__image">
-                                <img src="https://static.thenounproject.com/png/2034632-200.png" alt="product image" width="50px">
-                             </td>
-                             <td class="cart-item__name">
-                                 <h4>Product name Lorem ipsum dolor sit amet.</h4>
-                             </td>
-                             <td class="cart-item__price">
-                                 <span>199.00</span>грн.
-                             </td>
-                             <td class="cart-item__quantity">
-                                 <form action="#">
-                                    <input type="number" id="points" name="quantity" step="1" placeholder="1">
-                                 </form>
-                             </td>
-                             <td class="cart-item__total">
-                                 <span>199.00</span>грн.
-                             </td>
-                             <td class="cart-item__delete">
-                                 <button type="btn">Видалити</button>
-                             </td>
-                        </tr>
-                        <tr class="cart-item">
-                            <td class="cart-item__image">
-                                <img src="https://static.thenounproject.com/png/2034632-200.png" alt="product image" width="50px">
-                             </td>
-                             <td class="cart-item__name">
-                                 <h4>Product name Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quidem perspiciatis eum eligendi ea architecto.</h4>
-                             </td>
-                             <td class="cart-item__price">
-                                 <span>199.00</span>грн.
-                             </td>
-                             <td class="cart-item__quantity">
-                                 <form action="#">
-                                    <input type="number" id="points" name="quantity" step="1" placeholder="1">
-                                 </form>
-                             </td>
-                             <td class="cart-item__total">
-                                 <span>199.00</span>грн.
-                             </td>
-                             <td class="cart-item__delete">
-                                 <button type="btn">Видалити</button>
-                             </td>
-                        </tr>
-                </table>
-                <hr>
-                <div class="cart-modal__summ">
-                        <h3>До сплати:</h3>
-                        <b><span>309</span>грн.</b>
-                </div>
-                <div class="cart-modal__buttons">
-                        <button class="btn" type="button">Закрити</button>
-                        <button class="btn" type="button">Оформити</button>
-                </div>
-                </div>
-                <div class="checkout">
-                    <div class="checkout__steps">
-                        <div class="step active">
-                            <span class="step__image">1</span>
-                            <p>Вашi даннi</p>
-                        </div>
-                        <div class="step">
-                            <span class="step__image ">2</span>
-                            <p>Cпосiб <br>оплати</p>
-                        </div>
-                        <div class="step">
-                            <span class="step__image ">3</span>
-                            <p>Пiдтвердження</p>
-                        </div>
                     </div>
-                    <div class="checkout__form">
-                        <h2>Заповнiть анкету</h2>
-                        <form action="#">
-                            <div class="checkout__wrapper">
-                                <div class="checkout__input">
-                                    <label for="checkout-name">Iм'я</label>
-                                    <input type="text" id="checkout-name" name="checkout-name" required>
-                                </div>
-                                <div class="checkout__input">
-                                    <label for="checkout-surname">Фамiлiя</label>
-                                    <input type="text" id="checkout-surname" name="checkout-surname" required>
-                                </div>
-                                <div class="checkout__input">
-                                    <label for="checkout-phone">Телефон</label>
-                                    <input type="phone" id="checkout-phone" name="checkout-phone" required>
-                                </div>
-                                <div class="checkout__input">
-                                    <label for="checkout-email">Email</label>
-                                    <input type="email" id="checkout-email" name="checkout-email" required>
-                                </div>
-                                <div class="checkout__input">
-                                    <p>або</p>
-                                    <div class="login__link">
-                                        <a href="#">Вхiд</a>
+                    <hr>
+                    <table class="cart-modal__table">
+                            <tr class="cart-item">
+                                <td class="cart-item__image">
+                                    <img src="https://static.thenounproject.com/png/2034632-200.png" alt="product image" width="50px">
+                                </td>
+                                <td class="cart-item__name">
+                                    <h4>Product name Lorem ipsum dolor sit amet.</h4>
+                                </td>
+                                <td class="cart-item__price">
+                                    <span>199.00</span>грн.
+                                </td>
+                                <td class="cart-item__quantity">
+                                    <form action="#">
+                                        <input type="number" id="points" name="quantity" step="1" placeholder="1">
+                                    </form>
+                                </td>
+                                <td class="cart-item__total">
+                                    <span>199.00</span>грн.
+                                </td>
+                                <td class="cart-item__delete">
+                                    <button type="btn">Видалити</button>
+                                </td>
+                            </tr>
+                            <tr class="cart-item">
+                                <td class="cart-item__image">
+                                    <img src="https://static.thenounproject.com/png/2034632-200.png" alt="product image" width="50px">
+                                </td>
+                                <td class="cart-item__name">
+                                    <h4>Product name Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quidem perspiciatis eum eligendi ea architecto.</h4>
+                                </td>
+                                <td class="cart-item__price">
+                                    <span>199.00</span>грн.
+                                </td>
+                                <td class="cart-item__quantity">
+                                    <form action="#">
+                                        <input type="number" id="points" name="quantity" step="1" placeholder="1">
+                                    </form>
+                                </td>
+                                <td class="cart-item__total">
+                                    <span>199.00</span>грн.
+                                </td>
+                                <td class="cart-item__delete">
+                                    <button type="btn">Видалити</button>
+                                </td>
+                            </tr>
+                    </table>
+                    <hr>
+                    <div class="cart-modal__summ">
+                            <h3>До сплати:</h3>
+                            <b><span>309</span>грн.</b>
+                    </div>
+                    <div class="cart-modal__buttons">
+                            <button class="btn" type="button">Закрити</button>
+                            <button class="btn" type="button">Оформити</button>
+                    </div>
+                    <div class="checkout">
+                        <div class="checkout__steps">
+                            <div class="step active">
+                                <span class="step__image">1</span>
+                                <p>Вашi даннi</p>
+                            </div>
+                            <div class="step">
+                                <span class="step__image ">2</span>
+                                <p>Cпосiб <br>оплати</p>
+                            </div>
+                            <div class="step">
+                                <span class="step__image ">3</span>
+                                <p>Пiдтвердження</p>
+                            </div>
+                        </div>
+                        <div class="checkout__form">
+                            <h2>Заповнiть анкету</h2>
+                            <form action="#">
+                                <div class="checkout__wrapper">
+                                    <div class="checkout__input">
+                                        <label for="checkout-name">Iм'я</label>
+                                        <input type="text" id="checkout-name" name="checkout-name" required>
                                     </div>
-                                </div>
-                                <div class="checkout__input">
-                                    <button class="btn checkout__btn" type="submit">Далi</button>
-                                </div>
+                                    <div class="checkout__input">
+                                        <label for="checkout-surname">Фамiлiя</label>
+                                        <input type="text" id="checkout-surname" name="checkout-surname" required>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <label for="checkout-phone">Телефон</label>
+                                        <input type="phone" id="checkout-phone" name="checkout-phone" required>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <label for="checkout-email">Email</label>
+                                        <input type="email" id="checkout-email" name="checkout-email" required>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>або</p>
+                                        <div class="login__link">
+                                            <a href="#">Вхiд</a>
+                                        </div>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <button class="btn checkout__btn" type="submit">Далi</button>
+                                    </div>
 
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="checkout">
+                        <div class="checkout__steps">
+                            <div class="step completed">
+                                <span class="step__image">
+                                    <svg width="10px">
+                                        <use xlink:href="#tick"></use>
+                                    </svg>
+                                </span>
+                                <p>Вашi даннi</p>
                             </div>
-                        </form>
+                            <div class="step active">
+                                <span class="step__image ">2</span>
+                                <p>Cпосiб <br>оплати</p>
+                            </div>
+                            <div class="step">
+                                <span class="step__image ">3</span>
+                                <p>Пiдтвердження</p>
+                            </div>
+                        </div>
+                        <div class="checkout__form">
+                            <h2>Виберiть спосiб оплати</h2>
+                            <form action="#">
+                                <div class="checkout__wrapper">
+                                    
+                                        <input type="radio" id="cash" name="payment">
+                                        <label for="cash">Готiвкою при отриманнi</label>
+                                        
+                                    
+                                    
+                                        <input type="radio" id="card" name="payment">
+                                        <label for="card">Сплатити картою</label>
+                                        
+                                    
+                                    <div class="checkout__input">
+                                        <button class="btn checkout__btn" type="submit">Далi</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="checkout">
-                    <div class="checkout__steps">
-                        <div class="step completed">
-                            <span class="step__image">
-                                <svg width="10px">
-                                    <use xlink:href="#tick"></use>
-                                </svg>
-                            </span>
-                            <p>Вашi даннi</p>
-                        </div>
-                        <div class="step active">
-                            <span class="step__image ">2</span>
-                            <p>Cпосiб <br>оплати</p>
-                        </div>
-                        <div class="step">
-                            <span class="step__image ">3</span>
-                            <p>Пiдтвердження</p>
-                        </div>
-                    </div>
-                    <div class="checkout__form">
-                        <h2>Виберiть спосiб оплати</h2>
-                        <form action="#">
-                            <div class="checkout__wrapper">
-                                
-                                    <input type="radio" id="cash" name="payment">
-                                    <label for="cash">Готiвкою при отриманнi</label>
-                                    
-                                
-                                
-                                    <input type="radio" id="card" name="payment">
-                                    <label for="card">Сплатити картою</label>
-                                    
-                                
-                                <div class="checkout__input">
-                                    <button class="btn checkout__btn" type="submit">Далi</button>
-                                </div>
+            </section>-->
 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
         </div>
 
 
         <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" display="none">
+            <symbol id="edit" viewBox="0 0 448 512">
+                <g>
+                    <path fill="currentColor" d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"></path>
+                </g>
+            </symbol>
+            <symbol id="notebook" viewBox="0 0 448 512">
+                <g>
+                    <path fill="currentColor" d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"></path>
+                </g>
+            </symbol>
             <symbol id="home" viewBox="0 0 448 512">
                 <g>
                     <path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
@@ -585,6 +604,7 @@
                 <path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
             </symbol>
         </svg>
+
         <script src="{{asset('asset/js/vendor.js?v='.time())}}"></script>
         <script src="{{asset('asset/js/manifest.js?v='.time())}}"></script>
         <script src="{{asset('libs/jquery.min.js')}}"></script>

@@ -9,20 +9,52 @@
                     @foreach(json_decode($product->photos) as $photo)
                     <div class="item__slide">
                         <a>
+<<<<<<< HEAD
+                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="item__slide">
+                        <a>
+                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="item__slide">
+                        <a>
+                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                        </a>
+                    </div>
+=======
                             <img src="{{url('/storage/'.$photo)}}" alt="{{$photo}}" />
                         </a>
                     </div>
                     @endforeach
+>>>>>>> bda7e2e3148e7c289000adbf9bd6abcb63db013d
                 </div>
 
                 <div class="item__thumbnails">
                     @foreach(json_decode($product->photos) as $photo)
                     <div class="item__slide">
                         <a>
+<<<<<<< HEAD
+                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="item__slide">
+                        <a>
+                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="item__slide">
+                        <a>
+                            <img src="{{asset('img/product-1.png')}}" alt="" />
+                        </a>
+                    </div>
+=======
                             <img src="{{url('/storage/'.$photo)}}" alt="{{$photo}}" />
                         </a>
                     </div>
                     @endforeach
+>>>>>>> bda7e2e3148e7c289000adbf9bd6abcb63db013d
                 </div>
             </div>
 
@@ -48,7 +80,6 @@
                     <button class="item__add"
                         v-on:click="countCart++"
                     >+</button>
-                    
                 </div>
                 <div class="item__buttons">
                     <button type="button" class="item__cart btn"

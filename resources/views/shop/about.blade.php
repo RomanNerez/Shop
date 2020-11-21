@@ -1,67 +1,120 @@
 @extends('index')
 
 @section('content')
-<section class="about">
-    <div class="container">
-        <div class="section__title">
-            <h3>Інтернет магазин FreeZ</h3>
-            <p>
-            Новий, сучасний та зручний online магазин аксесуарів для гаджетів і цифрової техніки.
-            </p>
-        </div>
-        <div class="about__wrapper">
-            <div class="about__image ibg">
-                <img src="{{asset('img/about.jpg')}}" alt="Photo" />
+<section class="features">
+        <div class="container">
+            <div class="features__title section__title">
+                <h3 class="promo__title">
+                    Чому вигідно купувати з Freeze
+                </h3>
             </div>
-            <div class="about__text">
-                <b
-                    >Nam liber tempor cum soluta nobis eleifend
-                    option congue nihil imperdiet doming id quod
-                    mazim placerat facer possim assum. Claritas
-                    est etiam processus dynamicus, qui
-                    sequitur.</b
-                >
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer
-                    adipiscing elit, sed diam nonummy nibh
-                    euismod tincidunt ut laoreet dolore magna
-                    aliquam erat volutpat. Ut wisi enim ad minim
-                    veniam, quis nostrud exerci tation
-                    ullamcorper suscipit lobortis nisl ut
-                    aliquip ex ea commodo consequat. Duis autem
-                    vel eum iriure dolor in hendrerit in
-                    vulputate velit esse molestie consequat, vel
-                    illum dolore eu feugiat nulla facilisis at
-                    vero eros et accumsan et iusto odio
-                    dignissim qui blandit praesent luptatum
-                    zzril delenit augue. Mirum est notare quam
-                    littera gothica, quam nunc putamus parum
-                    claram, anteposuerit litterarum formas
-                    humanitatis per seacula quarta decima et
-                    quinta decima.
-                </p>
+            <div class="features__wrapper">
+                <div class="feature">
+                    <span class="feature__icon">
+                        <svg>
+                            <use xlink:href="#leaf"></use>
+                        </svg>
+                    </span>
+                    <h3 class="feature__title">якість</h3>
+                    <p class="feature__text">
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit, sed diam nonummy nibh
+                        euismod tincidunyt dolore.
+                    </p>
+                </div>
+                <div class="feature">
+                    <span class="feature__icon">
+                        <svg>
+                            <use xlink:href="#sun"></use>
+                        </svg>
+                    </span>
+                    <h3 class="feature__title">швидка доставка</h3>
+                    <p class="feature__text">
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit, sed diam nonummy nibh
+                        euismod tincidunyt dolore.
+                    </p>
+                </div>
+                <div class="feature">
+                    <span class="feature__icon">
+                        <svg>
+                            <use xlink:href="#gear"></use>
+                        </svg>
+                    </span>
+                    <h3 class="feature__title">гарантія</h3>
+                    <p class="feature__text">
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit, sed diam nonummy nibh
+                        euismod tincidunyt dolore.
+                    </p>
+                </div>
+                <div class="feature">
+                    <span class="feature__icon">
+                        <svg>
+                            <use xlink:href="#tablet"></use>
+                        </svg>
+                    </span>
+                    <h3 class="feature__title">найкращі бренди</h3>
+                    <p class="feature__text">
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit, sed diam nonummy nibh
+                        euismod tincidunyt dolore.
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="advantages">
-            <div class="advantages__info">
-                <h4>Чому обирати нас</h4>
-                <p>
-                Серед безлічі магазинів дуже складно знайти найдоброзичливiший, який поважає своїх клієнтів і дарує тільки позитивні емоції. Саме тому існує FreeZ - перший зручний online-магазин з широким вибором товарiв. 
-                </p>
-                <ul class="advantages__list">
-                    <li>
-                        Dolor sit amet, consectetuer adipiscing
-                        elit.
-                    </li>
-                    <li>Claritas etiam processus dynamicus.</li>
-                    <li>
-                        Mirum notare quam littera gothica quam.
-                    </li>
-                    <li>Eodem modo typi.</li>
-                    <li>Nam liber tempor cum soluta.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </section>
+<section class="stuff">
+        
+        <div class="container">
+            <div class="section__title">
+                <h3>Цікаві факти про нас</h3>
+            </div>
+
+            <div class="stuff__wrapper">
+                <div class="stuff__item">
+                    <div class="stuff__stat">
+                        <span>6587</span>
+                    </div>
+                    <h4>Задоволені клієнти</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit sed diam.
+                    </p>
+                </div>
+                <div class="stuff__item">
+                    <div class="stuff__stat">
+                        <span>6587</span>
+                    </div>
+                    <h4>проданий товар</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit sed diam.
+                    </p>
+                </div>
+                <div class="stuff__item">
+                    <div class="stuff__stat">
+                        <span>6587</span>
+                    </div>
+                    <h4>Подобається в instagram</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit sed diam.
+                    </p>
+                </div>
+                <div class="stuff__item">
+                    <div class="stuff__stat">
+                        <span>6587</span>
+                    </div>
+                    <h4>We launched</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer
+                        adipiscing elit sed diam.
+                    </p>
+                </div>
+            </div>
+        </div>
+</section>
+
+
 @endsection
