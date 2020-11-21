@@ -68,10 +68,10 @@
                         Реєстрація
                     </button>
                 </form>
-                <p class="login__or">або</p>
+                <p class="login__or">{{__('Or')}}</p>
                 
                 @if (Route::has('login'))
-                    <a href="{{ route('login') }}" class="btn login__register">Вхід</a>
+                    <a href="{{ route('login') }}" class="btn login__register">{{__('Log in')}}</a>
                 @endif
             </div>
         </div>

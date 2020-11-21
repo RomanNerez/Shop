@@ -1,10 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+<section class="login">
+    <div class="login__wrapper">
+        <div class="container">
+            <div class="login__form">
+                <div class="login__logo">
+                    <a class="login__" href="index.html">
+                        <b class="logo__red">free</b
+                        ><span>Z</span>
+                    </a>
+                    <a class="login__exit" href="{{ url('/') }}"
+                        >На головну</a
+                    >
+                </div>
                 <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
                 <div class="card-body">
@@ -20,9 +29,8 @@
                         @csrf
                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
                     </form>
-                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection
