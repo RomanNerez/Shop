@@ -34,10 +34,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('user-panel', function (User $user) {
-            if(!$user->isUser()){
+            if(!$user->isUser() && !$user->isAdmin()){
                 abort(404);
             }
-            return $user->isUser();
+            return true;
         });
     }
 }

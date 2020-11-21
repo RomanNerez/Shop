@@ -104,14 +104,50 @@
             </v-list>
         </v-menu>
 
-        <v-btn
-            class="ml-2"
-            min-width="0"
-            text
+        <v-menu
+            bottom
+            left
+            offset-y
+            origin="top right"
+            transition="scale-transition"
         >
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-  </v-app-bar>
+            <template v-slot:activator="{ attrs, on }">
+                <v-btn
+                    class="ml-2"
+                    min-width="0"
+                    text
+                    v-bind="attrs"
+                    v-on="on"
+                >
+                    <v-icon>mdi-account</v-icon>
+                </v-btn>
+            </template>
+
+            <v-list
+                :tile="false"
+                nav
+            >
+                <v-list-item
+                    v-for="(item, i) in profile"
+                    :key="i"
+                    @click="item.function"
+                >
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+                <!-- <div>
+                    <app-bar-item
+                        v-for="(n, i) in profile"
+                        :key="`item-${i}`"
+                    >
+                        <v-list-item-title 
+                            v-text="n.title"
+                            v-on:click="n.function"
+                         />
+                    </app-bar-item>
+                </div> -->
+            </v-list>
+        </v-menu>
+    </v-app-bar>
 </template>
 
 <script>
@@ -124,58 +160,69 @@
   export default {
     name: 'DashboardCoreAppBar',
 
-    components: {
-      AppBarItem: {
-        render (h) {
-          return h(VHover, {
-            scopedSlots: {
-              default: ({ hover }) => {
-                return h(VListItem, {
-                  attrs: this.$attrs,
-                  class: {
-                    'black--text': !hover,
-                    'white--text secondary elevation-12': hover,
-                  },
-                  props: {
-                    activeClass: '',
-                    dark: hover,
-                    link: true,
-                    ...this.$attrs,
-                  },
-                }, this.$slots.default)
-              },
+        components: {
+            AppBarItem: {
+                render (h) {
+                    return h(VHover, {
+                        scopedSlots: {
+                            default: ({ hover }) => {
+                                return h(VListItem, {
+                                    attrs: this.$attrs,
+                                    class: {
+                                        'black--text': !hover,
+                                        'white--text secondary elevation-12': hover,
+                                    },
+                                    props: {
+                                        activeClass: '',
+                                        dark: hover,
+                                        link: true,
+                                        ...this.$attrs,
+                                    },
+                                }, this.$slots.default)
+                            },
+                        },
+                    })
+                },
             },
-          })
         },
-      },
-    },
+        props: {
+          value: {
+            type: Boolean,
+            default: false,
+          },
+        },
 
-    props: {
-      value: {
-        type: Boolean,
-        default: false,
-      },
-    },
-
-    data: () => ({
-        location: window.location.origin,
-      notifications: [
-        'Mike John Responded to your email',
-        'You have 5 new tasks',
-        'You\'re now friends with Andrew',
-        'Another Notification',
-        'Another one',
-      ],
-    }),
-
-    computed: {
-      ...mapState(['drawer']),
-    },
-
-    methods: {
-      ...mapMutations({
-        setDrawer: 'SET_DRAWER',
-      }),
-    },
-  }
+        data: () => ({
+            location: window.location.origin,
+            notifications: [
+                'Mike John Responded to your email',
+                'You have 5 new tasks',
+                'You\'re now friends with Andrew',
+                'Another Notification',
+                'Another one',
+            ],
+            profile: [
+                {
+                    title: 'Профиль',
+                    function: () =>{
+                        console.log('work');
+                    },
+                },
+                {
+                    title: 'Выйти',
+                    function: () =>{
+                        document.getElementById('logout-form').submit();
+                    }
+                }
+            ]
+        }),
+        computed: {
+            ...mapState(['drawer']),
+        },
+        methods: {
+            ...mapMutations({
+                setDrawer: 'SET_DRAWER',
+            }),
+        },
+    }
 </script>
