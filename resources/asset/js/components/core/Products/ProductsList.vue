@@ -244,7 +244,6 @@
             },
 			initData: function () {
 				let page = this.getPage();
-				console.log(page);
 				if (page !== undefined) {
 					this.getProductData(this.pagination.page);
 					this.pagination.page = Number(page);

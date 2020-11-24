@@ -68,6 +68,7 @@
         </template> -->
     <v-list-item-group 
         v-model="component" 
+        mandatory
     >
         <v-list-item
             v-for="(item, i) in computedItems"
@@ -129,6 +130,11 @@
 
     data: () => ({
       items: [
+        {
+          title: 'Меню',
+          icon: 'mdi-menu',
+          component: 'public-menu'
+        },
         {
           title: 'Категории',
           icon: 'mdi-clipboard-outline',

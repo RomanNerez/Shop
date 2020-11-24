@@ -210,7 +210,6 @@
         methods:{
             initData: function () {
                 let page = this.getPage();
-                console.log(page);
                 if (page !== undefined) {
                     this.getSubCategoryData(this.pagination.page);
                     this.pagination.page = Number(page);
