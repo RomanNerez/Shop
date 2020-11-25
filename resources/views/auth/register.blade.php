@@ -69,8 +69,15 @@
                         Реєстрація
                     </button>
                 </form>
+<<<<<<< HEAD
                 @if (Route::has('login'))
                     <a href="{{ route('login') }}" class="login__register">{{__('Log in')}}</a>
+=======
+                <p class="login__or">{{__('Or')}}</p>
+                
+                @if (Route::has('login'))
+                    <a href="{{ route('login') }}" class="btn login__register">{{__('Log in')}}</a>
+>>>>>>> 5abcedd2a6523e4d7bfe9471d1d71e16602eef05
                 @endif
             </div>
         </div>

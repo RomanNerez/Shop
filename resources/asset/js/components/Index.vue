@@ -6,7 +6,7 @@
 
     	<dashboard-core-view />
  
-    	<dashboard-core-settings />
+    	<!-- <dashboard-core-settings /> -->
     	<v-dialog
         	v-model="updates"
         	fullscreen

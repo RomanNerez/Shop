@@ -13,7 +13,7 @@ class IndexController extends Controller
     	$categories = Categories::active()->get();
 
         $popularProducts = Products::active()->where('popular', 1)->limit(8)->get();
-
+        
     	return view('shop.app', compact('categories', 'popularProducts'));
     }
 

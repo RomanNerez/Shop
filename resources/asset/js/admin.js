@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import vuetify from './components/plugins/vuetify.js';
+import draggable from 'vuedraggable'
 
 
 Vue.use(Vuelidate); 
@@ -9,7 +10,6 @@ Vue.use(Vuex);
 
 window.SECTION_PARAM = 'section';
 window.PAGE_PARAM = 'page';
-
 
 const store = new Vuex.Store({
     state: {
@@ -43,6 +43,8 @@ const store = new Vuex.Store({
 });
 
 Vue.component('Index', require('./components/Index.vue').default);
+
+Vue.component('draggable', draggable);
 
 new Vue({
 	el: '#wrapper',

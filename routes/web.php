@@ -47,7 +47,7 @@ Route::group(
     ],
 	function () {
 		Route::namespace('User')->group(function () {
-			Route::get('/', 'UserController@index')->name('user-home');
+			Route::get('/', 'UserController@index')->name('user');
 		});
     	
 	}
@@ -64,7 +64,7 @@ Route::group(
 	     	\UniSharp\LaravelFilemanager\Lfm::routes();
 	 	});
 		Route::namespace('Admin')->group(function () {
-			Route::get('/', 'AdminController@index')->name('admin-home');
+			Route::get('/', 'AdminController@index')->name('admin');
 			Route::prefix('category')->group(function () {
 				Route::post('/add', 'CategoryController@addCategory');
 				Route::post('/edit', 'CategoryController@editCategory');

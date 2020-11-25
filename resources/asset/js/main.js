@@ -95,10 +95,12 @@ $(document).ready(function() {
     });
 });
 
+
+
 //vue starts here
 var Vue = require("vue");
 window.axios = require("axios");
-
+Vue.component('Cart', require('./public/components/Cart/Cart.vue').default);
 new Vue({
     el: "#app",
     data: {
