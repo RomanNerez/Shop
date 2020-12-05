@@ -1,5 +1,5 @@
 <template>
-	<section class="cart-modal">
+	<section class="cart-modal" v-if="false">
         <div class="cart-modal__wrapper">
             <div class="cart-modal__header">
                 <div class="cart-modal__title">
