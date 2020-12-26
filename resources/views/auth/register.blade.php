@@ -10,7 +10,7 @@
                     <a class="login__exit" href="{{ url('/') }}"
                         ><span></span></a>
                     <a class="login__image" href="index.html">
-                        <img src="{{asset('img/Header-logo.png')}}" alt="Slider-background" width="90px" />
+                        <img src="{{asset('img/Header-logo.png')}}" alt="Site logo" width="90px" />
                     </a>
                 </div>
                 <form method="POST" action="{{ route('register') }}">
@@ -69,15 +69,8 @@
                         Реєстрація
                     </button>
                 </form>
-<<<<<<< HEAD
                 @if (Route::has('login'))
                     <a href="{{ route('login') }}" class="login__register">{{__('Log in')}}</a>
-=======
-                <p class="login__or">{{__('Or')}}</p>
-                
-                @if (Route::has('login'))
-                    <a href="{{ route('login') }}" class="btn login__register">{{__('Log in')}}</a>
->>>>>>> 5abcedd2a6523e4d7bfe9471d1d71e16602eef05
                 @endif
             </div>
         </div>

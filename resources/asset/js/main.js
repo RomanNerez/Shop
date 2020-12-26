@@ -95,6 +95,18 @@ $(document).ready(function() {
     });
 });
 
+//form input labels
+
+//let formInput = document.querySelector(".form__input");
+//let formLabel = document.querySelector(".form__label");
+//console.log(formInput);
+//console.log(formLabel);
+
+//formInput.addEventListener("focus", function(){
+//    if(formInput.value !== ""){
+//        formLabel.classList.add("disabled");
+//    }
+//})
 
 
 //vue starts here

@@ -3260,124 +3260,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "cart-modal" }, [
-    _c(
-      "div",
-      { staticClass: "cart-modal__wrapper" },
-      [
-        _c("div", { staticClass: "cart-modal__header" }, [
-          _c("div", { staticClass: "cart-modal__title" }, [
-            _c("svg", [_c("use", { attrs: { "xlink:href": "#cart" } })]),
-            _vm._v(" "),
-            _vm._m(0)
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _vm.count === 0
-          ? [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "cart-modal__buttons" }, [
-                _c(
-                  "button",
-                  { staticClass: "btn", attrs: { type: "button" } },
-                  [_vm._v("Закрити")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.count++
-                      }
-                    }
-                  },
-                  [_vm._v("Оформити")]
-                )
-              ])
-            ]
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.count === 1
-          ? [
-              _c("div", { staticClass: "checkout" }, [
-                _vm._m(4),
-                _vm._v(" "),
-                _c("div", { staticClass: "checkout__form" }, [
-                  _c("h2", [_vm._v("Заповнiть анкету")]),
-                  _vm._v(" "),
-                  _c("form", { attrs: { action: "#" } }, [
-                    _c("div", { staticClass: "checkout__wrapper" }, [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _vm._m(6),
-                      _vm._v(" "),
-                      _vm._m(7),
-                      _vm._v(" "),
-                      _vm._m(8),
-                      _vm._v(" "),
-                      _vm._m(9),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "checkout__input" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn checkout__btn",
-                            attrs: { type: "submit" },
-                            on: {
-                              click: function($event) {
-                                _vm.count++
-                              }
-                            }
-                          },
-                          [_vm._v("Далi")]
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ]
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.count === 2
-          ? [
-              _c("div", { staticClass: "checkout" }, [
-                _c("div", { staticClass: "checkout__steps" }, [
-                  _c("div", { staticClass: "step completed" }, [
-                    _c("span", { staticClass: "step__image" }, [
-                      _c("svg", { attrs: { width: "10px" } }, [
-                        _c("use", { attrs: { "xlink:href": "#tick" } })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Вашi даннi")])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(10),
-                  _vm._v(" "),
-                  _vm._m(11)
-                ]),
-                _vm._v(" "),
-                _vm._m(12)
-              ])
-            ]
-          : _vm._e()
-      ],
-      2
-    )
-  ])
+  return false
+    ? undefined
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -3919,7 +3804,17 @@ $(document).ready(function () {
     focusOnSelect: true,
     draggable: false
   });
-}); //vue starts here
+}); //form input labels
+//let formInput = document.querySelector(".form__input");
+//let formLabel = document.querySelector(".form__label");
+//console.log(formInput);
+//console.log(formLabel);
+//formInput.addEventListener("focus", function(){
+//    if(formInput.value !== ""){
+//        formLabel.classList.add("disabled");
+//    }
+//})
+//vue starts here
 
 var Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
