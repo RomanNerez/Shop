@@ -20,7 +20,7 @@ class CreateSubcategoriesTable extends Migration
                 ->references('id')
                 ->on('categories')
                 ->onDelete('cascade');
-            $table->text('file')->default('default');
+            $table->text('file')->nullable();
             $table->string('title', 255);
             $table->text('desc');
             $table->string('slug', 50)->unique();
