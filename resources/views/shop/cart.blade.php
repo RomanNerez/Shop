@@ -139,7 +139,7 @@
                                     
                                 </div>
                                 <div class="credit-card__back">
-
+                                    <input type="text" placeholder="kurwa">
                                 </div>
                             </div>
                             
