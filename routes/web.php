@@ -64,7 +64,7 @@ Route::group(
 	     	\UniSharp\LaravelFilemanager\Lfm::routes();
 	 	});
 		Route::namespace('Admin')->group(function () {
-			Route::get('/', 'AdminController@index')->name('admin');
+			Route::get('/', 'IndexController@index')->name('admin');
 			Route::prefix('category')->group(function () {
 				Route::post('/add', 'CategoryController@addCategory');
 				Route::post('/edit', 'CategoryController@editCategory');
@@ -93,6 +93,12 @@ Route::group(
 				Route::post('/delete', 'ProductController@deleteProduct');
 				Route::post('/active', 'ProductController@activeProduct');
 				Route::post('/getdata', 'ProductController@getProduct');
+			});
+
+			Route::prefix('/menu-area-visibility')->group(function () {
+				Route::post('/add', 'MenuAreaVisibilityController@add');
+				Route::post('/edit', 'MenuAreaVisibilityController@edit');
+				Route::post('/delete', 'MenuAreaVisibilityController@delete');
 			});
 		});
     	

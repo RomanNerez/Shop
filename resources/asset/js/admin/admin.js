@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
 import vuetify from './components/plugins/vuetify.js';
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
+window.axios = require('axios');
 
 
 Vue.use(Vuelidate);

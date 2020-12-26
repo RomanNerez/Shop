@@ -32,19 +32,19 @@ const mutations = {
 const actions = {
     async addAreaVisibility({ }, payload){
         return await axios.post(
-            '/home/menu-area-visibility/add',
+            '/admin/menu-area-visibility/add',
             payload
         );
     },
     async deleteAreaVisibility({ }, payload){
         return await axios.post(
-            '/home/menu-area-visibility/delete',
+            '/admin/menu-area-visibility/delete',
             payload
         );
     },
     async editAreaVisibility({ }, payload){
         return await axios.post(
-            '/home/menu-area-visibility/edit',
+            '/admin/menu-area-visibility/edit',
             payload
         );
     }

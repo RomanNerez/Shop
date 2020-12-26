@@ -193,6 +193,7 @@
                     );
                     this.title = '';
                 }).catch((error)=>{
+                    console.log(error);
                 }).finally(()=>{
                     this.btnLoading = false;
                     this.$refs.form.reset();
