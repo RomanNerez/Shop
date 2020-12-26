@@ -2138,6 +2138,10 @@ button {
   }
 }
 
+.login {
+  position: relative;
+}
+
 .login__wrapper {
   display: flex;
   flex-flow: column;
@@ -2152,7 +2156,7 @@ button {
 .login__logo {
   margin-bottom: 30px;
   display: flex;
-  justify-content: space-between;
+  flex-flow: column;
   align-items: center;
 }
 
@@ -2163,6 +2167,11 @@ button {
 .login__logo span {
   font-weight: 900;
   color: #e5493a;
+}
+
+.login__image {
+  order: 1;
+  margin-top: 20px;
 }
 
 .login__brand {
@@ -2181,29 +2190,64 @@ button {
 }
 
 .login__form {
-  width: 400px;
-  padding: 50px;
+  display: flex;
+  flex-flow: column;
+  width: 320px;
+  padding: 20px 50px 20px 50px;
   background-color: #fff;
+  border-radius: 10px;
+}
+
+.login__form label {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.login__email {
+  background: url(/images/mail.svg?5e7742402170295cd40184f00859ee82) no-repeat left center;
+}
+
+.login__name {
+  background: url(/images/user-regular.svg?a5b86e4c571ea71e71474db9d4fde3ce) no-repeat left center;
+}
+
+.login__password {
+  background: url(/images/lock.svg?3e3de6bcbd624a1e25e79c06e0d55c78) no-repeat left center;
 }
 
 .login__email,
-.login__phone {
+.login__name,
+.login__password {
+  position: relative;
   width: 100%;
-  padding: 10px;
+  padding: 10px 10px 10px 25px;
   margin-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  background-size: 10px;
+}
+
+.login__email:focus,
+.login__name:focus,
+.login__password:focus {
+  outline: none;
+  border-bottom-color: #7e7e7e;
 }
 
 .login__btn {
   width: 100%;
   color: #fff;
   margin-top: 30px;
+  background: linear-gradient(to left, #7f00e2, #202020);
+  border-radius: 25px;
 }
 
 .login__register {
-  width: 100%;
   text-align: center;
-  color: #fff;
-  background-color: #e5493a;
+  font-size: 13px;
+  margin-top: 10px;
 }
 
 .login__or {
@@ -2214,9 +2258,50 @@ button {
 }
 
 .login__exit {
-  font-size: 14px !important;
-  padding-left: 30px;
-  background: url(/images/arrow-left.svg?22995d316859661e6cdb9289ddd61857) no-repeat left center;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.login__exit span {
+  width: 100%;
+  height: 2px;
+  background-color: #460379;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.login__exit span:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #460379;
+  transform: rotate(-90deg);
+}
+
+.login__links {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.login__links a {
+  font-size: 10px;
+  margin-left: auto;
+}
+
+.login__links label {
+  margin-left: 10px;
 }
 
 @media (max-width: 768px) {

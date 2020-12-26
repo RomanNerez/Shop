@@ -6,20 +6,19 @@
         <div class="container">
             <div class="login__form">
                 <div class="login__logo">
-                    <a class="login__" href="index.html">
-                        <b class="logo__red">free</b
-                        ><span>Z</span>
-                    </a>
+                    
                     <a class="login__exit" href="{{ url('/') }}"
-                        >На головну</a
-                    >
+                        ><span></span></a>
+                    <a class="login__image" href="index.html">
+                        <img src="{{asset('img/Header-logo.png')}}" alt="Slider-background" width="90px" />
+                    </a>
                 </div>
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <input
                         type="text"
                         placeholder="Имя"
-                        class="login__email @error('name') is-invalid @enderror"
+                        class="login__name @error('name') is-invalid @enderror"
                         required
                         name="name" 
                         value="{{ old('name') }}"
@@ -43,6 +42,7 @@
                         </span>
                     @enderror
                     <input
+                        class="login__password"
                         type="password"
                         name="password"
                         placeholder="Пароль"
@@ -55,6 +55,7 @@
                         </span>
                     @enderror
                     <input
+                        class="login__password"
                         type="password"
                         name="password_confirmation"
                         placeholder="Повторить пароль"
@@ -68,10 +69,8 @@
                         Реєстрація
                     </button>
                 </form>
-                <p class="login__or">{{__('Or')}}</p>
-                
                 @if (Route::has('login'))
-                    <a href="{{ route('login') }}" class="btn login__register">{{__('Log in')}}</a>
+                    <a href="{{ route('login') }}" class="login__register">{{__('Log in')}}</a>
                 @endif
             </div>
         </div>

@@ -6,20 +6,21 @@
         <div class="container">
             <div class="login__form">
                 <div class="login__logo">
-                    <a class="login__" href="index.html">
-                        <b class="logo__red">free</b
-                        ><span>Z</span>
+                    <a class="login__image" href="{{ url('/') }}">
+                        <img src="{{asset('img/Header-logo.png')}}" alt="Slider-background" width="90px" />
                     </a>
                     <a class="login__exit" href="{{ url('/') }}"
-                        >{{__('On the head')}}</a
-                    >
+                        ><span></span>
+                    </a>
                 </div>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
+                    <label for="email">Ім'я користувача</label>
                     <input
+                        id="email"
                         type="email"
-                        placeholder="{{__('Email')}}"
-                        class="login__email @error('email') is-invalid @enderror"
+                        placeholder="{{__('Username')}}"
+                        class="login__name @error('email') is-invalid @enderror"
                         required
                         name="email" 
                         value="{{ old('email') }}"
@@ -29,11 +30,13 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                    <label for="password">Пароль</label>
                     <input
+                        id="password"
                         type="password"
                         name="password"
                         placeholder="{{__('Password')}}"
-                        class="login__phone @error('password') is-invalid @enderror"
+                        class="login__password @error('password') is-invalid @enderror"
                         required
                     />
                     @error('password')
@@ -41,15 +44,16 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <input type="checkbox" id="login__memory" type="checkbox" name="remember"
-                        {{ old('remember') ? 'checked' : '' }}
-                    />
-                    <label for="login__memory">{{__('Remember me')}}</label><br>
-                    @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
+                    <div class="login__links">
+                        <input type="checkbox" id="login__memory" type="checkbox" name="remember"
+                        {{ old('remember') ? 'checked' : '' }}/>
+                        <label for="login__memory">{{__('Remember me')}}</label>
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                        @endif
+                    </div>
                     <button
                         type="submit"
                         class="btn login__btn"
@@ -57,10 +61,9 @@
                         Вхiд
                     </button>
                 </form>
-                <p class="login__or">{{__('Or')}}</p>
                 
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn login__register">{{__('Register')}}</a>
+                    <a href="{{ route('register') }}" class="login__register">{{__('Register')}}</a>
                 @endif
             </div>
         </div>
