@@ -22,7 +22,7 @@
     &__equiring {
         display: flex;
         flex-flow: column;
-        align-items: center;
+        align-items: flex-start;
         padding: 30px;
         border: 1px solid #d1cfd7;
         border-radius: 6px;
@@ -44,9 +44,14 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        border-bottom: 1px solid rgb(145, 145, 145);
     }
     &__icon {
-        min-width: 70px;
+        flex-basis: 100px;
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
     &__name {
         margin-right: auto;
@@ -75,7 +80,9 @@
         justify-content: space-between;
         align-items: center;
         p {
-            font-weight: 900;
+            font-size: 20px;
+            font-weight: 500;
+            margin-right: 30px;
         }
     }
     &__total {
@@ -122,15 +129,19 @@
     &__counter {
         display: flex;
         align-items: center;
-        margin-right: 10px;
+        margin-right: 100px;
     }
     &__btn {
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         background-color: transparent;
-        border: none;
+        border: 1px solid rgb(145, 145, 145);
+        border-radius: 50%;
         color: $main-color;
         font-size: 12px;
+        &:focus {
+            outline: none;
+        }
     }
     &__summ {
         text-align: center;
@@ -266,6 +277,9 @@
         padding: 20px 20px;
         border-radius: 10px;
         box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+        @media (max-width: 480px) {
+            width: 100%;
+        }
     }
     &__logo {
         padding: 10px 0;
@@ -308,6 +322,8 @@
     }
     &__date {
         position: relative;
+        display: flex;
+        justify-content: space-between;
         input {
             width: 70px;
             &::-webkit-input-placeholder {
@@ -326,16 +342,6 @@
     }
     &__text {
         padding: 25px 0 10px 0;
-    }
-    &__back {
-        position: absolute;
-        width: 100px;
-        height: 100%;
-        background-color: rgb(240, 132, 132);
-        border-radius: 10px;
-        top: 0;
-        right: -90px;
-        z-index: -1;
     }
 }
 

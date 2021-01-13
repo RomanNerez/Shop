@@ -47,7 +47,7 @@
 .top {
     width: 100%;
     color: $text-white;
-    background: linear-gradient(to left, #7f00e2, #202020);
+    background: $main-color;
     ul {
         @include dflex;
         a {
@@ -164,10 +164,10 @@
         position: relative;
         font-size: 14px;
         font-weight: 400;
-        color: #390263;
+        color: $main-color;
         font-weight: bold;
         &:hover {
-            color: #0095f9;
+            color: $text-red;
             &:before {
                 position: absolute;
                 content: "";
@@ -175,7 +175,7 @@
                 left: 0;
                 width: 10px;
                 height: 4px;
-                background-color: #0095f9;
+                background-color: $text-red;
                 transform: skewX(20deg);
             }
         }

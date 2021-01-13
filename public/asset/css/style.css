@@ -165,7 +165,7 @@ button {
 .top {
   width: 100%;
   color: #ffffff;
-  background: linear-gradient(to left, #7f00e2, #202020);
+  background: #363636;
 }
 
 .top ul {
@@ -301,12 +301,12 @@ button {
   position: relative;
   font-size: 14px;
   font-weight: 400;
-  color: #390263;
+  color: #363636;
   font-weight: bold;
 }
 
 .menu__link:hover {
-  color: #0095f9;
+  color: #e5493a;
 }
 
 .menu__link:hover:before {
@@ -316,7 +316,7 @@ button {
   left: 0;
   width: 10px;
   height: 4px;
-  background-color: #0095f9;
+  background-color: #e5493a;
   transform: skewX(20deg);
 }
 
@@ -595,7 +595,7 @@ button {
 .hero__categories {
   position: absolute;
   width: 250px;
-  background: linear-gradient(to left, #7f00e2, #202020);
+  background: #363636;
   z-index: 4;
   left: 100px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
@@ -698,7 +698,7 @@ button {
   width: 250px;
   height: 100%;
   position: absolute;
-  background-color: #7f00e2;
+  background-color: #363636;
   top: 0;
   left: 100%;
 }
@@ -929,7 +929,7 @@ button {
 
 .portfolio__btn {
   display: block;
-  background-color: #8400ff;
+  background-color: #363636;
   color: #fff;
   margin: 0 auto;
   border: none;
@@ -1057,7 +1057,7 @@ button {
 
 .footer {
   padding: 20px 0;
-  background: linear-gradient(to left, #7f00e2, #0095f9);
+  background: #363636;
 }
 
 .footer__wrapper {
@@ -1289,7 +1289,7 @@ button {
 .product__btn {
   color: #fff;
   text-align: center;
-  background: #7f00e2;
+  background: #363636;
   text-align: center;
 }
 
@@ -1787,7 +1787,7 @@ button {
 .purchase__equiring {
   display: flex;
   flex-flow: column;
-  align-items: center;
+  align-items: flex-start;
   padding: 30px;
   border: 1px solid #d1cfd7;
   border-radius: 6px;
@@ -1813,10 +1813,16 @@ button {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  border-bottom: 1px solid #919191;
 }
 
 .purchase__icon {
-  min-width: 70px;
+  flex-basis: 100px;
+}
+
+.purchase__icon img {
+  width: 100%;
+  height: auto;
 }
 
 .purchase__name {
@@ -1851,7 +1857,9 @@ button {
 }
 
 .purchase__price p {
-  font-weight: 900;
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 30px;
 }
 
 .purchase__total {
@@ -1905,16 +1913,21 @@ button {
 .purchase__counter {
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 100px;
 }
 
 .purchase__btn {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   background-color: transparent;
-  border: none;
+  border: 1px solid #919191;
+  border-radius: 50%;
   color: #363636;
   font-size: 12px;
+}
+
+.purchase__btn:focus {
+  outline: none;
 }
 
 .purchase__summ {
@@ -2073,6 +2086,12 @@ button {
   box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
 }
 
+@media (max-width: 480px) {
+  .credit-card__front {
+    width: 100%;
+  }
+}
+
 .credit-card__logo {
   padding: 10px 0;
   display: flex;
@@ -2125,6 +2144,8 @@ button {
 
 .credit-card__date {
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 .credit-card__date input {
@@ -2151,17 +2172,6 @@ button {
 
 .credit-card__text {
   padding: 25px 0 10px 0;
-}
-
-.credit-card__back {
-  position: absolute;
-  width: 100px;
-  height: 100%;
-  background-color: #f08484;
-  border-radius: 10px;
-  top: 0;
-  right: -90px;
-  z-index: -1;
 }
 
 @media (max-width: 902px) {

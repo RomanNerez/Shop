@@ -117,7 +117,8 @@ new Vue({
     el: "#app",
     data: {
         carts: [],
-        countCart: 1
+        countCart: 1,
+        goods: 2,
     },
     mounted: function() {
         this.loadCart();

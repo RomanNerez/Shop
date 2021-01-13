@@ -1,7 +1,7 @@
 .footer {
     padding: 20px 0;
     //background-color: $main-color;
-    background: linear-gradient(to left, #7f00e2, #0095f9);
+    background: $main-color;
     &__wrapper {
         @include dflex;
         flex-wrap: wrap;
