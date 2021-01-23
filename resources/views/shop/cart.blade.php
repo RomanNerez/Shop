@@ -5,7 +5,6 @@
     <div class="container-fluid">
         <div class="cart-page__header designator"></div>
         <div class="cart-page__wrapper">
-
             <div class="purchase">
                 <section class="purchase__items">
                     <div class="purchase__title">
@@ -45,7 +44,7 @@
                                     +
                                 </button>
                             </div>
-                            <p>@{{item.price}}</p>
+                            <p>@{{item.price}}<span> грн.</span></p>
                             <button
                                 class="purchase__remove"
                                 type="button"
@@ -119,30 +118,30 @@
                 <section class="purchase__equiring">
                     <div class="purchase__title">
                         <h4>Оплата</h4>
-                        <div class="credit-card">
-                            <div class="credit-card__front">
-                                <div class="credit-card__logo">
-                                    <img src="public/svg/mastercard.svg" alt="mastercard-logo" width="32px">
-                                    <img src="public/svg/visa.svg" alt="visa-logo" width="45px">
-                                </div>
-                                <div class="credit-card__number">
-                                    <input type="text" name="card-number" id="card-number">
-                                    <label for="card-number">Номер платіжної картки</label>
-                                </div>
-                                <div class="credit-card__text">
-                                    <label for="date">Діє до</label>
-                                </div>
-                                <div class="credit-card__date">
+                    </div>
+                    <div class="credit-card">
+                        <div class="credit-card__front">
+                            <div class="credit-card__logo">
+                                <img src="public/svg/mastercard.svg" alt="mastercard-logo" width="32px">
+                                <img src="public/svg/visa.svg" alt="visa-logo" width="45px">
+                            </div>
+                            <div class="credit-card__number">
+                                <input type="text" name="card-number" id="card-number">
+                                <label for="card-number">Номер платіжної картки</label>
+                            </div>
+                            <div class="credit-card__text">
+                                <label for="date">Діє до</label>
+                            </div>
+                            <div class="credit-card__date">
+                                <div class="expiry-date">
                                     <input type="text" id="date" name="date" placeholder="MM">
                                     <span>/</span>
                                     <input type="text" id="year" name="year" placeholder="PP">
-                                    
                                 </div>
-                                <div class="credit-card__back">
-
+                                <div class="cvv">
+                                    <input type="text" placeholder="cvv">
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </section>
