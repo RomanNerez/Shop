@@ -75,7 +75,7 @@ button {
 }
 
 .btn {
-  min-width: 120px;
+  width: 120px;
   display: inline-block;
   padding: 12px 25px;
   background-color: #363636;
@@ -1321,20 +1321,22 @@ button {
 }
 
 .product__price {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
 }
 
 .product__btn {
-  width: 70px;
+  max-width: 80px;
   padding: 10px 5px;
-  color: #fff;
-  background: #6a983c;
+  color: #e5493a;
+  background: #fff;
   text-align: center;
+  border: 1px solid #e5493a;
 }
 
 .product__btn:hover {
   background-color: #e5493a;
+  color: #fff;
 }
 
 .product__rate {
@@ -1358,6 +1360,21 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.product__total .add-cart {
+  border: none;
+  background-color: transparent;
+  margin-right: 10px;
+  margin-left: auto;
+}
+
+.product__total .add-cart:hover svg {
+  fill: #e5493a;
+}
+
+.product__total .add-cart svg {
+  fill: #6a983c;
 }
 
 .product__stars {

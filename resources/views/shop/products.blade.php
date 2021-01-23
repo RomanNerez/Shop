@@ -78,13 +78,6 @@
                     <div class="products__item product">
                         <div class="product__img">
                             <img  src="{{ asset('img/cover-1.jpg') }}" alt="1" />
-                            <div class="cart-add">
-                                <button>
-                                    <svg width="30px" height="20px">
-                                        <use href="#cart"></use>
-                                    </svg>
-                                </button>
-                            </div>
                         </div>
                         <h3 class="product__name">{{$item->title}}</h3>
                         <p class="product__description">
@@ -131,6 +124,11 @@
                         </div>
                         <div class="product__total">
                             <span class="product__price">{{$item->price}} грн.</span>
+                            <button class="add-cart">
+                                <svg width="30px" height="20px">
+                                    <use href="#cart"></use>
+                                </svg>
+                            </button>
                             <a
                                 class="btn product__btn"
                                 href="
