@@ -44,14 +44,14 @@
                     </li>
                     <li>
                         <ul class="top__socials">
-                            <li>
+                            <li class="top__insta">
                                 <a href="#">
                                     <svg>
                                         <use xlink:href="#insta"></use>
                                     </svg>
                                     Instagram.com</a>
                             </li>
-                            <li>
+                            <li class="top__facebook">
                                 <a href="#">
                                     <svg>
                                         <use xlink:href="#facebook"></use>
@@ -59,7 +59,7 @@
                                     Facebook
                                 </a>
                             </li>
-                            <li>
+                            <li class="top__telegram">
                                 <a href="#">
                                     <svg>
                                         <use xlink:href="#telegram"></use>
@@ -67,13 +67,13 @@
                                     telegram
                                 </a>
                             </li>
-                            <li>
+                            <li class="top__login">
                                 @guest
                                     <a href="{{route('login')}}" class="sign">
                                         <svg>
                                             <use xlink:href="#signin"></use>
                                         </svg>
-                                        singin
+                                        Вхід
                                     </a>
                                 @else
                                     <a href="#" onclick="
@@ -84,7 +84,7 @@
                                         <svg>
                                             <use xlink:href="#logout"></use>
                                         </svg>
-                                        logout
+                                        Вийти
                                     </a>
                                 @endguest
                             </li>
@@ -121,9 +121,9 @@
                 <li class="menu__item">
                     <a class="menu__link" href="{{route('waranty')}}">Доставка та Гарантiя</a>
                 </li>
-                <li class="menu__item">
+                <!--<li class="menu__item">
                     <a class="menu__link" href="{{route('blog')}}">Блог</a>
-                </li>
+                </li>-->
                 <li class="menu__item">
                     <a class="menu__link" href="{{route('contacts')}}">Контакти</a>
                 </li>

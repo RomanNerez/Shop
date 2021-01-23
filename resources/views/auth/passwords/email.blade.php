@@ -6,13 +6,12 @@
         <div class="container">
             <div class="login__form">
                 <div class="login__logo">
-                    <a class="login__" href="index.html">
-                        <b class="logo__red">free</b
-                        ><span>Z</span>
+                    <a class="login__image" href="index.html">
+                        <img src="{{asset('img/Header-logo.png')}}" alt="Site logo" width="90px" />
                     </a>
                     <a class="login__exit" href="{{ url('/') }}"
-                        >На головну</a
-                    >
+                        ><span></span>
+                    </a>
                 </div>
                 <div class="card-header">{{ __('Введите E-mail') }}</div>
 

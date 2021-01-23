@@ -71,20 +71,26 @@
                     @foreach($subcategories as $items) 
                         @foreach($items->products as $item)
                             <div class="products__item product">
+
                                 <div class="product__img">
-                                    <img src="{{ asset('img/cover-1.jpg') }}" alt="1" />
+                                    <img  src="{{ asset('img/cover-1.jpg') }}" alt="1" />
                                 </div>
+
+
                                 <h3 class="product__name">{{$item->title}}</h3>
-                                <span class="product__price">{{$item->price}}</span>
-                                <a
-                                    class="btn product__btn"
-                                    href="{{route('producting',
-                                                [
-                                                    'slug' => $item->slug
-                                                ]
-                                            )}}"
-                                    >Купити</a
-                                >
+
+                                <div class="product__total">
+                                    <span class="product__price">{{$item->price}}</span>
+                                    <a
+                                        class="btn product__btn"
+                                        href="{{route('producting',
+                                                    [
+                                                        'slug' => $item->slug
+                                                    ]
+                                                )}}"
+                                        >Купити</a
+                                    >
+                                </div>
                             </div>
                         @endforeach 
                     @endforeach

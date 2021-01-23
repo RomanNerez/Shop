@@ -10,7 +10,7 @@
                     <a class="login__exit" href="{{ url('/') }}"
                         ><span></span></a>
                     <a class="login__image" href="index.html">
-                        <img src="{{asset('img/Header-logo.png')}}" alt="Slider-background" width="90px" />
+                        <img src="{{asset('img/Header-logo.png')}}" alt="Site logo" width="90px" />
                     </a>
                 </div>
                 <form method="POST" action="{{ route('register') }}">

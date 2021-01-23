@@ -47,7 +47,7 @@
 .top {
     width: 100%;
     color: $text-white;
-    background: linear-gradient(to left, #7f00e2, #202020);
+    background: $main-color;
     ul {
         @include dflex;
         a {
@@ -98,6 +98,12 @@
             }
         }
     }
+    &__login {
+        margin-left: 20px;
+        a {
+            font-size: 12px;
+        }
+    }
 }
 .bottom {
     background-color: #fff;
@@ -106,7 +112,7 @@
     left: 0;
     top: 0;
     z-index: 5;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
     .container {
         @include dflex;
         justify-content: space-between;
@@ -153,13 +159,15 @@
         justify-content: center;
     }
     &__link {
-        padding: 15px 20px;
+        padding: 15px 30px;
         transition: $hover-transition;
         position: relative;
+        font-size: 14px;
         font-weight: 400;
         color: $main-color;
+        font-weight: bold;
         &:hover {
-            color: #0095f9;
+            color: $text-red;
             &:before {
                 position: absolute;
                 content: "";
@@ -167,7 +175,7 @@
                 left: 0;
                 width: 10px;
                 height: 4px;
-                background-color: #0095f9;
+                background-color: $text-red;
                 transform: skewX(20deg);
             }
         }
@@ -217,14 +225,19 @@
     }
 }
 .search {
+    min-width: 300px;
     padding: 0 !important;
     display: flex;
     align-items: center;
     order: 4;
+    form {
+        width: 100%;
+    }
     input {
-        padding: 0 20px 0 0;
+        width: 100%;
+        padding: 10px 20px 10px 0;
         background: url("../../img/svg/search.svg") no-repeat center right 10px;
-        background-size: 10%;
+        background-size: 5%;
     }
 }
 //.cart__popup {
@@ -431,8 +444,10 @@
                 justify-content: center;
             }
         }
-        &__socials {
-            display: none !important;
+        &__insta,
+        &__facebook,
+        &__telegram {
+            display: none;
         }
     }
 }

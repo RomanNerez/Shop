@@ -6,8 +6,8 @@
         <div class="container">
             <div class="login__form">
                 <div class="login__logo">
-                    <a class="login__image" href="{{ url('/') }}">
-                        <img src="{{asset('img/Header-logo.png')}}" alt="Slider-background" width="90px" />
+                    <a class="login__image" href="index.html">
+                        <img src="{{asset('img/Header-logo.png')}}" alt="Site logo" width="90px" />
                     </a>
                     <a class="login__exit" href="{{ url('/') }}"
                         ><span></span>
@@ -69,4 +69,5 @@
         </div>
     </div>
 </section>
+
 @endsection

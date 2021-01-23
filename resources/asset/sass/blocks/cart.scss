@@ -6,68 +6,73 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: flex-start;
         & > * {
             margin: 0 10px;
         }
     }
 }
 .purchase {
+    width: 100%;
     display: flex;
     flex-flow: column;
-    flex-basis: 60%;
-    padding: 30px;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+    flex-basis: 70%;
+    &__items,
+    &__form,
+    &__equiring {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        padding: 30px;
+        border: 1px solid #d1cfd7;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
     &__title {
+        align-self: flex-start;
         h4 {
-            font-size: 19px;
-            border-bottom: 1px solid #ccc;
+            font-size: 20px;
             padding: 10px;
+            font-weight: 500;
         }
+    }
+    &__list {
+        width: 100%;
     }
     &__item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid rgb(145, 145, 145);
     }
     &__icon {
-        min-width: 70px;
+        flex-basis: 100px;
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
     &__name {
+        margin-right: auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-grow: 1;
-        padding: 0 20px;
-        h4 {
+        max-width: 300px;
+        p {
             font-size: 16px;
         }
     }
     &__remove {
-        width: 40px;
-        height: 40px;
+        width: 20px;
+        height: 20px;
         border: none;
         position: relative;
         background-color: transparent;
-        &:before,
-        &:after {
-            width: 25px;
-            height: 3px;
-            background-color: $text-red;
-            left: 7px;
-            bottom: 18px;
-        }
-        &:before {
-            position: absolute;
-            content: "";
-            transform: rotate(45deg);
-        }
-        &:after {
-            position: absolute;
-            content: "";
-            transform: rotate(-45deg);
-        }
+        margin-left: auto;
+        background: url("../public/svg/close.svg") no-repeat center;
+        background-size: contain;
     }
     &__price {
         min-width: 140px;
@@ -75,7 +80,9 @@
         justify-content: space-between;
         align-items: center;
         p {
-            font-weight: 900;
+            font-size: 20px;
+            font-weight: 500;
+            margin-right: 30px;
         }
     }
     &__total {
@@ -122,109 +129,222 @@
     &__counter {
         display: flex;
         align-items: center;
-        margin-right: 30px;
+        margin-right: 100px;
     }
     &__btn {
         width: 30px;
         height: 30px;
         background-color: transparent;
-        border: none;
+        border: 1px solid rgb(145, 145, 145);
+        border-radius: 50%;
         color: $main-color;
-        font-size: 20px;
+        font-size: 12px;
+        &:focus {
+            outline: none;
+        }
     }
     &__summ {
         text-align: center;
         width: 30px;
-        font-size: 20px;
-    }
-}
-.checkout {
-    display: flex;
-    flex-flow: column;
-    flex-basis: 30%;
-
-    &__info {
-        padding: 30px 20px;
-        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
-        margin-bottom: 20px;
-        p {
-            padding: 20px 0;
-            font-size: 18px;
-            font-weight: 900;
-            text-align: center;
-        }
-    }
-    &__title {
-        font-size: 18px;
-        padding: 10px;
-    }
-    &__name,
-    &__email {
-        width: 100%;
-        padding: 15px;
-        background-color: rgb(219, 219, 219);
-        border: none;
-        margin-bottom: 10px;
-    }
-    &__login,
-    &__register {
-        width: 100%;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 10px;
-        background: linear-gradient(to left, #7f00e2, #0095f9);
-    }
-    &__register {
-        background: linear-gradient(to left, #7f00e2, #b9081f);
-        &:hover {
-            background-color: $main-color;
-        }
-    }
-}
-.payment {
-    padding: 30px 20px;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
-    &__title {
-        font-size: 18px;
-        padding: 10px;
-    }
-    &__item {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        img {
-            margin: 0 5px;
-        }
+        font-size: 14px;
     }
     &__form {
-        label {
-            margin-right: auto;
+        form {
+            width: 100%;
+            margin-top: 20px;
         }
-        label input {
-            display: none;
+        fieldset {
+            width: 100%;
+            border: none;
         }
-        label input + i {
+        legend {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 25px 16px 6px;
+            border: 1px solid #d1cfd7;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            &:focus {
+                border-color: rgba(120, 1, 255, 0.966);
+            }
+            &:focus + label {
+                top: 18px;
+                font-size: 12px;
+            }
+        }
+        .form-row {
+            position: relative;
+            display: flex;
+            margin-bottom: 20px;
+            label {
+                position: absolute;
+                top: 50%;
+                left: 20px;
+                transform: translatey(-5px);
+                color: #b3b3b3;
+                transition: all 0.3s;
+            }
+            label.disabled {
+                display: none;
+            }
+        }
+        .form-cell {
+            padding: 5px;
+            width: 50%;
+            position: relative;
+        }
+    }
+}
+
+.payment {
+    margin-bottom: 20px;
+    padding: 20px;
+    position: sticky;
+    top: 100px;
+    right: 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+    &__wrapper {
+        position: relative;
+        width: 300px;
+        min-height: 500px;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+    }
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-size: 20px;
+        font-weight: 700;
+        b {
             display: block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid $text-green;
-            border-radius: 50%;
-            margin-right: auto;
-        }
-        label input:checked + i {
-            background: url("../../img/svg/checked.svg") no-repeat;
-            background-size: cover;
+            font-size: 36px;
+            line-height: 37px;
         }
     }
     &__btn {
+        margin-top: auto;
         width: 100%;
-        background-color: rgb(0, 222, 251);
-        color: #fff;
+        display: block;
+        background-color: #727272;
         text-align: center;
+        text-decoration: none;
+        padding: 20px;
+        color: #fff;
+    }
+    &__info {
         margin-top: 30px;
+        p {
+            padding: 5px 0;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &__output {
+        margin-top: 20px;
+        h3 {
+            padding: 15px 0;
+        }
+        p {
+            padding: 5px 0;
+            font-size: 16px;
+        }
+    }
+    &__agreement {
+        margin-top: 30px;
+        li {
+            margin-bottom: 20px;
+        }
     }
 }
+
+//credit card block starts here
+.credit-card {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    &__front {
+        width: 400px;
+        background-color: rgb(50, 50, 50);
+        color: #fff;
+        padding: 20px 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+        @media (max-width: 480px) {
+            width: 100%;
+        }
+    }
+    &__logo {
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        img {
+            margin: 0 10px;
+        }
+    }
+    &__number,
+    &__date {
+        position: relative;
+        label {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translatey(-5px);
+            color: #b3b3b3;
+            transition: all 0.3s;
+        }
+        input {
+            position: relative;
+            width: 100%;
+            padding: 25px 16px 6px;
+            background-color: inherit;
+            border: 1px solid #d1cfd7;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            color: #fff;
+            &:focus {
+                border-color: rgba(120, 1, 255, 0.966);
+            }
+            &:focus + label {
+                top: 18px;
+                font-size: 12px;
+            }
+        }
+    }
+    &__date {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        input {
+            width: 70px;
+            &::-webkit-input-placeholder {
+                color: #fff;
+            }
+            &::-moz-placeholder {
+                color: #fff;
+            } /* Firefox 19+ */
+            &:-moz-placeholder {
+                color: #fff;
+            } /* Firefox 18- */
+            &:-ms-input-placeholder {
+                color: #fff;
+            }
+        }
+    }
+    &__text {
+        padding: 25px 0 10px 0;
+    }
+}
+
 @media (max-width: 902px) {
     .purchase {
         flex-basis: 100%;

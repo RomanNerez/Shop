@@ -3804,7 +3804,17 @@ $(document).ready(function () {
     focusOnSelect: true,
     draggable: false
   });
-}); //vue starts here
+}); //form input labels
+//let formInput = document.querySelector(".form__input");
+//let formLabel = document.querySelector(".form__label");
+//console.log(formInput);
+//console.log(formLabel);
+//formInput.addEventListener("focus", function(){
+//    if(formInput.value !== ""){
+//        formLabel.classList.add("disabled");
+//    }
+//})
+//vue starts here
 
 var Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
@@ -3814,7 +3824,8 @@ new Vue({
   el: "#app",
   data: {
     carts: [],
-    countCart: 1
+    countCart: 1,
+    goods: 2
   },
   mounted: function mounted() {
     this.loadCart();
@@ -4064,9 +4075,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\js\main.js */"./resources/asset/js/main.js");
-__webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\sass\style.scss */"./resources/asset/sass/style.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Shop\resources\asset\sass\admin\admin.sass */"./resources/asset/sass/admin/admin.sass");
+__webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/js/main.js */"./resources/asset/js/main.js");
+__webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/sass/style.scss */"./resources/asset/sass/style.scss");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/asset/sass/admin/admin.sass */"./resources/asset/sass/admin/admin.sass");
 
 
 /***/ })

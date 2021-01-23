@@ -23,7 +23,6 @@ body {
     padding: 0;
     font-size: 13px;
     font-family: $page-font;
-    background-color: rgb(238, 238, 238);
     color: $text-black;
 }
 body.blocked {
@@ -59,7 +58,14 @@ button {
     padding: 0 30px;
     //breakpoints
 }
+.container-fluid {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 5px;
+}
 //adaptive images
+
 .ibg {
     background-position: center;
     background-size: cover;
@@ -77,7 +83,7 @@ button {
 }
 //page button styles
 .btn {
-    min-width: 120px;
+    width: 120px;
     display: inline-block;
     padding: 12px 25px;
     background-color: $main-color;

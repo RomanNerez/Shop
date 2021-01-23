@@ -1,10 +1,8 @@
 .hero {
-    position: relative;
     &__categories {
         position: absolute;
         width: 250px;
-        //background-color: rgb(255, 252, 208);
-        background: linear-gradient(to left, #7f00e2, #202020);
+        background: $main-color;
         z-index: 4;
         left: 100px;
         box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
@@ -97,7 +95,7 @@
         width: 250px;
         height: 100%;
         position: absolute;
-        background-color: #7f00e2;
+        background-color: $main-color;
         top: 0;
         left: 100%;
         a {
