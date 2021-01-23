@@ -24,9 +24,9 @@
         </div>
         <div class="products__wrapper">
             <aside class="products__filter filter">
-                <div class="aside__heading">
+                <!--<div class="aside__heading">
                     <span>Фiльтр:</span>
-                </div>
+                </div>-->
                 <form action="#" class="products__form">
                     <fieldset class="manufacturer">
                         <legend>Виробник:</legend>
@@ -44,7 +44,7 @@
             </aside>
 
             <div class="products__list">
-                <div class="filter__heading sort">
+                <!--<div class="filter__heading sort">
                     <span>Сортувати:</span>
                     <a type="btn" class="sort__link">
                         <span>За цiною:</span>
@@ -72,31 +72,79 @@
                             ></button>
                         </div>
                     </a>
-                </div>
+                </div>-->
                 <div class="products__list-wrapper">
                     @foreach($products as $item)
                     <div class="products__item product">
                         <div class="product__img">
                             <img  src="{{ asset('img/cover-1.jpg') }}" alt="1" />
+                            <div class="cart-add">
+                                <button>
+                                    <svg width="30px" height="20px">
+                                        <use href="#cart"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <h3 class="product__name">{{$item->title}}</h3>
-                        <span class="product__price">{{$item->price}}</span>
-                        <a
-                            class="btn product__btn"
-                            href="
-                                    {{
-                                        route('producting', 
-                                            [
-                                                'slug' => $item->slug
-                                            ]
-                                        )
-                                    }}"
+                        <p class="product__description">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, sed.
+                        </p>
+                        <div class="product__rate">
+                            <div class="product__stars">
+                                <button class="star">
+                                    <svg width="12px" height="10px">
+                                        <use href="#star"></use>
+                                    </svg>
+                                </button>
+                                <button class="star">
+                                    <svg width="12px" height="10px">
+                                        <use href="#star"></use>
+                                    </svg>
+                                </button>
+                                <button class="star">
+                                    <svg width="12px" height="10px">
+                                        <use href="#star"></use>
+                                    </svg>
+                                </button>
+                                <button class="star">
+                                    <svg width="12px" height="10px">
+                                        <use href="#star"></use>
+                                    </svg>
+                                </button>
+                                <button class="star">
+                                    <svg width="12px" height="10px">
+                                        <use href="#star"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                            <button id="heart-rate">
+                                <svg width="20px" height="15px">
+                                    <use href="#heart"></use>
+                                </svg> 
+                            </button>
+                            <button id="bookmark-rate">
+                                <svg width="20px" height="15px">
+                                    <use href="#bookmark"></use>
+                                </svg> 
+                            </button>
+                        </div>
+                        <div class="product__total">
+                            <span class="product__price">{{$item->price}} грн.</span>
+                            <a
+                                class="btn product__btn"
+                                href="
+                                        {{
+                                            route('producting', 
+                                                [
+                                                    'slug' => $item->slug
+                                                ]
+                                            )
+                                        }}"
+                                >Купити
+                                </a
                             >
-                            <svg>
-                                    <use fill="#fff" xlink:href="#cart"></use>
-                            </svg>
-                            </a
-                        >
+                        </div>
                     </div>
                     @endforeach
                 </div>

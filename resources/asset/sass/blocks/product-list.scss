@@ -1,8 +1,10 @@
 .products {
     padding: 30px 0;
     &__wrapper {
-        display: flex;
-        justify-content: space-between;
+        //display: flex;
+        //justify-content: space-between;
+        display: grid;
+        grid-template-columns: 25% 1fr;
     }
     &__filter {
         min-width: 200px;
@@ -12,13 +14,10 @@
     }
     &__list-wrapper {
         flex-grow: 1;
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
         padding: 50px 0;
-        //& > .product:last-child {
-        //    margin-right: auto;
-        //}
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
     }
     .brand__name {
         flex-basis: 100%;
@@ -26,16 +25,13 @@
     }
 }
 .product {
-    width: calc(25% - 4px);
-    padding: 15px 5px;
+    padding: 15px;
     margin: 0 4px 10px 0;
-    //border: 1px solid rgb(230, 230, 230);
-    //border-top-color: transparent;
-    //border-bottom-color: transparent;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 10px;
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-flow: column;
-    align-items: center;
     justify-content: space-between;
     transition: $hover-transition;
     cursor: pointer;
@@ -44,32 +40,92 @@
         transform: scale(1.02);
     }
     &__img {
+        position: relative;
         width: 100%;
-        min-height: 250px;
+        height: 200px;
+        border: 1px solid rgb(230, 230, 230);
+        border-radius: 10px;
         display: flex;
+        justify-content: center;
         align-items: center;
+        overflow: hidden;
         img {
-            width: 100%;
+            width: 80%;
+            border-radius: 10px;
+        }
+        .cart-add {
+            padding-right: 5px;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            background-color: transparent;
+            button {
+                background-color: transparent;
+                border: none;
+                &:hover svg {
+                    fill: darken(#6a983c, 20%);
+                }
+                svg {
+                    fill: #6a983c;
+                    transition: 0.3s fill;
+                }
+            }
         }
     }
     &__name {
-        margin-bottom: 10px;
-        text-align: center;
+        padding: 20px 0 5px 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    &__description {
+        padding: 5px 0 10px 0;
     }
     &__price {
-        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: 700;
     }
     &__btn {
+        width: 70px;
+        padding: 10px 5px;
         color: #fff;
-        text-align: center;
-        background: $main-color;
+        background: #6a983c;
         text-align: center;
         &:hover {
             background-color: $text-red;
         }
-        svg {
-            width: 30px;
-            height: 20px;
+    }
+    &__rate {
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-end;
+        button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    &__total {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__stars {
+        margin-right: auto;
+        .star {
+            width: 12px;
+            height: 10px;
+            &:hover svg {
+                fill: gold;
+            }
         }
     }
 }
