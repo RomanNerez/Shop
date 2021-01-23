@@ -1,9 +1,7 @@
 .hero {
-    //position: relative;
     &__categories {
         position: absolute;
         width: 250px;
-        //background-color: rgb(255, 252, 208);
         background: $main-color;
         z-index: 4;
         left: 100px;
