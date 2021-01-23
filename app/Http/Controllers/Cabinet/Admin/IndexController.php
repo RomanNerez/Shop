@@ -21,10 +21,10 @@ class IndexController extends Controller
 
     public function index (Request $request)
     {
-        $version = env('APP_VERSION', time());
+    	$version = env('APP_VERSION', time());
 
-        $user = Auth::user();
-        $data = [
+    	$user = Auth::user();
+    	$data = [
             'divide' => $request->get('divide'),
             'langs'  => DB::table('lang')->where('local', '!=', 'en')->get(),
             'store'  => [
@@ -49,8 +49,8 @@ class IndexController extends Controller
                 'fullname' => $user->fullname,
                 'name'     => $user->name,
             ]
-        ];
+    	];
 
-        return view('cabinet.admin.index', compact('data', 'version'));
+    	return view('cabinet.admin.index', compact('data', 'version'));
     }
 }

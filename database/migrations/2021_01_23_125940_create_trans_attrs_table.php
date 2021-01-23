@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenuAreaVisibilitiesTable extends Migration
+class CreateTransAttrsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateMenuAreaVisibilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_area_visibilities', function (Blueprint $table) {
+        Schema::create('trans_attrs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->unsignedBigInteger('attribute_id');
+            $table->foreign('attribute_id')->references('id')->on('attributes');
+            $table->string('title')->nullable();
+            $table->string('local');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateMenuAreaVisibilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_area_visibilities');
+        Schema::dropIfExists('trans_attrs');
     }
 }

@@ -15,15 +15,12 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->text('file')->nullable();
-            $table->string('title', 255);
-            $table->text('desc');
-            $table->string('meta_title', 255);
-            $table->text('meta_desc');
-            $table->string('slug', 50)->unique();
-            $table->boolean('active')->default(true);
+            $table->string('slug', 255)->unique();
+            $table->string('file', 255)->nullable();
+            $table->boolean('status');
+            $table->boolean('is_root');
+            $table->string('related')->default('store');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

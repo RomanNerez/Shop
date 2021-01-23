@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArbitraryLinksTable extends Migration
+class CreateSubsInProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateArbitraryLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('arbitrary_links', function (Blueprint $table) {
+        Schema::create('subs_in_products', function (Blueprint $table) {
             $table->id();
-            $table->text('link');
+            $table->unsignedBigInteger('subs_id');
+            $table->foreign('subs_id')->references('id')->on('subs');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateArbitraryLinksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arbitrary_links');
+        Schema::dropIfExists('subs_in_products');
     }
 }
