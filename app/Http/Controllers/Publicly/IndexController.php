@@ -14,14 +14,14 @@ class IndexController extends Controller
             'data'       => [
                 'content' => [
                     'meta' => [
-                        'title' => 'Первый в Украине магазин неодимовых магнитов',
-                        'desc'  => 'Первый в Украине магазин неодимовых магнитов',
+                        'title' => 'Найзручнiший online-магазин аксесуарiв та електронiки в Україні',
+                        'desc'  => 'Найзручнiший online-магазин аксесуарiв та електронiки в Україні',
                         'image' => ''
                     ]
                 ]
             ]
         ];
-
+        
         return view('public.pages.home', compact('response'));
     }
 }

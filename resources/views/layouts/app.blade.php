@@ -8,8 +8,8 @@
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="asset/css/normalize.css" />
-        <link rel="stylesheet" href="{{asset('asset/css/style.css?v='.time())}}" />
+        <link rel="stylesheet" href="assets/css/normalize.css" />
+        <link rel="stylesheet" href="{{asset('assets/css/public.css?v='.time())}}" />
     </head>
     <body class="page__body">
         <div class="page__wrapper">
@@ -178,6 +178,6 @@
         </svg>
         <script src="{{asset('libs/jquery.min.js')}}"></script>
         <script src="{{asset('libs/slick.min.js')}}"></script>
-        <script src="{{asset('asset/js/main.js?v='.time())}}"></script>
+        <script src="{{asset('assets/js/main.js?v='.time())}}"></script>
     </body>
 </html>

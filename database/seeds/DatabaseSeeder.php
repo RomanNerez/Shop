@@ -15,16 +15,17 @@ class DatabaseSeeder extends Seeder
         //factory(App\SubCategories::class, 48)->create();
         // $this->call(SubCategoriesSeeder::class);
 
-        // DB::table('langs')->insert([
-        //     [
-        //         'title' => 'Русский',
-        //         'local' => 'ru'
-        //     ],
-        //     [
-        //         'title' => 'Украинский',
-        //         'local' => 'ua'
-        //     ]
-        // ]);
+        DB::table('lang')->insert([
+            [
+                'title'  => 'Русский',
+                'local'  => 'ru',
+                'abbrev' => 'рус'
+            ],[
+                'title'  => 'УкраЇнська',
+                'local'  => 'ua',
+                'abbrev' => 'укр'
+            ]
+        ]);
         
         //factory(App\Products::class, 480)->create();
         factory(App\User::class, 1)->create();
