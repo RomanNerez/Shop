@@ -42,7 +42,8 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, User $user)
     {
-        return redirect()->intended($user->getRole());
+        $role = $user->getRole() == 'admin' ? 'home' : $user->getRole();
+        return redirect()->intended($role);
     }
 
 }

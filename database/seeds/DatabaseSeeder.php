@@ -11,22 +11,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Categories::class, 6)->create();
-        factory(App\SubCategories::class, 48)->create();
+        //factory(App\Categories::class, 6)->create();
+        //factory(App\SubCategories::class, 48)->create();
         // $this->call(SubCategoriesSeeder::class);
 
-        DB::table('langs')->insert([
+        DB::table('lang')->insert([
             [
-                'title' => 'Русский',
-                'local' => 'ru'
-            ],
-            [
-                'title' => 'Украинский',
-                'local' => 'ua'
+                'title'  => 'Русский',
+                'local'  => 'ru',
+                'abbrev' => 'рус'
+            ],[
+                'title'  => 'УкраЇнська',
+                'local'  => 'ua',
+                'abbrev' => 'укр'
             ]
         ]);
         
-        factory(App\Products::class, 480)->create();
+        //factory(App\Products::class, 480)->create();
         factory(App\User::class, 1)->create();
     }
 
