@@ -1,8 +1,10 @@
 {
-    "/asset/js/admin.js": "/asset/js/admin.js",
-    "/asset/js/main.js": "/asset/js/main.js",
-    "/asset/css/style.css": "/asset/css/style.css",
-    "/asset/css/admin.css": "/asset/css/admin.css",
-    "/asset/js/manifest.js": "/asset/js/manifest.js",
-    "/asset/js/vendor.js": "/asset/js/vendor.js"
+    "/assets/js/admin.js": "/assets/js/admin.js",
+    "/assets/css/admin.css": "/assets/css/admin.css?id=8c9d84f39a883d97f162",
+    "/assets/css/public.css": "/assets/css/public.css?id=96bf496a31d7cfa2932b",
+    "/assets/js/main.js": "/assets/js/main.js",
+    "/assets/js/manifest.js": "/assets/js/manifest.js",
+    "/assets/js/public.js": "/assets/js/public.js",
+    "/assets/js/user.js": "/assets/js/user.js",
+    "/assets/js/vendor.js": "/assets/js/vendor.js"
 }
