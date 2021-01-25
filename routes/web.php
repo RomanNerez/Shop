@@ -106,7 +106,7 @@ foreach(['', '{locale?}'] as $prefix) {
     Route::group([
             'prefix'     => $prefix,
             'where'      => ['locale' => '('. env('APP_LOCALE_LIST') .')'],
-            //'middleware' => ['localization', 'currency']
+            'middleware' => ['localization', 'currency']
         ],
         function () {
             Route::namespace('Publicly')->group(function () {
