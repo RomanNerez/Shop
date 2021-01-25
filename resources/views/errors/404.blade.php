@@ -21,11 +21,6 @@
                     <a href="{{route('index')}}" class="home btn"> Back to home </a>
                 </div>
             </div>
-            <div class="copyright text-center">
-                <p>© 2020 Fixed Error. All rights reserved | Design by 
-                    <a href="http://w3layouts.com/" target="_blank">W3layouts</a>
-                </p>
-            </div>
         </div>
     </body>
 </html>
