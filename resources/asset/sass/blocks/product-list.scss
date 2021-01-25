@@ -1,8 +1,6 @@
 .products {
     padding: 30px 0;
     &__wrapper {
-        //display: flex;
-        //justify-content: space-between;
         display: grid;
         grid-template-columns: 25% 1fr;
     }
@@ -147,13 +145,34 @@
 .products__form {
     padding: 40px 0;
     fieldset {
+        padding-bottom: 30px;
         border: none;
         display: flex;
         flex-flow: column;
     }
+    fieldset .price-range {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        label {
+            display: flex;
+            flex-flow: column;
+            align-items: start;
+        }
+        input {
+            max-width: 100px;
+            padding: 10px 10px;
+            background-color: rgb(241, 241, 241);
+            border: 1px solid rgb(221, 221, 221);
+            border-radius: 10px;
+        }
+        span {
+            margin-top: 10px;
+        }
+    }
     legend {
         display: block;
-        font-size: 18px;
+        font-size: 16px;
         margin: 10px 0;
         font-weight: 700;
     }
@@ -162,10 +181,17 @@
         align-items: center;
         cursor: pointer;
         font-size: 14px;
-        font-weight: 900;
-        text-transform: uppercase;
-        color: $text-grey;
+        font-weight: 400;
         margin-bottom: 10px;
+        button {
+            margin: 0 2px;
+            border: none;
+            background-color: transparent;
+            svg {
+                width: 20px;
+                height: 15px;
+            }
+        }
     }
     input[type="checkbox"] {
         display: none;
@@ -175,12 +201,16 @@
         width: 20px;
         height: 20px;
         border: 2px solid $text-grey;
+        border-radius: 5px;
         margin-right: 20px;
     }
     input[type="checkbox"]:checked + i {
         background-image: url("../../img/svg/tick.svg");
         background-repeat: no-repeat;
         background-size: cover;
+    }
+    button[type="submit"] {
+        background-color: #6a983c;
     }
 }
 @media (max-width: 902px) {

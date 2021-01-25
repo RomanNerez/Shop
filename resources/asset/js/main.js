@@ -119,6 +119,18 @@ new Vue({
         carts: [],
         countCart: 1,
         goods: 2,
+        tabs: [
+            {
+                title: 'Опис',
+                id: 1,
+            },
+            {
+                title: 'Відгуки',
+                id: 1,
+            }
+        ],
+        selectedTab: 1
+
     },
     mounted: function() {
         this.loadCart();
