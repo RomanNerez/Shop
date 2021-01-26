@@ -128,5 +128,3 @@
         </div>
     </div>
 </footer>
-
-<Cart />
