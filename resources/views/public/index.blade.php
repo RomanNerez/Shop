@@ -34,11 +34,10 @@
 
         <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-vue/dist/style.css" />
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('library/css/fonts.css') }}" />
+        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('library/css/fonts.css') }}" /> -->
         <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/public.css') }}" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ asset('asset/css/normalize.css') }}" />
-        <link rel="stylesheet" href="{{ asset('asset/css/style.css?v='.time()) }}" />
+        <!-- <link rel="stylesheet" href="{{ asset('asset/css/normalize.css') }}" /> -->
         <script src="{{asset('libs/jquery.min.js')}}"></script>
         <script src="{{asset('libs/slick.min.js')}}"></script>
     </head>
@@ -228,8 +227,19 @@
 
         </svg>
 
+        <script>
+            const response = @json($response);
+        </script>
+
+        <?php
+            if ( isset($response['captcha']) ) {
+                echo '<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>';
+            }
+        ?>
+
         <script src="{{asset('assets/js/vendor.js?v='.time())}}"></script>
         <script src="{{asset('assets/js/manifest.js?v='.time())}}"></script>
+        <script src="{{asset('assets/js/public.js?v='.time())}}"></script>
         <script src="{{asset('assets/js/main.js?v='.time())}}"></script>
     </body>
 </html>
