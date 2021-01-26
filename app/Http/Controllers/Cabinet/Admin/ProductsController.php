@@ -75,7 +75,7 @@ class ProductsController extends Controller
                     'subs_id'    => $value
                 ]);
             }
-
+            
             foreach ($data['related'] as $value) {
                 RelatedProduct::create([
                     'product_id' => $product->id,

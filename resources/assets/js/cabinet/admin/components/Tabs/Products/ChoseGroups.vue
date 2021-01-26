@@ -12,7 +12,6 @@
                                 <span class="items-head__title">{{ group.content.ru.title }}</span>
                             </div>
                         </div>
-
                         <div class="groups-list__items-wrap">
                             <div class="groups-list__items-item"
                                  v-for="item in group.subs"
