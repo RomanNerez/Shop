@@ -11,8 +11,6 @@
         width: 50%;
         min-width: 500px;
         text-align: center;
-
-        outline: 1px solid red;
         img {
             height: 300px;
         }
@@ -27,33 +25,71 @@
         & > * {
             margin-bottom: 20px;
         }
+        .product__stars button {
+            border: none;
+            background-color: transparent;
+            margin: 5px;
+            &:focus {
+                outline: none;
+            }
+            svg {
+                width: 25px;
+                height: 15px;
+            }
+        }
     }
     &__name {
-        font-size: 24px;
+        font-size: 20px;
+        font-weight: 600;
     }
     &__description {
+        margin-top: 20px;
         line-height: 1.8;
     }
     &__features {
+        margin-top: 20px;
+        display: flex;
+        gap: 40px;
+    }
+    &__feature {
         line-height: 1.8;
+        color: rgb(155, 155, 155);
+        li {
+            display: flex;
+            justify-content: space-between;
+        }
         span {
+            color: #000;
             margin-left: 50px;
             font-weight: 700;
+        }
+    }
+    &__price {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        span {
+            font-size: 30px;
+            font-weight: 700;
+            color: #6a983c;
         }
     }
     &__buttons {
         display: flex;
         justify-content: flex-start;
-        margin-top: 50px;
         & > * {
             margin: 0 5px;
         }
     }
     &__cart {
+        padding: 12px;
         text-align: center;
         color: #fff;
-        background-color: #7f00e2;
+        background-color: #6a983c;
         border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     &__purchase {
         text-align: center;
@@ -61,23 +97,6 @@
         background-color: $text-red;
         &:hover {
             background-color: darken($text-red, 10);
-        }
-    }
-    &__quantity {
-        display: flex;
-        align-items: center;
-        span {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        button {
-            background-color: #fff;
-            border: 1px solid $text-grey;
-            width: 30px;
-            height: 30px;
         }
     }
     &__slider {
@@ -111,6 +130,93 @@
             img {
                 height: 100px;
             }
+        }
+    }
+    &__tabs {
+        margin-top: 40px;
+        .tab-links {
+            display: flex;
+            gap: 10px;
+            a {
+                padding: 10px 20px;
+                width: 50%;
+                font-size: 18px;
+                border-bottom: 1px solid transparents;
+            }
+            a.current-tab {
+                border-bottom: 1px solid #6a983c;
+            }
+        }
+        .tab-content {
+            //display: none;
+            padding: 30px 10px;
+            p {
+                line-height: 20px;
+                margin-bottom: 20px;
+            }
+            &:target {
+                display: block;
+            }
+        }
+    }
+}
+.feedbacks {
+    &__wrapper {
+        padding: 10px;
+        max-height: 400px;
+        overflow-y: scroll;
+        margin-bottom: 50px;
+    }
+    &__item {
+        position: relative;
+        margin-bottom: 30px;
+        padding: 10px;
+        background-color: #6a983c;
+        color: #fff;
+        border: 1px solid rgb(219, 219, 219);
+        border-radius: 10px;
+        &:after {
+            position: absolute;
+            content: "";
+            right: 20px;
+            bottom: -20px;
+            width: 0;
+            height: 0;
+            border: 10px solid #6a983c;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+    }
+    &__text {
+        margin: 0;
+    }
+    &__author {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    &__form {
+        form {
+            display: flex;
+            flex-flow: column;
+            justify-content: flex-start;
+        }
+        label {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        textarea {
+            width: 100%;
+        }
+        button[type="submit"] {
+            display: block;
+            margin-top: 20px;
+            width: 150px;
+            background-color: #6a983c;
+            text-align: center;
+            align-self: start;
         }
     }
 }
