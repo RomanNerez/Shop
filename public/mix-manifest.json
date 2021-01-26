@@ -1,8 +1,11 @@
 {
-    "/asset/js/admin.js": "/asset/js/admin.js",
-    "/asset/js/main.js": "/asset/js/main.js",
-    "/asset/css/style.css": "/asset/css/style.css",
-    "/asset/css/admin.css": "/asset/css/admin.css",
-    "/asset/js/manifest.js": "/asset/js/manifest.js",
-    "/asset/js/vendor.js": "/asset/js/vendor.js"
+    "/assets/js/admin.js": "/assets/js/admin.js?id=d6d1e5bc0e15a2b4c2e0",
+    "/assets/js/admin.js": "/assets/js/admin.js?id=8de8613b5e2f7cd50900",
+    "/assets/css/admin.css": "/assets/css/admin.css?id=8c9d84f39a883d97f162",
+    "/assets/css/public.css": "/assets/css/public.css?id=96bf496a31d7cfa2932b",
+    "/assets/js/main.js": "/assets/js/main.js?id=3dc8ab6476c90aa9f93d",
+    "/assets/js/manifest.js": "/assets/js/manifest.js?id=a9edb371038268b0b57a",
+    "/assets/js/public.js": "/assets/js/public.js?id=13fda18a3dadfc526f7e",
+    "/assets/js/user.js": "/assets/js/user.js?id=b18a90c8ca8fc91c3956",
+    "/assets/js/vendor.js": "/assets/js/vendor.js?id=ede9037a89192202960b"
 }
