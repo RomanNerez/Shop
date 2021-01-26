@@ -18,7 +18,7 @@ eval("//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Shop\resources\assets\js\cabinet\user\index.js */"./resources/assets/js/cabinet/user/index.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Shop/resources/assets/js/cabinet/user/index.js */"./resources/assets/js/cabinet/user/index.js");
 
 
 /***/ })
