@@ -16,10 +16,11 @@ class CatalogRepository extends Repository
         $params     = $request->route()->parameter('params');
         $collection = $request->route()->parameter('collection');
         $order      = $request->get('order');
-
+        
         if ($group && !$params) {
             abort(404);
         }
+        
         $request->merge([
             'is-catalog' => true
         ]);
@@ -49,11 +50,11 @@ class CatalogRepository extends Repository
         $subs     = $query->get()->pluck('subs');
         $products = self::filterProduct($query, $params, $order);
         $filters  = self::getFilter($subs, $products['data']->pluck('subs'));
-
+        
         if ( !count($products['data']) ) {
             abort(404);
         }
-
+        
         return [
             'content'  => self::getContent($collection ? $collection : $category, $products['selected'] ?? null),
             'list'     => $products['data'],
@@ -75,6 +76,7 @@ class CatalogRepository extends Repository
                 'count' => 0,
                 'subs'  => 0
             ];
+            
             foreach ($subs as $sub) {
                 if ( !isset($data[$sub->id]) ) {
                     $data[$sub->id] = [];
@@ -86,7 +88,7 @@ class CatalogRepository extends Repository
                     $check['subs']  = $sub->id;
                 }
             }
-
+            
             if ( isset($data[$check['subs']]) ) {
                 foreach ($data[$check['subs']] as $item) {
                     $counter = 0;
@@ -100,7 +102,7 @@ class CatalogRepository extends Repository
                     }
                 }
             }
-
+            
             $products = $products->whereIn('id', $result);
         }
         return $products;
