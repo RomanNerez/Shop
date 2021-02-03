@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
@@ -27,18 +26,5 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'user';
-
-    public function showResetForm(Request $request, $token = null)
-    {
-        return redirect(
-            route('index',
-                [
-                    'auth' => 'reset',
-                    'token' => $token,
-                    'email' => $request->email
-                ]
-            )
-        );
-    }
+    protected $redirectTo = RouteServiceProvider::HOME;
 }

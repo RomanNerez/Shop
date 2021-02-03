@@ -40,15 +40,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function authenticated(Request $request, User $user)
+    protected function authenticated(Request $request, User $user)
     {
-        return response()->json([
-            'user' => $user
-        ]);
+        $role = $user->getRole() == 'admin' ? 'home' : $user->getRole();
+        return redirect()->intended($role);
     }
 
-    public function showLoginForm ()
-    {
-        return abort(404);
-    }
 }
