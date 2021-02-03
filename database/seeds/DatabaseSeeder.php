@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Page;
+use App\Models\TransPage;
 
 class DatabaseSeeder extends Seeder
 {
