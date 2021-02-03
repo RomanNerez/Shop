@@ -21,11 +21,13 @@ class CreateProductsTable extends Migration
             $table->boolean('status');
             $table->boolean('hit');
             $table->boolean('new');
+            $table->string('related_to')->default('store');
             $table->unsignedBigInteger('currency')->nullable();
             $table->decimal('price', 12, 6)->nullable();
             $table->unsignedBigInteger('count')->nullable();
             $table->json('images')->nullable();
             $table->json('bulk_price')->nullable();
+            $table->unsignedBigInteger('draw')->default(1);
             $table->timestamps();
         });
     }

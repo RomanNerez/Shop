@@ -5,6 +5,7 @@ namespace App\Repositories\Publicly;
 use App\Models\Categories;
 use App\Models\Collection;
 use App\Models\Groups;
+use App\Models\Page;
 use App\Models\Product;
 use App\Models\Subs;
 use App\Repositories\Repository;
@@ -16,6 +17,14 @@ class CatalogRepository extends Repository
         $params     = $request->route()->parameter('params');
         $collection = $request->route()->parameter('collection');
         $order      = $request->get('order');
+
+        switch ($request->route()->parameter('catalog')) {
+            case 'services':
+                $related = 'services';
+                break;
+            default:
+                $related = 'store';
+        }
 
         if ($group && !$params) {
             abort(404);
@@ -39,7 +48,10 @@ class CatalogRepository extends Repository
             ->firstOrFail();
         }
 
-        $where = [['status', 1]];
+        $where = [
+            ['status', 1],
+            ['related_to', $related],
+        ];
 
         if (!$category->is_root) {
             $where[] = ['categories_id', $category->id];
@@ -55,7 +67,7 @@ class CatalogRepository extends Repository
         }
 
         return [
-            'content'  => self::getContent($collection ? $collection : $category, $products['selected'] ?? null),
+            'content'  => self::getContent($collection ? $collection : $category, $products['selected'] ?? null, $related),
             'list'     => $products['data'],
             'filters'  => [
                 'items'    => $filters,
@@ -246,7 +258,7 @@ class CatalogRepository extends Repository
         return array_values($data);
     }
 
-    public function getContent($parent, $subs) {
+    public function getContent($parent, $subs, $related) {
         $data = $parent->content;
         if ($subs) {
             if ( count($subs) === 1 ) {
@@ -332,11 +344,57 @@ class CatalogRepository extends Repository
                 'desc'   => $data->metaDesc,
                 'image'  => $parent->file,
             ],
-
             'body' => [
                 'title' => $data->title,
                 'desc'  => $data->desc
+            ],
+            'breadcrumbs' => self::getBreadcrumbs($parent, $subs, $related)
+        ];
+    }
+
+    public function getBreadcrumbs($parent, $subs, $related)
+    {
+        $breadcrumbs = [
+            [
+                'name' => __('Главная'),
+                'link' => url('/')
             ]
         ];
+
+        switch ($related) {
+            case 'services':
+                $model = Page::where('key', 'services')->firstOrFail();
+
+                $breadcrumbs[] = [
+                    'name' => $model->content->title,
+                    'link' => $model->url
+                ];
+                break;
+        }
+
+        $breadcrumbs[] = [
+            'name' => $parent->content->title,
+            'link' => $parent->url
+        ];
+
+        $loop = 0;
+        foreach (collect($subs)->groupBy('groups_id') as $group) {
+            $count = count($breadcrumbs);
+            $prev  = $breadcrumbs[$count - 1]['link'] . (!$loop ? '/group' : '');
+            $link  = $prev .'/'. $group[0]['group']['slug'];
+            $names = [];
+
+            foreach ($group as $item) {
+                $link .= '_'. $item['slug'];
+                $names[] = $item['content']['title'];
+            }
+            $breadcrumbs[] = [
+                'name' => implode(', ', $names),
+                'link' => $link
+            ];
+            ++$loop;
+        }
+
+        return $breadcrumbs;
     }
 }

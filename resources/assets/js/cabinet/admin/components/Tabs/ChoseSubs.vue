@@ -74,7 +74,7 @@
             },
             groups: function () {
                 return this.$store.getters.storeData.data.groups.filter(item => {
-                    return item.status && item.subs.length && (item.categories_id === this.other || item.categories_id === this.rootCatalog.id);
+                    return item.status && item.subs.length && (item.categories_id === this.other || (this.rootCatalog && item.categories_id === this.rootCatalog.id));
                 })
             }
         },

@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $request;
     protected $table    = 'products';
-    protected $fillable = ['categories_id', 'slug', 'status', 'new', 'hit', 'currency', 'price', 'count', 'images', 'bulk_price'];
+    protected $fillable = ['categories_id', 'slug', 'status', 'new', 'hit', 'currency', 'price', 'count', 'images', 'bulk_price', 'related_to', 'draw'];
     protected $hidden   = ['reviews', 'category', 'currency', 'product_trans', 'bulk_price', 'product_attr', 'product_subs', 'currency_data'];
     protected $appends  = ['content', 'subs', 'url'];
     protected $casts    = [
@@ -151,16 +151,17 @@ class Product extends Model
 
             if ($selected_currency) {
                 if ($item['price'] !== null) {
+                    $price = $item['price'];
                     if (isset($currency_values)) {
                         if ( $currency_values->first === $selected_currency->id ) {
-                            $item['price'] = $item['price'] / $currency_values->value;
+                            $price = $price / $currency_values->value;
                         }else{
-                            $item['price'] = $item['price'] * $currency_values->value;
+                            $price = $price * $currency_values->value;
                         }
                     }
                     $input['value'] = [
-                        'origin' => (float) $item['price'],
-                        'view'   => number_format($item['price'], 2, '.', ' ')
+                        'origin' => (float) $price,
+                        'view'   => number_format($price, 2, '.', ' ')
                     ];
                 }else{
                     $input = null;
@@ -367,7 +368,15 @@ class Product extends Model
 
     public function getUrlAttribute()
     {
-        return $this->urlLocal($this->request->input('locale'), 'product/'. $this->slug);
+        switch ($this->related_to) {
+            case 'services':
+                $segment = 'service';
+                break;
+            default:
+                $segment = 'product';
+        }
+
+        return $this->urlLocal($this->request->input('locale'), $segment .'/'. $this->slug);
     }
 
     public static function boot() {

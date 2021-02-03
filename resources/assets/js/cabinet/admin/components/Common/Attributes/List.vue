@@ -139,7 +139,7 @@
 
 <script>
     export default {
-        props: ['items', 'selected', 'formState', 'action', 'edit', 'edt', 'langs', 'alert'],
+        props: ['items', 'selected', 'formState', 'action', 'edit', 'edt', 'langs', 'related', 'alert'],
         data() {
             return {
                 loading: false,
@@ -183,7 +183,10 @@
                     return this.items;
                 },
                 set(data) {
-                    this.$store.commit('updateAttribute', data);
+                    this.$store.commit('updateAttribute', {
+                        data: data,
+                        related: this.related
+                    });
                 }
             },
             selectedGroup: function() {
@@ -251,13 +254,29 @@
                         .then(response => {
                             response = response.data;
 
-                            this.$store.commit(this.getMutation.remove, this.selected.section === 'attribute' ? this.selected.id : this.subs);
+                            let payload = {
+                                related: this.related
+                            };
+
+                            switch (this.selected.section) {
+                                case 'attribute':
+                                    payload.id = this.selected.id;
+                                    break;
+                                default:
+                                    payload.id = this.subs.id;
+                                    break;
+                            }
+
+                            this.$store.commit(this.getMutation.remove, payload);
                             this.$emit('update:selected', {
                                 section: null,
                                 id: null
                             })
                             if (response.instance === 'list') {
-                                this.$store.commit('reloadProducts', response.data);
+                                this.$store.commit('reloadProducts', {
+                                    related: this.related,
+                                    data: response.data
+                                });
                             }
                         })
                         .catch(() => {

@@ -14,7 +14,8 @@ class GroupRepository extends Repository
         $data  = $request->input('data');
         $check = Groups::where([
                     ['slug', $data['slug']],
-                    ['categories_id', $data['parent']]
+                    ['categories_id', $data['parent']],
+                    ['related', $data['related']]
                 ])->exists();
 
         if ($data['slug'] && $check) {
@@ -101,7 +102,8 @@ class GroupRepository extends Repository
         $slug = Groups::where([
                     ['id', '!=', $data['id']],
                     ['slug', $data['slug']],
-                    ['categories_id', $data['parent']]
+                    ['categories_id', $data['parent']],
+                    ['related', $data['related']]
                 ])->exists();
 
         if ($data['slug'] && $slug) {
@@ -148,10 +150,10 @@ class GroupRepository extends Repository
                     ++$index['subs'];
 
                     $check = Subs::where([
-                        ['id', '!=', $subs['id']],
-                        ['slug', $subs['slug']],
-                        ['groups_id', $group['id']]
-                    ])->exists();
+                            ['id', '!=', $subs['id']],
+                            ['slug', $subs['slug']],
+                            ['groups_id', $group['id']]
+                        ])->exists();
 
                     if ($check) {
                         abort(422, 'Не удалось выполнить сортировку! Ключ <b>"'. $subs['slug'] .'"</b> дублируется в группе <b>"'. $group['content']['ru']['title'] .'"</b>');

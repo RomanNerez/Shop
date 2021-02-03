@@ -198,7 +198,7 @@
 
 <script>
     export default {
-        props: ['select', 'formState', 'items', 'edit', 'edt', 'langs', 'alert'],
+        props: ['select', 'formState', 'items', 'edit', 'edt', 'langs', 'related', 'alert'],
         data: function() {
             return {
                 location: window.location.origin,
@@ -259,7 +259,10 @@
                     id: this.select
                 })
                 .then(() => {
-                    this.$store.commit('rmProducts', this.select);
+                    this.$store.commit('rmProducts', {
+                        id: this.select,
+                        related_to: this.related
+                    });
                     this.$emit('update:select', null);
 
                     this.$emit('update:alert', {

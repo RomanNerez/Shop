@@ -34,6 +34,7 @@
                 :edit="edit"
                 :edt.sync="edt"
                 :langs="langs"
+                :related="related"
                 :alert.sync="alert.option"
                 v-on:confirm="$root.confirmAction"
             >
@@ -45,6 +46,8 @@
                 :selected.sync="selected"
                 :parent="chosen.categories"
                 :edt.sync="edt"
+                :related="related"
+                :available="available"
                 :components="components"
             >
             </editor>
@@ -57,7 +60,7 @@
     import Editor from './Editor.vue'
 
     export default {
-        props: ['chosen'],
+        props: ['chosen', 'items', 'related', 'available'],
         components: {
             list: List,
             editor: Editor
@@ -162,7 +165,7 @@
                 }
             },
             list: function () {
-                return this.$store.getters.storeData.data.products.filter(item => {
+                return this.items.filter(item => {
                     return item.categories_id === this.chosen.categories
                 })
             }

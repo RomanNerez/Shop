@@ -34,6 +34,7 @@
             :edit="edit"
             :edt.sync="edt"
             :langs="langs"
+            :related="related"
             :alert.sync="alert.option"
             v-on:confirm="$root.confirmAction"
         >
@@ -47,6 +48,8 @@
             :parent="selected.id"
             :edt.sync="edt"
             :alert.sync="alertActive"
+            :related="related"
+            :available="available"
             :components="components"
         >
         </editor>
@@ -59,7 +62,7 @@
     import Editor from './Editor.vue'
 
     export default {
-        props: ['chosen'],
+        props: ['chosen', 'items', 'related', 'available'],
         components: {
             list: List,
             alert: Alert,
@@ -86,7 +89,6 @@
                 edit: {},
                 edt: false,
                 alertActive: false,
-                list: this.$store.getters.storeData.data.attributes,
                 langs: this.$store.state.data.langs,
                 components: [
                     {
@@ -175,6 +177,9 @@
             },
             data: function () {
                 return this.list
+            },
+            list: function () {
+                return this.items
             }
         }
     }

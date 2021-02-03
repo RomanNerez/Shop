@@ -173,7 +173,7 @@
 <script>
     export default {
         name: "ParamsItem",
-        props: ['value', 'local', 'status', 'langs', 'select', 'tabSelect', 'other', 'index'],
+        props: ['value', 'local', 'status', 'langs', 'select', 'tabSelect', 'other', 'index', 'related'],
         data: function() {
             return {
                 attribute: -1,
@@ -306,7 +306,7 @@
                 })
             },
             validate: function () {
-                if (this.value.status) {
+                if (this.value.status && this.related !== 'services') {
                     const groups = this.value.content[this.local].params.base;
                     for (let i = 0; i < groups.length; ++i) {
                         const group = groups[i];

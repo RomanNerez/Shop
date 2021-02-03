@@ -16,7 +16,7 @@ class Categories extends Model
 
 	protected $translate = 'App\Models\TransCategories';
 	//protected $subs      = 'App\Models\Collection';
-    protected $fillable  = ['file', 'slug', 'is_root', 'status', 'related'];
+    protected $fillable  = ['file', 'slug', 'is_root', 'status', 'related', 'template'];
     protected $appends   = ['url'];
     protected $casts     = [
 	    'created_at' => 'datetime:d.m.Y',
@@ -32,7 +32,17 @@ class Categories extends Model
 
     public function getUrlAttribute()
     {
-        $segment = $this->related === 'store' ? 'catalog' : 'articles';
+        switch ($this->related) {
+            case 'services':
+                $segment = 'services';
+                break;
+            case 'content':
+                $segment = 'articles';
+                break;
+            default:
+                $segment = 'catalog';
+        }
+
         return $this->urlLocal($this->locale, $segment .'/'. $this->slug);
     }
 

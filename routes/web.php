@@ -98,6 +98,10 @@ Route::group([
                 Route::post('/edit',   'ArticleController@edit');
                 Route::post('/copy',   'ArticleController@copy');
             });
+
+            Route::group(['prefix' => '/page'], function () {
+                Route::post('/edit',   'PagesController@edit');
+            });
         });
     }
 );
@@ -110,14 +114,25 @@ foreach(['', '{locale?}'] as $prefix) {
         ],
         function () {
             Route::namespace('Publicly')->group(function () {
-                Route::get('/',      'IndexController@index')->name('index');
+                Route::get('/',      'PagesController@home')->name('index');
                 Route::get('search', 'SearchController@index');
 
                 Route::group([
-                        'prefix' => 'catalog/{category}',
+                    'prefix' => '/services',
+                ],
+                    function () {
+                        Route::get('/',         'PagesController@services');
+                        Route::get('/vinyls',   'PagesController@serviceVinyls');
+                        Route::get('/standing', 'PagesController@serviceStanding');
+                    }
+                );
+
+                Route::group([
+                        'prefix' => '{catalog}/{category}',
                         'where'  => [
-                            'group'  => '(group)',
-                            'params' => '.*'
+                            'catalog' => '(catalog|services)',
+                            'group'   => '(group)',
+                            'params'  => '.*'
                         ]
                     ],
                     function () {
@@ -127,8 +142,9 @@ foreach(['', '{locale?}'] as $prefix) {
                 );
 
                 Route::group([
-                        'prefix' => 'product/{product}',
+                        'prefix' => '{product}/{id}',
                         'where'  => [
+                            'product'   => '(product|service)',
                             'option'    => '(option)',
                             'attribute' => '.*'
                         ]
@@ -182,7 +198,14 @@ foreach(['', '{locale?}'] as $prefix) {
                     }
                 );
                 Route::get('article/{article}', 'ArticleController@index');
-                Route::get('/magnet-custom',    'PagesController@magnitCustom');
+
+                Route::get('delivery',     'PagesController@delivery');
+                Route::get('contacts',     'PagesController@contacts');
+                Route::get('calculator',   'PagesController@calculator');
+                Route::get('units',        'PagesController@units');
+                Route::get('returns',      'PagesController@returns');
+                Route::get('certificates', 'PagesController@certificates');
+                Route::get('partnership',  'PagesController@partnership');
             });
             Route::group([
                     'middleware' => ['auth', 'verified'],

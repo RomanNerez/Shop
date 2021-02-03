@@ -55,6 +55,7 @@ class CartRepository extends Repository
 
         return [
             'id'       => $product->id,
+            'draw'     => $product->draw,
             'attr'     => $attribute,
             'title'    => $title,
             'url'      => $url,

@@ -9,9 +9,14 @@ class CategoryRepository extends Repository
 {
 	public function create($request)
 	{
-        $data = $request->input('data');
+        $data  = $request->input('data');
+        $check = Categories::where([
+                ['slug', $data['slug']],
+                ['related', $data['related']]
+            ])
+            ->exists();
 
-        if ($data['slug'] && Categories::where('slug', $data['slug'])->exists()) {
+        if ($data['slug'] && $check) {
             abort(422, 'Такая ссылка уже существует');
         }
         if ($data['is_root']) {
@@ -44,11 +49,12 @@ class CategoryRepository extends Repository
         sleep(1);
         return DB::transaction(function () use (&$data) {
             $category = Categories::create([
-                'slug'    => $data['slug'],
-                'file'    => $data['file'],
-                'related' => $data['related'],
-                'status'  => isset($data['id']) ? 0 : $data['status'],
-                'is_root' => isset($data['id']) ? 0 : $data['is_root']
+                'slug'     => $data['slug'],
+                'file'     => $data['file'],
+                'related'  => $data['related'],
+                'template' => $data['template'] ?? 'catalog',
+                'status'   => isset($data['id']) ? 0 : $data['status'],
+                'is_root'  => isset($data['id']) ? 0 : $data['is_root']
             ]);
 
             foreach ($data['content'] as $key => $value) {
@@ -72,7 +78,8 @@ class CategoryRepository extends Repository
         $data = $request->input('data');
         $slug = Categories::where([
                     ['id', '!=', $data['id']],
-                    ['slug', $data['slug']]
+                    ['slug', $data['slug']],
+                    ['related', $data['related']]
                 ])->exists();
 
         if ($data['slug'] && $slug) {
@@ -88,10 +95,11 @@ class CategoryRepository extends Repository
 
             $category = Categories::find($data['id']);
             $category->update([
-                'slug'    => $data['slug'],
-                'file'    => $data['file'],
-                'status'  => $data['status'],
-                'is_root' => $data['is_root'],
+                'slug'     => $data['slug'],
+                'file'     => $data['file'],
+                'status'   => $data['status'],
+                'is_root'  => $data['is_root'],
+                'template' => $data['template']
             ]);
 
             foreach ($data['content'] as $key => $value) {

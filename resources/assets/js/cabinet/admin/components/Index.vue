@@ -177,23 +177,38 @@
     import StoreCategories from './Store/Categories.vue'
     import StoreGroups from './Store/Groups.vue'
     import StoreCollection from './Store/Collection/Index.vue'
-    import StoreAttributes from './Store/Attributes/Index.vue'
-    import StoreProducts from './Store/Products/Index.vue'
+    import StoreAttributes from './Store/Attributes.vue'
+    import StoreProducts from './Store/Products.vue'
+
+    import ServicesCategories from './Services/Categories.vue'
+    import ServicesGroups from './Services/Groups.vue'
+    import ServicesAttributes from './Services/Attributes.vue'
+    import ServicesProducts from './Services/Products.vue'
+
     import ContentCategories from './Content/Categories.vue'
     import ContentGroups from './Content/Groups.vue'
     import ContentArticles from './Content/Articles/Index.vue'
+    import ContentPages from './Content/Pages/Index.vue'
 
     export default {
         components: {
             'settings-currency': SettingsCurrency,
+
             'store-categories': StoreCategories,
             'store-groups': StoreGroups,
             'store-collection': StoreCollection,
             'store-attributes': StoreAttributes,
             'store-products': StoreProducts,
+
+            'services-categories': ServicesCategories,
+            'services-groups': ServicesGroups,
+            'services-attributes': ServicesAttributes,
+            'services-products': ServicesProducts,
+
             'content-categories': ContentCategories,
             'content-groups': ContentGroups,
-            'content-articles': ContentArticles
+            'content-articles': ContentArticles,
+            'content-pages': ContentPages
         },
         data: function() {
             return {
@@ -253,7 +268,7 @@
                                 icon: 'mdi-tag-multiple-outline',
                                 component: 'store-attributes'
                             },{
-                                title: 'Продукты',
+                                title: 'Товары',
                                 icon: 'mdi-unity',
                                 component: 'store-products',
                                 filter: {
@@ -261,6 +276,36 @@
                                     items: this.getCategories.filter(item => {
                                         return !item.is_root;
                                     })
+                                }
+                            }
+                        ]
+                    },{
+                        title: 'Услуги',
+                        icon: 'mdi-format-list-bulleted',
+                        child: [
+                            {
+                                title: 'Категории',
+                                icon: 'mdi-buffer',
+                                component: 'services-categories',
+                            },{
+                                title: 'Группы',
+                                icon: 'mdi-animation',
+                                component: 'services-groups',
+                                filter: {
+                                    key: 'categories',
+                                    items: this.$store.getters.servicesData.available.categories
+                                }
+                            },{
+                                title: 'Атрибуты',
+                                icon: 'mdi-tag-multiple-outline',
+                                component: 'services-attributes'
+                            },{
+                                title: 'Товары',
+                                icon: 'mdi-unity',
+                                component: 'services-products',
+                                filter: {
+                                    key: 'categories',
+                                    items: this.$store.getters.servicesData.available.categories
                                 }
                             }
                         ]
@@ -288,6 +333,10 @@
                                     key: 'categories',
                                     items: this.$store.getters.contentData.available.categories
                                 }
+                            },{
+                                title: 'Страницы',
+                                icon: 'mdi-format-page-break',
+                                component: 'content-pages',
                             }
                         ]
                     }

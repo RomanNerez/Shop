@@ -11,7 +11,7 @@ class Attribute extends Model
 
     protected $table     = 'attributes';
     protected $translate = 'App\Models\TransAttr';
-    protected $fillable  = ['order', 'slug', 'price', 'count', 'status', 'type', 'data'];
+    protected $fillable  = ['order', 'slug', 'price', 'count', 'status', 'type', 'data', 'related'];
     protected $appends   = ['subs'];
     protected $hidden    = ['get_list'];
     protected $casts     = [
