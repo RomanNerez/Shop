@@ -31,6 +31,12 @@ class DatabaseSeeder extends Seeder
         
         //factory(App\Products::class, 480)->create();
         factory(App\User::class, 1)->create();
+
+        Eloquent::unguard();
+
+        $path = 'database/seeds/magniton.sql';
+        DB::unprepared(file_get_contents($path));
+        
         $pages = [
             [
                 'base' => [
