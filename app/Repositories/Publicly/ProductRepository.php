@@ -19,7 +19,7 @@ class ProductRepository extends Repository
 
         $attribute = self::getAttribute( $params['attribute'] );
         $product   = Product::where([
-                ['slug', $request->route()->parameter('product')],
+                ['slug', $request->route()->parameter('id')],
                 ['status', 1]
             ])
             ->firstOrFail();
@@ -27,7 +27,6 @@ class ProductRepository extends Repository
         return [
             'content'  => self::getContent($product, $attribute),
             'product'  => self::getData($product, $attribute),
-            'category' => $product->category,
             'reviews'  => $product->reviews
         ];
     }
@@ -72,17 +71,19 @@ class ProductRepository extends Repository
             ];
         }
         return [
-            'id'      => $product->id,
-            'title'   => $product->content['title'],
-            'hit'     => $product->hit,
-            'new'     => $product->new,
-            'desc'    => $product->content['desc'],
-            'images'  => $product->images,
-            'price'   => $product->price,
-            'count'   => $product->count,
-            'params'  => $product->content['params'],
-            'related' => $product->related->pluck('related'),
-            'attr'    => $attr
+            'id'         => $product->id,
+            'title'      => $product->content['title'],
+            'hit'        => $product->hit,
+            'new'        => $product->new,
+            'desc'       => $product->content['desc'],
+            'images'     => $product->images,
+            'price'      => $product->price,
+            'count'      => $product->count,
+            'draw'       => $product->draw,
+            'params'     => $product->content['params'],
+            'related'    => $product->related->pluck('related'),
+            'related_to' => $product->related_to,
+            'attr'       => $attr
         ];
     }
 
@@ -96,7 +97,8 @@ class ProductRepository extends Repository
             ],
             'body' => [
                 'desc' => self::getAttrContent($product->content['desc'], $attribute)
-            ]
+            ],
+            'breadcrumbs' => self::getBreadcrumbs($product)
         ];
     }
 
@@ -125,5 +127,35 @@ class ProductRepository extends Repository
         }else{
             return $data['base'];
         }
+    }
+
+    public function getBreadcrumbs($product)
+    {
+        $breadcrumbs = [
+            [
+                'name' => __('Главная'),
+                'link' => url('/')
+            ]
+        ];
+
+        switch ($product->related_to) {
+            case 'services':
+                $breadcrumbs[] = [
+                    'name' => __('Услуги'),
+                    'link' => url('/services')
+                ];
+                break;
+        }
+        $breadcrumbs[] = [
+            'name' => $product->category->content['title'],
+            'link' => $product->category->url
+        ];
+
+        $breadcrumbs[] = [
+            'name' => $product->content['title'],
+            'link' => $product->url
+        ];
+
+        return $breadcrumbs;
     }
 }

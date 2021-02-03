@@ -28,7 +28,7 @@ class ProductController extends Controller
         $data = $request->input('data');
 
         return Review::create([
-            'product_id' => $request->route()->parameter('product'),
+            'product_id' => $request->route()->parameter('id'),
             'name'       => $data['name'],
             'email'      => $data['email'],
             'message'    => $data['message'],
@@ -44,7 +44,7 @@ class ProductController extends Controller
                    '✅️ Товар: '. $data['product']['name'] ."\r\n".
                    '🔄 Количество: '. $data['product']['quantity'];
 
-        return 'https://api.telegram.org//sendMessage?chat_id=&text=' .urlencode($message);
+        return 'https://api.telegram.org/bot1441722052:AAG6L0xhnsKUmL9uzWtyRL48rqgWR1NOJgs/sendMessage?chat_id=-461222525&text=' .urlencode($message);
     }
 
     public function related(Request $request) {

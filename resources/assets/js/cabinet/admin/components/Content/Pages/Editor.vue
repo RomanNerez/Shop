@@ -5,6 +5,28 @@
         class="b-overlay"
         z-index="7"
     >
+        <v-snackbar
+            v-model="alert.show"
+            absolute top right
+            elevation="24"
+            :color="alertColor"
+            :timeout="alert.option.type === 'loading' ? -1 : 4000"
+        >
+            <span v-html="alert.option.text"></span>
+
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                    :loading="alert.option.type === 'loading'"
+                    color="white"
+                    text
+                    v-bind="attrs"
+                    @click="alert.show = false"
+                >
+                    Закрыть
+                </v-btn>
+            </template>
+        </v-snackbar>
+
         <div class="b-drawer b-drawer--right"
              :class="{active: formDialogRight}"
         >
@@ -19,7 +41,6 @@
                             {{ !selected ? 'Новая категория' : 'Редактирование' }}
                         </span>-->
                         <v-select style="margin-right: 5% !important"
-                            :disabled="activeItem.o.disabled && activeItem.o.disabled.lang"
                             class="b-lang"
                             v-model="langs.select"
                             :items="langs.items"
@@ -29,26 +50,17 @@
                             color="green"
                             solo
                         ></v-select>
-                        <v-select
-                            class="b-lang"
-                            v-model.trim="editor.status"
-                            :items="status.items"
-                            item-value="key"
-                            color="green"
-                            item-text="caption"
-                            label="Статус"
-                            solo
-                        ></v-select>
 
                         <v-btn
                             :loading="pending"
                             class="b-btn"
                             color="green darken-1"
-                            v-on:click="editCategory"
+                            style="margin-left: auto"
+                            v-on:click="send"
                         >
                             Сохранить
                         </v-btn>
-                        <v-btn class="b-close"  large color="red" icon
+                        <v-btn class="b-close" large color="red" icon
                                v-on:click="closeModal($event)"
                         >
                             <svg height="329pt" fill="currentColor" viewBox="0 0 329.26933 329" width="329pt">
@@ -64,7 +76,7 @@
                             v-model="tabSelect"
                         >
                             <v-tab
-                                v-for="(component, index) in getComponent"
+                                v-for="(component, index) in getComponents"
                                 :key="index"
                             >
                                 {{'Шаг ' + (index + 1)}}
@@ -72,7 +84,7 @@
                             </v-tab>
                         </v-tabs>
                     </template>
-                    <template v-for="(component, index) in getComponent">
+                    <template v-for="(component, index) in getComponents">
                         <component
                             v-show="tabSelect == index"
                             :tabSelect.sync="tabSelect"
@@ -85,6 +97,7 @@
                             :invalid.sync="valid"
                             :ref="component.c"
                             :select.sync="langs.select"
+                            :alert.sync="alert.option"
                         ></component>
                     </template>
 
@@ -115,22 +128,37 @@
 </template>
 
 <script>
-    import { validationMixin } from 'vuelidate';
-    import { required, maxLength } from 'vuelidate/lib/validators';
+    import Base from '../../Tabs/Pages/Base.vue';
+    import Meta from '../../Tabs/Pages/Meta.vue';
+    import ServiceContent from '../../Tabs/Pages/Content/Services.vue';
+    import StandingContent from '../../Tabs/Pages/Content/Standing.vue';
+    import VinylsContent from '../../Tabs/Pages/Content/Vinyls.vue';
 
     export default {
         props: [
             'formDialog',
             'edit',
             'selected',
-            'action',
-            'parent',
+            'list',
             'edt',
-            'alert',
             'components'
         ],
+        components: {
+            'create-base': Base,
+            'create-meta': Meta,
+            'service-content': ServiceContent,
+            'standing-content': StandingContent,
+            'vinyls-content': VinylsContent
+        },
         data: function() {
             return {
+                alert: {
+                    show: false,
+                    option: {
+                        type: null,
+                        text: null
+                    }
+                },
                 location: window.location.origin,
                 tabSelect: 0,
                 pending: false,
@@ -153,42 +181,19 @@
                     show: false,
                     text: ''
                 },
-                editor: {},
-                mutations: {
-                    attribute: {
-                        create: 'addAttribute',
-                        edit: 'editAttribute'
-                    },
-                    'attribute-list': {
-                        create: 'addAttrList',
-                        edit: 'editAttrList'
-                    }
-                },
+                editor: null,
                 valid: true,
                 formDialogRight: false,
             }
         },
         mounted: function() {
-            this.setup();
             setTimeout(()=>{
                 this.$emit('update:edt', false);
             },100)
         },
         watch: {
             edit: function() {
-                if (!Object.keys(this.edit).length) {
-                    this.editor = {
-                        slug: '',
-                        status: 0,
-                        price: false,
-                        count: false,
-                        data: false,
-                        type: null
-                    }
-                    this.setup();
-                }else{
-                    this.editor = this.edit;
-                }
+                this.editor = this.edit;
             },
             editor: {
                 deep: true,
@@ -204,59 +209,61 @@
                 }else{
                     this.formDialogRight = a;
                 }
+            },
+            'alert.option': {
+                deep: true,
+                handler: function() {
+                    if (this.alert.option.type && this.alert.option.text) {
+                        this.alert.show = true;
+                    }
+                }
+            },
+            'alert.show': function() {
+                if ( !this.alert.show ) {
+                    setTimeout(() => {
+                        this.alert.option = {
+                            type: null,
+                            text: null
+                        }
+                    }, 200)
+                }
             }
         },
-        computed: {
+        computed:{
+            alertColor: function () {
+                switch (this.alert.option.type) {
+                    case 'loading':
+                        return 'blue darken-1';
+                    case 'warning':
+                        return 'orange darken-1';
+                    default:
+                        return this.alert.option.type;
+                }
+            },
             getLocal: function (){
                 return this.langs.items[this.langs.select-1].local
             },
-            getMutation: function () {
-                return this.mutations[this.action.section][this.action.type];
-            },
-            activeItem: function () {
-                return this.components[this.tabSelect];
-            },
-            getComponent: function () {
+            getComponents: function () {
                 return this.components.filter(item => {
-                    return item.o.section.includes(this.action.section)
-                });
+                    return !item.k || item.k === this.editor.key
+                })
             }
         },
         methods: {
-            setup: function(){
-                this.$set(this.editor, 'content', this.langs.items.reduce(function(acc, item) {
-                    acc[item.local] = {
-                        title: ''
-                    };
-                    return acc;
-                }, {}));
-            },
             notification: function (text = 'Null') {
                 this.snackbar.show = true;
                 this.snackbar.text = text;
-            },
-            checkEmpty(value, field){
-                if(!value.trim()){
-                    this.user[field] = this.currentGator[field];
-                }
             },
             closeModal: function(e) {
                 if (this.edt) {
                     this.$root.confirmAction(e, {
                         type: 'set_editor',
                         action: () =>{
-                            this.editor = {
-                                slug: '',
-                                status: 0,
-                                price: false,
-                                count: false,
-                                data: false,
-                                type: null
-                            }
-                            this.setup();
+                            this.editor = null;
                             this.$emit('update:formDialog', false);
+                            this.$emit('update:selected', null);
 
-                            setTimeout(() => {
+                            setTimeout(()=>{
                                 this.$emit('update:edt', false);
                             },100)
                         }
@@ -267,28 +274,23 @@
                 }
             },
             validate: function () {
-                let comps = this.getComponent;
-                for (let i = 0; i < comps.length; i++) {
-                    let comp = comps[i];
-                    if (!this.$refs[comp.c][0].validate()) {
+                for (let i = 0; i < this.getComponents.length; i++) {
+                    let compn = this.getComponents[i];
+                    if (!this.$refs[compn.c][0].validate()) {
                         return false;
                     }
                 }
                 return true;
             },
-            editCategory: function(){
+            send: function(){
                 if (!this.validate()) {
                     return;
                 }
 
-                let input = this.editor,
-                    path = window.location.pathname +'/'+ this.action.section,
-                    url = path +'/'+ this.action.type;
-
+                let input = this.editor;
                 this.pending = true;
 
-                input.parent = this.parent;
-                axios.post(url, {
+                axios.post('/home/page/edit', {
                     _token: window._token,
                     data: input
                 })
@@ -296,39 +298,35 @@
                     setTimeout(() => {
                         let data = response.data;
 
-                        if (data.item) {
-                            this.$store.commit(this.getMutation, this.action.section === 'attribute' ? data.item : {
-                                parent: input.parent,
-                                item: data.item
-                            });
-                        }else{
-                            input.file = data.done;
-                            this.$store.commit(this.getMutation, input);
-                        }
-                        this.editor = {
-                            file: '',
-                            slug: '',
-                            status: 0
-                        }
-                        this.setup();
+                        for (var i = 0; i < this.list.length; i++) {
+                            var item = this.list[i];
+                            if (item.id === input.id) {
+                                input.updated_at = data.updated_at;
 
+                                this.$store.commit('editPage', {
+                                    index: i,
+                                    input: input
+                                });
+                            }
+                        }
+
+                        this.$emit('update:selected', null);
                         this.$emit('update:formDialog', false);
-                        //this.$v.reset();
                     },200)
                 })
                 .catch((error)=> {
                     this.snackbar.show = true;
 
-                    if (error.response && error.response.status === 422) {
+                    if (error.response && error.response.data.message) {
                         this.snackbar.text = error.response.data.message;
                     }else{
                         this.snackbar.text = 'Неизвестная ошибка, повторите попытку';
                     }
                 })
-                .finally(()=>{
+                .finally(() => {
                     this.pending = false;
 
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this.$emit('update:edt', false);
                     },300)
                 })

@@ -96,6 +96,7 @@
                             :invalid.sync="valid"
                             :ref="component.c"
                             :select.sync="langs.select"
+                            :available="available"
                         ></component>
                     </template>
 

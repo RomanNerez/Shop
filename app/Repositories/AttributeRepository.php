@@ -11,19 +11,26 @@ class AttributeRepository extends Repository
 	public function getIdNewAttribute($request)
 	{
         $data  = $request->input('data');
+        $check = Attribute::where([
+                ['slug', $data['slug']],
+                ['related', $data['related']]
+            ])
+            ->exists();
 
-        if ($data['slug'] && Attribute::where('slug', $data['slug'])->exists()) {
+
+        if ($data['slug'] && $check) {
             abort(422, 'Такая ссылка уже существует');
         }
 
         return DB::transaction(function () use ($request, &$attributeData, &$data) {
             $attribute = Attribute::create([
-                'slug'   => $data['slug'],
-                'price'  => $data['price'],
-                'count'  => $data['count'],
-                'data'   => $data['data'],
-                'type'   => $data['type'],
-                'status' => $data['status']
+                'slug'    => $data['slug'],
+                'price'   => $data['price'],
+                'count'   => $data['count'],
+                'data'    => $data['data'],
+                'type'    => $data['type'],
+                'related' => $data['related'],
+                'status'  => $data['status']
             ]);
 
             foreach ($data['content'] as $key => &$value) {
@@ -48,7 +55,8 @@ class AttributeRepository extends Repository
         $data = $request->input('data');
         $slug = Attribute::where([
                     ['id', '!=', $data['id']],
-                    ['slug', $data['slug']]
+                    ['slug', $data['slug']],
+                    ['related', $data['related']]
                 ])->exists();
 
         if ($data['slug'] && $slug) {

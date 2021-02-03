@@ -137,6 +137,7 @@
                             :select.sync="langs.select"
                             :other="getOtherProps(component.c)"
                             :index="index"
+                            :related="related"
                         ></component>
                     </template>
 
@@ -181,6 +182,8 @@
             'selected',
             'parent',
             'edt',
+            'related',
+            'available',
             'components'
         ],
         components: {
@@ -290,7 +293,12 @@
                 return this.components[this.tabSelect];
             },
             attributes: function () {
-                return this.$store.getters.storeData.data.attributes;
+                switch (this.related) {
+                    case 'store':
+                        return this.$store.getters.storeData.data.attributes;
+                    case 'services':
+                        return this.$store.getters.servicesData.data.attributes;
+                }
             },
             variables: function () {
                 const items = [];
@@ -426,6 +434,7 @@
                     status: 0,
                     hit: false,
                     new: false,
+                    draw: 1,
                     subs: [],
                     related: [],
                     attr: this.attributes.reduce(function(acc, item) {
@@ -535,6 +544,8 @@
                             path = window.location.pathname +'/',
                             url = this.selected ? path +'products/edit' : path +'products/create';
 
+                        input.related_to = this.related;
+                        console.log(input);
                         this.pending = true;
                         input.categories_id = this.parent;
 

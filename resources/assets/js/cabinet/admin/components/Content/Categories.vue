@@ -18,8 +18,10 @@
         data: function() {
             return {
                 related: 'content',
-                available: null,
-                items: this.$store.getters.contentData.data.categories
+                items: this.$store.getters.contentData.data.categories,
+                available: {
+                    template: true
+                }
             }
         },
     }

@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->boolean('status');
             $table->boolean('is_root');
             $table->string('related')->default('store');
+            $table->string('template')->default('catalog');
             $table->timestamps();
         });
     }

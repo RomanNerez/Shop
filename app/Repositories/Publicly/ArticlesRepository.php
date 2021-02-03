@@ -58,6 +58,7 @@ class ArticlesRepository extends Repository
             'content'  => self::getContent($category, $list['selected'] ?? null, $_category),
             'list'     => $list['data'],
             'search'   => $search,
+            'template' => $category->template,
             'filters'  => [
                 'items'    => $filters,
                 'selected' => collect($list['selected'])->pluck('id')

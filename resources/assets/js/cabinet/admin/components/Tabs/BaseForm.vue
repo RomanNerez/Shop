@@ -16,7 +16,7 @@
                     </v-img>
                 </div>
 
-                <div class="b-colum">
+                <div class="b-colum" style="display: block">
                     <v-text-field
                         v-model.trim="value.content[local].title"
                         label="Название"
@@ -24,6 +24,7 @@
                         outlined
                         :error-messages="requiredErrors('title')"
                     ></v-text-field>
+
                     <v-row no-gutters>
                         <v-col cols="10">
                             <v-text-field
@@ -49,6 +50,28 @@
                             </v-tooltip>
                         </v-col>
                     </v-row>
+
+                    <template v-if="available && available.template">
+                        <v-select
+                            class="b-lang"
+                            v-model.trim="value.template"
+                            item-value="val"
+                            color="green"
+                            item-text="name"
+                            label="Шаблон"
+                            outlined
+                            :error-messages="templateErrors"
+                            :items="[
+                                {
+                                    name: 'каталог',
+                                    val: 'catalog'
+                                },{
+                                    name: 'лента',
+                                    val: 'tape'
+                                }
+                            ]"
+                        ></v-select>
+                    </template>
                     <!--<v-textarea
                         v-model.trim="value.content[local].desc"
                         label="Описание"
@@ -84,7 +107,7 @@
     import CKEditor from 'ckeditor4-vue';
 
 	export default{
-        props:['value', 'local', 'status', 'langs', 'valid', 'select', 'tabSelect'],
+        props:['value', 'local', 'status', 'langs', 'valid', 'select', 'tabSelect', 'available'],
         validations: function () {
             let value = {
                     file: {},
@@ -122,6 +145,12 @@
 
             if (isStatus) {
                 value.file.required = required;
+
+                if ( this.available && this.available.template ) {
+                    value.template = {
+                        required: required
+                    }
+                }
             }
 
             return { value };
@@ -163,6 +192,15 @@
 
                 return errors
             },
+            templateErrors: function () {
+                const errors = [];
+
+                if (this.$v.value.template && !this.$v.value.template.required) {
+                    errors.push('Это поле обязательно!');
+                }
+
+                return errors
+            }
         },
         methods:{
             validate: function () {
@@ -182,7 +220,7 @@
                             return false;
                         }
 
-                        if ( !this.$v.value.file.required ) {
+                        if ( !this.$v.value.file.required || (this.$v.value.template && !this.$v.value.template.required) ) {
                             this.$emit('update:tabSelect', 0);
                             return false;
                         }
