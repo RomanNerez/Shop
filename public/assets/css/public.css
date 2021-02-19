@@ -165,7 +165,7 @@ button {
 .top {
   width: 100%;
   color: #ffffff;
-  background: #363636;
+  background: #114aa5;
 }
 
 .top ul {
@@ -592,17 +592,20 @@ button {
   }
 }
 
+.hero__wrapper {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
 .hero__categories {
-  position: absolute;
-  width: 250px;
-  background: #363636;
-  z-index: 4;
-  left: 100px;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  position: relative;
+  width: 80%;
   color: #fff;
 }
 
-.hero__categories h2 {
+.hero__title {
+  left: 0;
+  width: 300px;
   background-color: #363636;
   color: #fff;
   font-size: 18px;
@@ -612,9 +615,12 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  cursor: pointer;
+  z-index: 4;
 }
 
-.hero__categories h2 svg {
+.hero__title svg {
   width: 25px;
   height: 20px;
   fill: #fff;
@@ -622,57 +628,22 @@ button {
 }
 
 .hero__slider {
-  position: relative;
-}
-
-.hero .slick-track {
-  display: flex;
-}
-
-.hero .slick-list {
-  overflow: hidden;
-}
-
-.hero .slick-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-20px);
-  width: 35px;
-  height: 40px;
-  font-size: 0;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  outline: none;
-}
-
-.hero .slick-arrow:after {
-  position: absolute;
-  content: "";
-  width: 16px;
-  height: 16px;
-  top: 50%;
-  border: 3px solid #363636;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  transform: translateY(-8px) rotate(45deg);
-}
-
-.hero .slick-arrow.slick-prev {
-  left: 0;
-  z-index: 1;
-}
-
-.hero .slick-arrow.slick-next {
-  right: 0;
-  transform: translateY(-20px) rotate(180deg);
+  background: url(/images/Slide-1.jpg?ad6bb3a2a620c76f9e60f4ff468c0a1a) no-repeat;
+  background-size: 100%;
 }
 
 .categories {
+  width: 300px;
   display: flex;
   flex-flow: column;
-  position: relative;
-  height: 400px;
+  align-content: flex-start;
+  max-height: 450px;
+  background: #114aa5;
+  overflow-y: scroll;
+}
+
+.categories__item {
+  max-width: 300px;
 }
 
 .categories__item:hover > .categories__inner {
@@ -684,7 +655,7 @@ button {
   padding: 15px 20px;
   font-size: 13px;
   background: url(/images/chevron-right-solid.svg?54d4165e6b607d8c6e72c961e1faa27f) no-repeat right 10px center;
-  background-size: 3%;
+  background-size: 2%;
   transition: all 0.25s;
 }
 
@@ -695,12 +666,13 @@ button {
 
 .categories__inner {
   display: none;
-  width: 250px;
+  width: 300px;
   height: 100%;
   position: absolute;
-  background-color: #363636;
+  background-color: #ffe89e;
   top: 0;
-  left: 100%;
+  left: 300px;
+  color: #000;
 }
 
 .categories__inner a {
@@ -3174,5 +3146,43 @@ button {
 
 .edit__form dt {
   min-width: 300px;
+}
+
+.catalog-filter__btn {
+  padding: 10px 0;
+}
+
+.catalog-filter__title {
+  font-size: 16px;
+  color: #000;
+  font-weight: 500;
+}
+
+.checked {
+  display: flex;
+  align-self: center;
+  padding: 10px 0;
+}
+
+.checked__inout {
+  display: none;
+}
+
+.checked input[type=checkbox]:checked + span {
+  background: url(/images/check-solid.svg?3a96a1cd1778e116ec836633d051a027) no-repeat center;
+  background-size: 80%;
+}
+
+.checked__square {
+  margin-right: 20px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #898989;
+  border-radius: 4px;
+}
+
+.checked__text {
+  vertical-align: middle;
 }
 

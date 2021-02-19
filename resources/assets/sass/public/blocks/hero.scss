@@ -1,78 +1,53 @@
 .hero {
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+    }
+
     &__categories {
-        position: absolute;
-        width: 250px;
-        background: $main-color;
-        z-index: 4;
-        left: 100px;
-        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+        position: relative;
+        width: 80%;
         color: #fff;
-        h2 {
-            background-color: $main-color;
-            color: #fff;
-            font-size: 18px;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            svg {
-                width: 25px;
-                height: 20px;
-                fill: #fff;
-                margin: 0 10px 0 0;
-            }
+    }
+    &__title {
+        left: 0;
+        width: 300px;
+        background-color: $main-color;
+        color: #fff;
+        font-size: 18px;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        z-index: 4;
+        svg {
+            width: 25px;
+            height: 20px;
+            fill: #fff;
+            margin: 0 10px 0 0;
         }
     }
     &__slider {
-        position: relative;
-    }
-    .slick-track {
-        @include dflex;
-    }
-    .slick-list {
-        overflow: hidden;
-    }
-    .slick-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-20px);
-        width: 35px;
-        height: 40px;
-        font-size: 0;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        outline: none;
-        &:after {
-            position: absolute;
-            content: "";
-            width: 16px;
-            height: 16px;
-            top: 50%;
-            border: 3px solid $main-color;
-            border-top-color: transparent;
-            border-right-color: transparent;
-            transform: translateY(-8px) rotate(45deg);
-        }
-    }
-    .slick-arrow.slick-prev {
-        left: 0;
-        z-index: 1;
-    }
-    .slick-arrow.slick-next {
-        right: 0;
-        transform: translateY(-20px) rotate(180deg);
+        background: url("../../public/img/Slide-1.jpg") no-repeat;
+        background-size: 100%;
     }
 }
 .categories {
+    width: 300px;
     display: flex;
     flex-flow: column;
-    position: relative;
-    height: 400px;
+    align-content: flex-start;
+    max-height: 450px;
+    background: rgb(17, 74, 165);
+    overflow-y: scroll;
 
     &__item {
+        //position: relative;
+        max-width: 300px;
         &:hover > .categories__inner {
             display: block;
         }
@@ -83,7 +58,7 @@
         font-size: 13px;
         background: url("../../img/svg/chevron-right-solid.svg") no-repeat right
             10px center;
-        background-size: 3%;
+        background-size: 2%;
         transition: $hover-transition;
         &:hover {
             background-color: $main-color;
@@ -92,12 +67,14 @@
     }
     &__inner {
         display: none;
-        width: 250px;
+        width: 300px;
         height: 100%;
+        //height: 100%;
         position: absolute;
-        background-color: $main-color;
+        background-color: #ffe89e;
         top: 0;
-        left: 100%;
+        left: 300px;
+        color: #000;
         a {
             background-image: none;
         }

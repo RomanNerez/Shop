@@ -1,52 +1,47 @@
 @extends('public.index')
 
 @section('content')
-    <section class="hero">
-        <section class="hero__categories">
-            <h2 class="">
-                <svg>
-                    <use xlink:href="#notebook"></use>
-                </svg>
-                Каталог продукції
-            </h2>
-            <ul class="categories">
-                @foreach ($response['header']['menu']['base'] as $category)
-                    <li class="categories__item">
-                        <a class="categories__link" 
-                            href="{{$category->url}}"
-                        >
-                            {{$category->content->title}}
-                        </a>
-                        @if ( count($category->collection) )
-                            <ul class="categories__inner">
-                                @foreach ($category->collection as $collection)
-                                <li>
-                                    <a class="categories__link product__link" 
-                                        href="{{ $collection->url }}"
-                                    >
-                                        {{ $collection->content->title }}
-                                        <!-- (<span class="poduct__quantity">
-                                        </span>) -->
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </li>
-                @endforeach
-            </ul>
-        </section>
-        <div class="hero__slider">
-            <div class="slide ibg">
-                <img src="{{asset('img/powerbank.jpeg')}}" alt="Slider-background" />
-            </div>
-            <div class="slide ibg">
-                <img src="{{asset('img/cable.jpg')}}" alt="Slider-background" />
-            </div>
-            <div class="slide ibg">
-                <img src="{{asset('img/slider-bg-30.jpg')}}" alt="Slider-background" />
+    <section class="hero container">
+        <div class="hero__wrapper">
+            <section class="hero__categories">
+                <button type="button" class="hero__title">
+                    <svg width="10px" height="10px">
+                        <use xlink:href="#notebook"></use>
+                    </svg>
+                    Каталог продукції
+                </button>
+                <ul class="categories">
+                    @foreach ($response['header']['menu']['base'] as $category)
+                        <li class="categories__item">
+                            <a class="categories__link" 
+                                href="{{$category->url}}"
+                            >
+                                {{$category->content->title}}
+                            </a>
+                            @if ( count($category->collection) )
+                                <ul class="categories__inner">
+                                    @foreach ($category->collection as $collection)
+                                    <li>
+                                        <a class="categories__link product__link" 
+                                            href="{{ $collection->url }}"
+                                        >
+                                            {{ $collection->content->title }}
+                                            <!-- (<span class="poduct__quantity">
+                                            </span>) -->
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+            <div class="hero__slider">
+
             </div>
         </div>
+        
     </section>
 
     <section class="portfolio">
