@@ -19,13 +19,16 @@ class CreateProductsTable extends Migration
             $table->foreign('categories_id')->references('id')->on('categories');
             $table->string('slug', 255)->unique();
             $table->boolean('status');
+            $table->boolean('sale');
             $table->boolean('hit');
             $table->boolean('new');
+            $table->string('related_to')->default('store');
             $table->unsignedBigInteger('currency')->nullable();
             $table->decimal('price', 12, 6)->nullable();
             $table->unsignedBigInteger('count')->nullable();
             $table->json('images')->nullable();
             $table->json('bulk_price')->nullable();
+            $table->unsignedBigInteger('draw')->default(1);
             $table->timestamps();
         });
     }

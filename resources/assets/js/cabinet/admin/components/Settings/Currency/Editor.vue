@@ -196,13 +196,10 @@
                 }
             },
             formDialog: function(a){
-                if(a){
-                    setTimeout(()=>{
-                        this.formDialogRight = a;
-                    },100)
-                }else{
+                setTimeout(()=>{
                     this.formDialogRight = a;
-                }
+                    html_hidden('editor');
+                },10)
             }
         },
         computed: {

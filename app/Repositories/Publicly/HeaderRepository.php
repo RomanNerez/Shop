@@ -1,10 +1,13 @@
 <?php
+
+
 namespace App\Repositories\Publicly;
 
 
 use App\Models\Categories;
 use App\Models\CurrencyList;
 use App\Models\Lang;
+use App\Models\Option;
 use App\Repositories\Repository;
 
 class HeaderRepository extends Repository
@@ -59,10 +62,20 @@ class HeaderRepository extends Repository
             'currency'  => $currency,
             'menu'      => self::getMenu(),
             'content'   => self::getContent(),
+            'options'   => self::getOptions(),
             'cart'      => $request->session()->get('cart'),
             'compare'   => $request->session()->get('compare'),
             'favorites' => $request->session()->get('favorites')
         ];
+    }
+
+    public function getOptions() {
+        $option = Option::all()->first();
+
+        $option->emails = explode("\n", $option->emails);
+        $option->phones = explode("\n", $option->phones);
+
+        return $option;
     }
 
     public function getContent() {

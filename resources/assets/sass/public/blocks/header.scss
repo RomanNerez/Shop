@@ -47,7 +47,7 @@
 .top {
     width: 100%;
     color: $text-white;
-    background: $main-color;
+    background: rgb(17, 74, 165);
     ul {
         @include dflex;
         a {

@@ -8,12 +8,12 @@
             >
                 <div class="reviews-block">
                     <div class="reviews-block__top">
-                        <a href="#" class="reviews-block__img">
+                        <a :href="item.product.url" class="reviews-block__img">
                             <img :src="item.product.image" alt="" />
                         </a>
                         <div class="reviews-block__box">
                             <span class="reviews-block__name">{{ item.name }}</span>
-                            <a href="#" class="reviews-block__view">{{ item.product.title }}</a>
+                            <a :href="item.product.url" class="reviews-block__view">{{ item.product.title }}</a>
                             <div class="reviews-block__rating">
                                 <div class="star"
                                      v-for="index in 5"

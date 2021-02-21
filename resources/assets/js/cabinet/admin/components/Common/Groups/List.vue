@@ -281,6 +281,9 @@
                     case 'store':
                         key = 'storeData';
                         break;
+                    case 'services':
+                        key = 'servicesData';
+                        break;
                     case 'content':
                         key = 'contentData';
                         break;

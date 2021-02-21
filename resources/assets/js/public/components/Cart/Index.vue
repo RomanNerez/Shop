@@ -39,20 +39,25 @@
                 <div class="quantity">
                     <div class="quantity__box">
                         <button type="button" class="quantity__btn"
-                                :disabled="item.quantity <= 1 || !item.count.origin"
+                                :disabled="item.quantity <= item.draw"
                                 v-on:click="changeQuantity(index, -1)"
                         >-</button>
                         <input type="number" class="quantity__input"
-                               :disabled="!item.count.origin"
+                               :disabled="!item.count.origin || (item.count.origin < item.draw && item.count.origin >= 0)"
                                v-model.number="item.quantity"
                                v-on:input="quantity(index)"
                         >
                         <button type="button" class="quantity__btn"
-                                :disabled="item.quantity >= item.count.origin"
+                                :disabled="item.quantity >= item.count.origin && item.count.origin >= 0"
                                 v-on:click="changeQuantity(index, 1)"
                         >+</button>
                     </div>
-                    <span class="quantity__text">{{ __('В наличии') }}: {{ item.count.view }} {{ __('шт.') }}</span>
+                    <template v-if="item.count.origin >= 0">
+                        <span class="quantity__text">{{ __('В наличии') }}: {{ item.count.view }} {{ __('шт.') }}</span>
+                    </template>
+                    <template v-if="item.draw > 1">
+                        <span class="quantity__text">{{ __('Мин. кол-во') }}: {{ item.draw | numFormat(0, '.', ' ') }} {{ __('шт.') }}</span>
+                    </template>
                 </div>
 
                 <span class="basket__block-price">{{ getPrice(item) | numFormat(2, '.', ' ') }} <b>{{ item.price.data.currency.content.abbrev }}</b></span>
@@ -71,14 +76,18 @@
                     </div>-->
 
                     <button type="button" class="btn big"
-                        :disabled="checkCount"
+                        :disabled="checkCount || checkAmount"
                     >
                         <span class="btn__titlte">{{ __('оформить заказ') }}</span>
                     </button>
                 </div>
 
                 <div class="basket__price-row bottom">
-                    <span class="title">{{ __('Минимальная сумма заказа') }} {{ data.option.min_price }} {{ items[0].price.data.currency.content.abbrev }}</span>
+                    <span class="title"
+                          :class="{'invalid-amount': checkAmount}"
+                    >
+                        {{ __('Минимальная сумма заказа') }} {{ data.option.min_price | numFormat(2, '.', ' ') }} {{ items[0].price.data.currency.content.abbrev }}
+                    </span>
                     <a :href="data.option.prev_page" class="btn-text">{{ __('Продолжить покупки') }}</a>
                 </div>
             </div>
@@ -112,23 +121,26 @@
                 return Math.round(amount * 100) / 100;
             },
             checkCount: function () {
-                return this.items.some(item => !item.count.origin);
+                return this.items.some(item => !item.count.origin || item.quantity < item.draw || (item.count.origin < item.draw && item.count.origin >= 0) || (item.quantity > item.count.origin && item.count.origin >= 0));
+            },
+            checkAmount: function () {
+                return this.data.option.min_price > this.getAmount;
             }
         },
         methods: {
             changeQuantity: function(index, step) {
                 this.items[index].quantity += step;
-                this.update(index);
+                this.quantity(index);
             },
             quantity: function (index) {
                 let item = this.items[index];
 
                 clearTimeout(window._bounce);
                 window._bounce = setTimeout(() => {
-                    if ( item.quantity > item.count.origin ) {
+                    if ( item.quantity > item.count.origin && item.count.origin >= 0 ) {
                         item.quantity = item.count.origin;
-                    }else if (item.quantity < 1 && item.count.origin){
-                        item.quantity = 1;
+                    }else if (item.quantity < item.draw && item.count.origin){
+                        item.quantity = (item.count.origin >= item.draw || item.count.origin < 0) ? item.draw : item.count.origin;
                     }
                     this.update(index);
                 }, 1000)

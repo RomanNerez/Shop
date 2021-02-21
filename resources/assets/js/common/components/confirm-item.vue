@@ -41,7 +41,7 @@
                     first_btn.removeEventListener('click', this.data_action.confirm);
                     last_btn.removeEventListener('click', this.data_action.revoke);
                 }
-                scroll_hidden('confirm');
+                html_hidden('confirm');
             }
         },
         computed: {

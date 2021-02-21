@@ -115,15 +115,15 @@
                         name: 'единичный выбор',
                         val: 'radio'
                     },{
+                        name: 'выпадающий список',
+                        val: 'select'
+                    }/*,{
                         name: 'множественный выбор',
                         val: 'checkbox'
                     },{
-                        name: 'выпадающий список',
-                        val: 'select'
-                    },{
                         name: 'поле ввода',
                         val: 'input'
-                    }
+                    }*/
                 ],
                 content: this.value,
                 alert: {

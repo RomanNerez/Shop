@@ -1,26 +1,43 @@
 import Top from '../components/Search/Top.vue'
+import Pagination from '../../common/components/pagination-item'
 
 export default {
     data: function() {
+        let state = this.$store.state.data.items;
         return {
             sortable: null,
-            locale: this.$store.state.header.lang.selected.local
+            locale: this.$store.state.header.lang.selected.local,
+            pager: {
+                current: state.current_page,
+                size: state.per_page,
+                total: state.total
+            }
         }
     },
     components: {
-        'top-layout': Top
+        'top-layout': Top,
+        Pagination
     },
     watch: {
         sortable: function () {
             this.updateData();
-        }
+        },
+        'pager.current': function() {
+            this.updateData();
+        },
     },
     computed: {
         counter: function () {
-            return this.items.length;
+            return this.pager.total;
         },
         items: function () {
-            return this.$store.state.data.items;
+            let items = this.$store.state.data.items;
+
+            this.pager.current = items.current_page;
+            this.pager.size = items.per_page;
+            this.pager.total = items.total;
+
+            return items.data ? items.data : [];
         },
         query: function () {
             return encodeURI(this.$store.state.data.query);
@@ -31,9 +48,14 @@ export default {
     },
     methods: {
         updateData: function () {
+            let path = this.path;
+
+            if (this.pager.current > 1) {
+                path += '&page='+ this.pager.current;
+            }
             this.$root.loading = true;
 
-            axios.get( this._locale(this.path) )
+            axios.get( this._locale(path) )
             .then(response => {
                 this.$store.commit('updateSearchItems', response.data);
             })

@@ -22,6 +22,7 @@ class CreateAttributesTable extends Migration
             $table->enum('type', ['checkbox', 'radio', 'select', 'input'])->nullable();
             $table->unsignedBigInteger('order')->nullable();
             $table->boolean('status');
+            $table->string('related')->default('store');
             $table->timestamps();
         });
     }

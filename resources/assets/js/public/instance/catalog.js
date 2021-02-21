@@ -1,11 +1,26 @@
 import FilterBase from '../components/Catalog/FilterBase.vue'
+import Pagination from '../../common/components/pagination-item'
 
 export default {
     components: {
-        'filter-base': FilterBase,
+        FilterBase,
+        Pagination
+    },
+    data: function() {
+        let state = this.$store.state.data.list;
+        return {
+            pager: {
+                current: state.current_page,
+                size: state.per_page,
+                total: state.total
+            }
+        }
     },
     watch: {
         'filters.path': function () {
+            this.updateData();
+        },
+        'pager.current': function() {
             this.updateData();
         },
         search_data: function () {
@@ -15,8 +30,13 @@ export default {
     computed: {
         items: function () {
             let data = this.$store.state.data;
+
+            this.pager.current = data.list.current_page;
+            this.pager.size = data.list.per_page;
+            this.pager.total = data.list.total;
+
             return {
-                list: data.list,
+                list: data.list.data ? data.list.data : [],
                 filters: data.filters
             };
         },
@@ -63,6 +83,9 @@ export default {
             }
             if (this.search_data) {
                 get += '&search='+ this.search_data;
+            }
+            if (this.pager.current > 1) {
+                get += '&page='+ this.pager.current;
             }
 
             window.history.replaceState(null, null, path);

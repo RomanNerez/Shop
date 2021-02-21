@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use App\User;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -22,22 +22,13 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function boot()
     {
         $this->registerPolicies();
 
         Gate::define('admin-panel', function (User $user) {
-            if(!$user->isAdmin()){
-                abort(404);
-            }
             return $user->isAdmin();
-        });
-
-        Gate::define('user-panel', function (User $user) {
-            if(!$user->isUser() && !$user->isAdmin()){
-                abort(404);
-            }
-            return true;
         });
     }
 }

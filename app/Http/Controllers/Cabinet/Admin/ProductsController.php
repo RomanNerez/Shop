@@ -14,6 +14,7 @@ use App\Models\TransProduct;
 use App\Repositories\SearchActionRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ProductsController extends Controller
@@ -27,6 +28,7 @@ class ProductsController extends Controller
     {
         $product = Product::find( $request->input('id') );
         $slug    = explode('-', $product->slug);
+        $related = $product->related->pluck('related');
 
         if (count($slug) > 1) {
             $last = array_pop($slug);
@@ -34,10 +36,14 @@ class ProductsController extends Controller
                 $slug[] = $last;
             }
         }
+
         $product->slug   = implode('-', $slug) .'-'. (Product::latest()->value('id') + 1);
         $product->status = 0;
 
-        return response( self::insert($product->toArray()) );
+        $product = $product->toArray();
+        $product['related'] = $related;
+
+        return response( self::insert($product) );
     }
 
     public function insert($data)
@@ -59,13 +65,16 @@ class ProductsController extends Controller
             $product = Product::create([
                 'categories_id' => $data['categories_id'],
                 'bulk_price'    => $data['price']['bulk'],
+                'related_to'    => $data['related_to'],
                 'slug'     => $data['slug'],
                 'status'   => $data['status'],
                 'new'      => $data['new'],
                 'hit'      => $data['hit'],
+                'sale'     => $data['sale'],
                 'currency' => $data['price']['currency'],
                 'price'    => $data['price']['base'],
                 'count'    => $data['count']['base'],
+                'draw'     => $data['draw'],
                 'images'   => $images
             ]);
 
@@ -75,7 +84,7 @@ class ProductsController extends Controller
                     'subs_id'    => $value
                 ]);
             }
-            
+
             foreach ($data['related'] as $value) {
                 RelatedProduct::create([
                     'product_id' => $product->id,
@@ -224,9 +233,11 @@ class ProductsController extends Controller
                 'status'     => $data['status'],
                 'new'        => $data['new'],
                 'hit'        => $data['hit'],
+                'sale'       => $data['sale'],
                 'currency'   => $data['price']['currency'],
                 'price'      => $data['price']['base'],
                 'count'      => $data['count']['base'],
+                'draw'       => $data['draw'],
                 'bulk_price' => $data['price']['bulk'],
                 'images'     => $images
             ]);
@@ -402,7 +413,7 @@ class ProductsController extends Controller
     }
 
     public function search(Request $request, SearchActionRepository $searchAction) {
-        $products = $searchAction->get( $request->get('query') );
+        $products = $searchAction->get( $request->get('query'), TransProduct::class, Product::class, 'product_id' );
 
         return $products->orderBy('id', 'desc')->take(12)->get();
     }

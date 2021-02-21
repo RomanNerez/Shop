@@ -21,7 +21,7 @@ class CatalogController extends Controller
             'data'      => $data,
             'component' => 'catalog'
         ];
-        
+
         return view('public.pages.catalog', compact('response'));
     }
 }

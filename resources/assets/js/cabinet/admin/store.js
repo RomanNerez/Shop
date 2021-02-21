@@ -24,6 +24,18 @@ export default {
                 }
             };
         },
+        servicesData: function (state) {
+            let data = state.data.services;
+
+            return {
+                data: data,
+                available: {
+                    categories: data.categories.filter(item => {
+                        return item.status;
+                    })
+                }
+            };
+        },
         contentData: function (state) {
             let data = state.data.content;
 
@@ -163,72 +175,72 @@ export default {
         },
 
         addAttribute(state, data) {
-            state.data.store.attributes.unshift(data);
+            state.data[data.related].attributes.unshift(data);
         },
         editAttribute(state, data) {
-            let attributes = state.data.store.attributes;
+            let attributes = state.data[data.related].attributes;
 
             for (let i = 0; i < attributes.length; i++) {
                 if ( attributes[i].id === data.id ) {
-                    state.data.store.attributes.splice(i, 1, data);
+                    state.data[data.related].attributes.splice(i, 1, data);
                     break;
                 }
             }
         },
-        updateAttribute(state, data) {
-            data.forEach(item => {
-                state.data.store.attributes.forEach((group, index) => {
+        updateAttribute(state, input) {
+            input.data.forEach(item => {
+                state.data[input.related].attributes.forEach((group, index) => {
                     if ( group.id === item.id ) {
-                        state.data.store.attributes.splice(index, 1);
+                        state.data[input.related].attributes.splice(index, 1);
                     }
                 })
             });
-            state.data.store.attributes.unshift(...data);
+            state.data[input.related].attributes.unshift(...input.data);
         },
-        rmAttribute(state, id) {
-            let attributes = state.data.store.attributes;
+        rmAttribute(state, input) {
+            let attributes = state.data[input.related].attributes;
 
             for (let i = 0; i < attributes.length; i++) {
-                if ( attributes[i].id === id ) {
-                    state.data.store.attributes.splice(i, 1);
+                if ( attributes[i].id === input.id ) {
+                    state.data[input.related].attributes.splice(i, 1);
                     break;
                 }
             }
         },
 
         addAttrList(state, data) {
-            let attributes = state.data.store.attributes;
+            let attributes = state.data[data.related].attributes;
 
             for (let i = 0; i < attributes.length; i++) {
                 if ( attributes[i].id === data.parent ) {
-                    state.data.store.attributes[i].subs.unshift(data.item);
+                    state.data[data.related].attributes[i].subs.unshift(data.item);
                     break;
                 }
             }
         },
         editAttrList(state, data) {
-            let attributes = state.data.store.attributes;
+            let attributes = state.data[data.related].attributes;
 
             for (let g_i = 0; g_i < attributes.length; g_i++) {
                 let attribute = attributes[g_i];
 
                 for (let s_i = 0; s_i < attribute.subs.length; s_i++) {
                     if ( attribute.subs[s_i].id === data.id ) {
-                        state.data.store.attributes[g_i].subs.splice(s_i, 1, data);
+                        state.data[data.related].attributes[g_i].subs.splice(s_i, 1, data);
                         break;
                     }
                 }
             }
         },
         rmAttrList(state, data) {
-            let attributes = state.data.store.attributes;
+            let attributes = state.data[data.related].attributes;
 
             for (let g_i = 0; g_i < attributes.length; g_i++) {
                 let attribute = attributes[g_i];
 
                 for (let s_i = 0; s_i < attribute.subs.length; s_i++) {
                     if ( attribute.subs[s_i].id === data.id ) {
-                        state.data.store.attributes[g_i].subs.splice(s_i, 1);
+                        state.data[data.related].attributes[g_i].subs.splice(s_i, 1);
                         break;
                     }
                 }
@@ -275,28 +287,29 @@ export default {
             }
         },
 
-        reloadProducts(state, data) {
-            state.data.store.products = data;
+        reloadProducts(state, input) {
+            state.data[input.related_to].products = input.data;
         },
         addProducts(state, data) {
-            state.data.store.products.unshift(data);
+            console.log(data.related_to, state.data);
+            state.data[data.related_to].products.unshift(data);
         },
         editProducts(state, data) {
-            let products = state.data.store.products;
+            let products = state.data[data.related_to].products;
 
             for (let i = 0; i < products.length; i++) {
                 if ( products[i].id === data.id ) {
-                    state.data.store.products.splice(i, 1, data);
+                    state.data[data.related_to].products.splice(i, 1, data);
                     break;
                 }
             }
         },
-        rmProducts(state, id) {
-            let products = state.data.store.products;
+        rmProducts(state, input) {
+            let products = state.data[input.related_to].products;
 
             for (let i = 0; i < products.length; i++) {
-                if ( products[i].id === id ) {
-                    state.data.store.products.splice(i, 1);
+                if ( products[i].id === input.id ) {
+                    state.data[input.related_to].products.splice(i, 1);
                     break;
                 }
             }
@@ -325,5 +338,8 @@ export default {
                 }
             }
         },
+        editPage(state, data) {
+            state.data.content.pages.splice(data.index, 1, data.input);
+        }
     }
 }

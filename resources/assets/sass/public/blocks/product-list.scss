@@ -4,6 +4,13 @@
         display: grid;
         grid-template-columns: 25% 1fr;
     }
+    &__title {
+        display: flex;
+        flex-flow: column;
+        p {
+            padding: 20px 0;
+        }
+    }
     &__filter {
         min-width: 200px;
     }
@@ -88,14 +95,14 @@
         font-weight: 700;
     }
     &__btn {
-        max-width: 80px;
+        max-width: 90px;
         padding: 10px 5px;
-        color: $text-red;
-        background: #fff;
+        color: #fff;
+        background: $text-red;
         text-align: center;
         border: 1px solid $text-red;
         &:hover {
-            background-color: $text-red;
+            background-color: darken($text-red, 10%);
             color: #fff;
         }
     }

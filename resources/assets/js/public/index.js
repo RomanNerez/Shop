@@ -51,6 +51,21 @@ if (response.component === 'search') {
 if (response.component === 'articles') {
     mixins.push(require('./instance/articles.js').default);
 }
+if (response.component === 'service-vinyls') {
+    mixins.push(require('./instance/service-vinyls.js').default);
+}
+if (response.component === 'service-standing') {
+    mixins.push(require('./instance/service-standing.js').default);
+}
+if (response.component === 'certificates') {
+    mixins.push(require('./instance/certificates.js').default);
+}
+if (response.component === 'home') {
+    mixins.push(require('./instance/home.js').default);
+}
+if (response.component === 'units') {
+    mixins.push(require('./instance/units.js').default);
+}
 
 new Vue ({
     el: '#app',
@@ -61,26 +76,12 @@ new Vue ({
             show: false
         },
         loading: false,
-        off_tabs: 0,
         overlay: null,
         navbar: null,
         headFilterMob: false,
         calc_tabs: 0,
         cabinet_tabs: 0,
-        catalog_fitler: false,
-        select: {
-            one: false,
-            two: false,
-            three: false,
-            four: false
-        },
-        units_btn: {
-            one: false,
-            two: false,
-            three: false,
-            four: false,
-            five: false
-        },
+        notifyRequest: null,
         orders_user: {
             one: false,
             two: false,

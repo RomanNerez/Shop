@@ -12,6 +12,7 @@
                                 <span class="items-head__title">{{ group.content.ru.title }}</span>
                             </div>
                         </div>
+
                         <div class="groups-list__items-wrap">
                             <div class="groups-list__items-item"
                                  v-for="item in group.subs"
@@ -39,7 +40,7 @@
 
 <script>
 	export default{
-        props:['value', 'local', 'status', 'langs', 'select', 'tabSelect', 'other', 'index'],
+        props:['value', 'local', 'status', 'langs', 'select', 'tabSelect', 'other', 'index', 'related'],
 		data: function() {
 			return {
                 alert: {
@@ -53,8 +54,18 @@
                 return this.$store.getters.storeData.root_catalog;
             },
             groups: function () {
-                return this.$store.getters.storeData.data.groups.filter(item => {
-                    return item.status && item.subs.length && (item.categories_id === this.other || item.categories_id === this.rootCatalog.id);
+                let groups;
+
+                switch (this.related) {
+                    case 'store':
+                        groups = this.$store.getters.storeData.data.groups;
+                        break;
+                    case 'services':
+                        groups = this.$store.getters.servicesData.data.groups;
+                        break;
+                }
+                return groups.filter(item => {
+                    return item.status && item.subs.length && (item.categories_id === this.other || (this.rootCatalog && item.categories_id === this.rootCatalog.id));
                 })
             }
         },

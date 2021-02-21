@@ -22,6 +22,7 @@
                 </li>
             </ul>
         </div>
+
         <div class="products__wrapper">
             <aside class="products__filter filter">
                 <!--<div class="aside__heading">

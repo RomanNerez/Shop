@@ -28,12 +28,12 @@ function closeMenu() {
 }
 closeButton.addEventListener("click", closeMenu);
 //main slider
-$(document).ready(function() {
-    $(".hero__slider").slick({
-        arrows: true,
-        autoplay: true
-    });
-});
+//$(document).ready(function() {
+//    $(".hero__slider").slick({
+//        arrows: true,
+//        autoplay: true
+//    });
+//});
 
 //brands slider
 $(document).ready(function() {

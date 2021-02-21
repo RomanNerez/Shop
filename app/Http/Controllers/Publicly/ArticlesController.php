@@ -17,11 +17,20 @@ class ArticlesController extends Controller
         }
 
         $response = [
-            'header'    => $headerRepository->data($request),
-            'data'      => $data,
-            'component' => 'articles'
+            'header' => $headerRepository->data($request),
+            'data'   => $data
         ];
 
-        return view('public.pages.articles', compact('response'));
+        switch ($data['template']) {
+            case 'tape':
+                $template = 'sales';
+                $response['component'] = 'tape';
+                break;
+            default:
+                $template = 'articles';
+                $response['component'] = 'articles';
+        }
+
+        return view('public.pages.'. $template, compact('response'));
     }
 }

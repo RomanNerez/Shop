@@ -9,7 +9,7 @@ window.axios = require('axios');
 require('../../common/helper/helper.js');
 require('../../common/helper/polyfill.js');
 
-import vuexStore from './store.js';
+import vuexStore from './store/index.js';
 import draggable from 'vuedraggable';
 
 Vue.use(Vuex);
