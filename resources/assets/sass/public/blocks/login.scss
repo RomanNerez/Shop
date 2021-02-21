@@ -51,6 +51,12 @@
             font-size: 10px;
             font-weight: 500;
         }
+        .invalid-feedback {
+            display: block;
+            color: $text-red;
+            font-size: 11px;
+            margin-top: -20px;
+        }
     }
 
     &__email {
