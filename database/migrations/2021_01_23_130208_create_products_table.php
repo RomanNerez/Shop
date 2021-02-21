@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->foreign('categories_id')->references('id')->on('categories');
             $table->string('slug', 255)->unique();
             $table->boolean('status');
+            $table->boolean('sale');
             $table->boolean('hit');
             $table->boolean('new');
             $table->string('related_to')->default('store');

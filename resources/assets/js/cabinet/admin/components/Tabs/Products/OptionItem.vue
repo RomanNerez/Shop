@@ -24,6 +24,12 @@
                     label="Новинка"
                     hide-details
                 ></v-checkbox>
+                <v-checkbox
+                    v-model="value.sale"
+                    color="success"
+                    label="Акция"
+                    hide-details
+                ></v-checkbox>
             </v-col>
 
             <v-col class="pb-0">

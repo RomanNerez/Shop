@@ -137,5 +137,27 @@ class PagesController extends Controller
 
         return view('public.pages.partnership', compact('response'));
     }
+
+    public function privacyPolicy(Request $request)
+    {
+        $response = [
+            'header'    => $this->headerRepo->data($request),
+            'data'      => $this->pagesRepo->data('policy'),
+            'component' => 'policy'
+        ];
+
+        return view('public.pages.typical-page', compact('response'));
+    }
+
+    public function measuring(Request $request)
+    {
+        $response = [
+            'header'    => $this->headerRepo->data($request),
+            'data'      => $this->pagesRepo->data('measuring'),
+            'component' => 'policy'
+        ];
+
+        return view('public.pages.measuring', compact('response'));
+    }
 }
 

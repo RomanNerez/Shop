@@ -3,11 +3,14 @@
         <div class="gallery__main-img">
             <img :src="gallery.selected.source" :key="gallery.selected.id" alt="">
 
-            <template v-if="status.new">
-                <span class="gallery__status">{{ __('Новинка') }}</span>
+            <template v-if="status.sale">
+                <span class="gallery__status">{{ __('Акция') }}</span>
             </template>
             <template v-else-if="status.hit">
                 <span class="gallery__status">{{ __('Топ продаж') }}</span>
+            </template>
+            <template v-else-if="status.new">
+                <span class="gallery__status">{{ __('Новинка') }}</span>
             </template>
         </div>
 

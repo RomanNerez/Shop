@@ -92,6 +92,23 @@ Route::group([
                 Route::get('/search',  'ProductsController@search');
             });
 
+            Route::group(['prefix' => '/menu-area-visibility'], function () {
+                Route::post('/delete', 'MenuAreaVisibilitiesController@delete');
+                Route::post('/edit',   'MenuAreaVisibilitiesController@edit');
+                Route::post('/add',   'MenuAreaVisibilitiesController@add');
+            });
+
+            Route::group(['prefix' => '/arbitrary-links'], function () {
+                Route::post('/delete', 'ArbitraryLinksController@delete');
+                Route::post('/edit',   'ArbitraryLinksController@edit');
+                Route::post('/create',   'ArbitraryLinksController@create');
+            });
+
+            Route::group(['prefix' => '/menu'], function () {
+                Route::post('/create', 'MenuController@create');
+                Route::post('/update', 'MenuController@update');
+            });
+
             Route::group(['prefix' => '/article'], function () {
                 Route::post('/delete', 'ArticleController@delete');
                 Route::post('/create', 'ArticleController@create');
@@ -100,7 +117,11 @@ Route::group([
             });
 
             Route::group(['prefix' => '/page'], function () {
-                Route::post('/edit',   'PagesController@edit');
+                Route::post('/edit', 'PagesController@edit');
+            });
+
+            Route::group(['prefix' => '/options'], function () {
+                Route::post('/update', 'OptionsController@update');
             });
         });
     }
@@ -189,7 +210,7 @@ foreach(['', '{locale?}'] as $prefix) {
                 Route::group([
                         'prefix' => 'articles/{category}',
                         'where'  => [
-                            'group'  => '(rubric)',
+                            'rubric' => '(rubric)',
                             'params' => '.*'
                         ]
                     ],
@@ -199,13 +220,23 @@ foreach(['', '{locale?}'] as $prefix) {
                 );
                 Route::get('article/{article}', 'ArticleController@index');
 
-                Route::get('delivery',     'PagesController@delivery');
-                Route::get('contacts',     'PagesController@contacts');
-                Route::get('calculator',   'PagesController@calculator');
-                Route::get('units',        'PagesController@units');
-                Route::get('returns',      'PagesController@returns');
-                Route::get('certificates', 'PagesController@certificates');
-                Route::get('partnership',  'PagesController@partnership');
+                Route::get('delivery',       'PagesController@delivery');
+                Route::get('contacts',       'PagesController@contacts');
+                Route::get('calculator',     'PagesController@calculator');
+                Route::get('units',          'PagesController@units');
+                Route::get('returns',        'PagesController@returns');
+                Route::get('certificates',   'PagesController@certificates');
+                Route::get('partnership',    'PagesController@partnership');
+                Route::get('privacy-policy', 'PagesController@privacyPolicy');
+                Route::get('measuring',      'PagesController@measuring');
+
+                Route::group([
+                    'prefix' => 'get-data',
+                ],
+                    function () {
+                        Route::get('special-offers', 'ActionController@getSpecialOffers');
+                    }
+                );
             });
             Route::group([
                     'middleware' => ['auth', 'verified'],

@@ -1,6 +1,18 @@
 import LocaleUA from '../../../lang/ua.json'
 
 export default {
+    watch: {
+        notifyRequest() {
+            if (this.notifyRequest) {
+                this.overlay = 'notify-request';
+            }
+        },
+        overlay() {
+            if (!this.overlay) {
+                this.notifyRequest = null
+            }
+        }
+    },
     computed: {
         getLocaleData: function() {
             return {
@@ -10,6 +22,37 @@ export default {
         },
         lang: function () {
             return this.$store.state.header.lang;
+        },
+        getNotifyRequest() {
+            switch (this.notifyRequest) {
+                case 'addCart':
+                    return {
+                        title: 'Товар добавлен в корзину',
+                        img: this._asset('library/img/cart-notify.svg'),
+                        btn: {
+                            name: 'Перейти в корзину',
+                            link: this._locale('cart')
+                        },
+                    }
+                case 'addCompare':
+                    return {
+                        title: 'Товар добавлен в сравнение',
+                        img: this._asset('library/img/compare-notify.svg'),
+                        btn: {
+                            name: 'Перейти к сравнению',
+                            link: this._locale('compare')
+                        },
+                    }
+                case 'addFavorites':
+                    return {
+                        title: 'Товар добавлен в избранное',
+                        img: this._asset('library/img/favorites-notify.svg'),
+                        btn: {
+                            name: 'Перейти в избранное',
+                            link: this._locale('favorites')
+                        },
+                    }
+            }
         }
     },
     filters: {
@@ -91,6 +134,7 @@ export default {
             })
             .then(() => {
                 setTimeout(() => {
+                    this.$root.notifyRequest = body.commit;
                     this.$store.commit(body.commit, body.input);
                 }, 500)
             })
@@ -107,6 +151,9 @@ export default {
                     item[body.pending] = false;
                 }, 500)
             })
+        },
+        notifyRequestTo() {
+            window.location = this.getNotifyRequest.btn.link;
         }
     }
 };

@@ -137,7 +137,7 @@ export default {
                 input: {
                     id: item.id,
                     attr: item.count.attr ? item.count.attr : [],
-                    count: 1
+                    count: item.draw
                 }
             });
         },

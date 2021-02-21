@@ -77,7 +77,7 @@
                                 </v-hover>
                             </v-col>
 
-                            <v-col cols="12" sm="1" class="py-0">
+                            <v-col cols="12" sm="1" class="py-0 text-right">
                                 <v-btn fab dark small color="red lighten-1 is-disabled"
                                     v-on:click="rmItem(index)"
                                 >

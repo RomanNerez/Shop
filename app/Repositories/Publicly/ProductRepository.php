@@ -75,6 +75,7 @@ class ProductRepository extends Repository
             'title'      => $product->content['title'],
             'hit'        => $product->hit,
             'new'        => $product->new,
+            'sale'       => $product->sale,
             'desc'       => $product->content['desc'],
             'images'     => $product->images,
             'price'      => $product->price,

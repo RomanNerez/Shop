@@ -1,0 +1,150 @@
+<template>
+    <section class="offers">
+        <div class="offers__tabs">
+            <div class="offers__tabs-box"
+                 v-for="(tab, index) in tabs.items"
+                 :key="index"
+                 v-on:click="tabs.selected = index"
+                 :class="{active: tabs.selected === index}"
+            >
+                <span class="offers__tabs-text">{{ __(tab.name) }}</span>
+            </div>
+        </div>
+
+        <div class="offers__cont" ref="offer-wrap"
+            :class="{'no-result': count === 0}"
+        >
+            <load-content
+                :show="count < 0"
+            ></load-content>
+
+            <template v-if="count > 0">
+                <product-card
+                    v-for="item in items"
+                    :key="item.id"
+                    :data="item"
+                ></product-card>
+            </template>
+            <template v-else-if="count === 0">
+                <div class="null-content is-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m494.5 60.514h-113.627c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h113.627c1.378 0 2.5 1.122 2.5 2.5v45.527h-482v-45.527c0-1.378 1.122-2.5 2.5-2.5h328.85c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-328.85c-9.649 0-17.5 7.851-17.5 17.5v355.973c0 9.649 7.851 17.5 17.5 17.5h399.347c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-399.347c-1.378 0-2.5-1.122-2.5-2.5v-295.446h482v97.409c0 4.142 3.358 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-157.936c0-9.65-7.851-17.5-17.5-17.5z"/><path d="m504.5 262.972c-4.142 0-7.5 3.358-7.5 7.5v163.515c0 1.378-1.122 2.5-2.5 2.5h-43.13c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h43.13c9.649 0 17.5-7.851 17.5-17.5v-163.515c0-4.142-3.358-7.5-7.5-7.5z"/><path d="m47.433 92.027c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h.113c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m70.076 92.027c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h.113c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m92.719 92.027c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h.113c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m464.567 107.027c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-13.956c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5z"/><path d="m336.078 240.496c0-44.155-35.923-80.078-80.078-80.078s-80.078 35.923-80.078 80.078 35.923 80.078 80.078 80.078 80.078-35.923 80.078-80.078zm-80.078 65.078c-35.884 0-65.078-29.194-65.078-65.078s29.194-65.078 65.078-65.078 65.078 29.194 65.078 65.078-29.194 65.078-65.078 65.078z"/><path d="m229.518 330.68c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h52.965c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m328.26 388.997c0-4.142-3.358-7.5-7.5-7.5h-187.453c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h187.453c4.142 0 7.5-3.358 7.5-7.5z"/><path d="m378.693 381.497h-27.484c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h27.484c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m133.307 404.334c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h59.876c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m221.632 419.334h157.061c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-157.061c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5z"/><path d="m283.801 212.695c-2.929-2.929-7.678-2.929-10.606 0l-17.195 17.195-17.195-17.195c-2.929-2.929-7.678-2.929-10.606 0-2.929 2.929-2.929 7.678 0 10.606l17.195 17.195-17.195 17.195c-2.929 2.929-2.929 7.678 0 10.606 1.464 1.464 3.384 2.197 5.303 2.197s3.839-.732 5.303-2.197l17.195-17.194 17.195 17.195c1.464 1.464 3.384 2.197 5.303 2.197s3.839-.732 5.303-2.197c2.929-2.929 2.929-7.678 0-10.606l-17.195-17.195 17.195-17.195c2.929-2.929 2.929-7.678 0-10.607z"/></g></svg>
+
+                    <p class="null-content__subtitle">{{ __(noContentNotify) }}</p>
+                </div>
+            </template>
+        </div>
+
+        <button type="button" class="btn-border red big"
+                v-if="checkMore"
+                v-on:click="loadMore"
+        >
+            <span class="btn-border__title">{{ __('Показать еще') }}</span>
+        </button>
+    </section>
+</template>
+
+<script>
+    export default {
+        data: function () {
+            return {
+                window: window.innerWidth,
+                items: [],
+                count: -1,
+                tabs: {
+                    selected: 0,
+                    items: [
+                        {
+                            name: 'Акции',
+                            key: 'sale',
+                            step: 1
+                        },{
+                            name: 'Топ продаж',
+                            key: 'hit',
+                            step: 1
+                        },{
+                            name: 'Новинки',
+                            key: 'new',
+                            step: 1
+                        }
+                    ]
+                }
+            }
+        },
+        mounted() {
+            window.addEventListener('resize', this.resize);
+            this.getProduct('tab');
+        },
+        watch: {
+            'tabs.selected': function () {
+                this.getProduct('tab')
+            },
+            'selected.step': function () {
+                this.getProduct('more')
+            }
+        },
+        computed: {
+            selected() {
+                return this.tabs.items[ this.tabs.selected ];
+            },
+            checkMore() {
+                return this.count > this.show;
+            },
+            show() {
+                let count;
+                if (this.window > 900) {
+                    count = 3
+                } else if (this.window > 600) {
+                    count = 2
+                }else{
+                    count = 1
+                }
+
+                return count * this.selected.step;
+            },
+            noContentNotify() {
+                switch (this.selected.key) {
+                    case 'sale':
+                        return 'На данный момент мы не проводим ни каких акций';
+                    case 'hit':
+                        return 'На данный момент мы не можем определить товары с достаточной популярностью';
+                    case 'new':
+                        return 'На данный момент в магазине нет новых поступлений';
+                }
+            }
+        },
+        methods: {
+            getProduct(behavior) {
+                if (behavior === 'tab') {
+                    this.count = -1;
+                }else{
+                    this.$root.loading = true;
+                }
+
+                axios.get(this._locale( '/get-data/special-offers' ), {
+                    params: {
+                        key: this.selected.key,
+                        count: this.show
+                    }
+                })
+                .then(response => {
+                    setTimeout(() => {
+                        let data = response.data;
+
+                        this.count = data.count;
+                        this.items = data.items;
+
+                        if (behavior === 'more') {
+                            this.$root.loading = false;
+                        }
+                    }, 1000)
+                })
+            },
+            resize() {
+                this.window = window.innerWidth;
+            },
+            loadMore() {
+                this.tabs.items[ this.tabs.selected ].step++;
+            }
+        }
+    }
+</script>

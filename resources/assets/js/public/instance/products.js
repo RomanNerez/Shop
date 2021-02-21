@@ -20,7 +20,7 @@ export default {
     computed: {
         counter: function () {
             return {
-                list: this.items.list.length
+                list: this.pager.total
             }
         }
     }

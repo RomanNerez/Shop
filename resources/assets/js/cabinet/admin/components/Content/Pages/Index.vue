@@ -93,6 +93,42 @@
                         t: 'контент',
                         k: 'vinyls'
                     },{
+                        c: 'delivery-content',
+                        t: 'контент',
+                        k: 'delivery'
+                    },{
+                        c: 'returns-content',
+                        t: 'контент',
+                        k: 'returns'
+                    },{
+                        c: 'certificates-content',
+                        t: 'контент',
+                        k: 'certificates'
+                    },{
+                        c: 'partnership-content',
+                        t: 'контент',
+                        k: 'partnership'
+                    },{
+                        c: 'home-content',
+                        t: 'контент',
+                        k: 'home'
+                    },{
+                        c: 'contacts-content',
+                        t: 'контент',
+                        k: 'contacts'
+                    },{
+                        c: 'policy-content',
+                        t: 'контент',
+                        k: 'policy'
+                    },{
+                        c: 'desc-content',
+                        t: 'контент',
+                        k: 'units'
+                    },{
+                        c: 'desc-content',
+                        t: 'контент',
+                        k: 'calculator'
+                    },{
                         c: 'create-meta',
                         t: 'meta данные'
                     }

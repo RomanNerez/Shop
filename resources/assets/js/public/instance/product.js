@@ -5,6 +5,7 @@ import Attr from '../components/Product/Attr.vue'
 import ReviewForm from '../components/Product/Reviews/Form.vue'
 import ReviewList from '../components/Product/Reviews/List.vue'
 import Related from '../components/Product/Related.vue'
+import CheckoutService from '../components/Product/CheckoutService.vue'
 
 export default {
     data: function() {
@@ -18,13 +19,14 @@ export default {
                 pending: false
             },
             show: {
-                review: false
+                review: false,
+                checkout: false
             }
         }
     },
     mounted: function() {
         if ( this.count.origin ) {
-            this.quantity = 1
+            this.quantity = this.data.draw
         }
     },
     components: {
@@ -34,25 +36,29 @@ export default {
         'attr-item': Attr,
         'review-form': ReviewForm,
         'review-list': ReviewList,
-        'related-item': Related
+        'related-item': Related,
+        CheckoutService
     },
     watch: {
         'count.origin': function() {
-            if ( this.quantity > this.count.origin && this.count.origin ) {
-                this.quantity = this.count.origin;
+            if ( this.quantity > this.count.origin ) {
+                this.quantity = (this.count.origin >= this.data.draw || this.count.origin < 0) ? this.data.draw : this.count.origin;
             }
+        },
+        'show.checkout': function() {
+            setTimeout(scroll_hidden, this.show.checkout ? 0 : 250)
         },
         quantity: function () {
             clearTimeout(window._bounce);
             window._bounce = setTimeout(() => {
-                if ( this.quantity > this.count.origin ) {
+                if ( this.quantity > this.count.origin && this.count.origin >= 0 ) {
                     this.quantity = this.count.origin;
-                }else if (this.quantity < 1 && this.count.origin){
-                    this.quantity = 1;
+                }else if (this.quantity < this.data.draw){
+                    this.quantity = (this.count.origin >= this.data.draw || this.count.origin < 0) ? this.data.draw : this.count.origin;
                 }
             }, 1000)
         },
-        attr: function () {
+        attr: function (a, b) {
             let data = [],
                 path = window.location.href.split('/option')[0];
 
@@ -65,8 +71,8 @@ export default {
                 path += '/option/' + data.join('/');
             }
 
-            if ( this.count.origin ) {
-                this.quantity = 1
+            if ( this.quantity > this.count.origin && JSON.stringify(a) !== JSON.stringify(b) ) {
+                this.quantity = (this.count.origin >= this.data.draw || this.count.origin < 0) ? this.data.draw : this.count.origin;
             }
 
             window.history.replaceState(null, null, path);
@@ -79,7 +85,8 @@ export default {
         status: function() {
             return {
                 hit: this.data.hit,
-                new: this.data.new
+                new: this.data.new,
+                sale: this.data.sale
             }
         },
         reviews: function() {
@@ -147,6 +154,9 @@ export default {
             }else{
                 return this.data.compare_pending ? 'обработка...' : 'Сравнить'
             }
+        },
+        validOrder: function() {
+            return !this.quantity || !this.count.origin || (this.count.origin < this.data.draw && this.count.origin >= 0)
         }
     },
     methods: {
@@ -220,7 +230,7 @@ export default {
                 .then(response => {
                     axios.get(response.data)
                     .then(() => {
-                        this.$root.setOverlay(4);
+                        this.$root.setOverlay('fast-order');
                         this.phone.value = '';
                         this.phone.input = '';
                     })

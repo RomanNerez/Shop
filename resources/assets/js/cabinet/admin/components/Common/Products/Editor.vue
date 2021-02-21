@@ -272,14 +272,14 @@
                     }
 
                     this.setAttrValue();
-
-                    setTimeout(()=>{
-                        this.formDialogRight = a;
-                    },100)
                 }else{
                     this.setup();
-                    this.formDialogRight = a;
                 }
+
+                setTimeout(()=>{
+                    this.formDialogRight = a;
+                    html_hidden('editor');
+                },10)
             }
         },
         computed:{
@@ -434,6 +434,7 @@
                     status: 0,
                     hit: false,
                     new: false,
+                    sale: false,
                     draw: 1,
                     subs: [],
                     related: [],
@@ -545,7 +546,7 @@
                             url = this.selected ? path +'products/edit' : path +'products/create';
 
                         input.related_to = this.related;
-                        console.log(input);
+
                         this.pending = true;
                         input.categories_id = this.parent;
 

@@ -60,15 +60,15 @@ class CatalogRepository extends Repository
         $query    = self::getProduct($where, $collection);
         $subs     = $query->get()->pluck('subs');
         $products = self::filterProduct($query, $params, $order);
-        $filters  = self::getFilter($subs, $products['data']->pluck('subs'));
+        $filters  = self::getFilter($subs, $products['data']->get()->pluck('subs'));
 
-        if ( !count($products['data']) ) {
+        if ( !$products['data']->exists() ) {
             abort(404);
         }
 
         return [
             'content'  => self::getContent($collection ? $collection : $category, $products['selected'] ?? null, $related),
-            'list'     => $products['data'],
+            'list'     => $products['data']->paginate(24),
             'filters'  => [
                 'items'    => $filters,
                 'selected' => collect($products['selected'])->pluck('id')
@@ -163,6 +163,9 @@ class CatalogRepository extends Repository
                 }
             }
 
+            if ( !isset($data[$check['group']]) ) {
+                abort(404);
+            }
             foreach ($data[$check['group']] as $sub) {
                 $counter = 0;
                 foreach ($data as $key => $group) {
@@ -185,7 +188,7 @@ class CatalogRepository extends Repository
 
         return [
             'selected' => $selected,
-            'data'     => $products->orderBy('id', 'desc')->get()
+            'data'     => $products->orderBy('id', 'desc')
         ];
     }
 

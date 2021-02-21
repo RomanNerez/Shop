@@ -59,7 +59,7 @@
             this.step = step > 0 ? step : 0;
 
             if (this.data.length) {
-                axios.post(window.origin +'/product/'+ this.id +'/related', {
+                axios.post(this._locale( '/product/'+ this.id +'/related' ), {
                     data: this.data
                 })
                 .then(response => {

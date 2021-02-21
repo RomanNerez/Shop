@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Cabinet\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArbitraryLinks;
 use App\Models\Article;
 use App\Models\Attribute;
 use App\Models\Collection;
 use App\Models\CurrencyList;
 use App\Models\CurrencyValue;
+use App\Models\Menu;
+use App\Models\MenuAreaVisibilities;
+use App\Models\Option;
 use App\Models\Page;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -33,7 +37,8 @@ class IndexController extends Controller
                 'groups'      => Groups::where('related', 'store')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->get(),
                 'collections' => Collection::orderBy('created_at', 'desc')->get(),
                 'attributes'  => Attribute::where('related', 'store')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->get(),
-                'products'    => Product::where('related_to', 'store')->with('related')->orderBy('created_at', 'desc')->get()
+                'products'    => Product::where('related_to', 'store')->with('related')->orderBy('created_at', 'desc')->get(),
+                'arbitrary_links' => ArbitraryLinks::orderBy('created_at', 'desc')->get(),
             ],
             'services' => [
                 'categories'  => Categories::where('related', 'services')->orderBy('created_at', 'desc')->get(),
@@ -42,9 +47,14 @@ class IndexController extends Controller
                 'products'    => Product::where('related_to', 'services')->with('related')->orderBy('created_at', 'desc')->get()
             ],
             'settings' => [
+                'options'  => Option::all()->first(),
                 'currency' => [
                     'list'   => CurrencyList::all(),
                     'values' => CurrencyValue::all()
+                ],
+                'menu' => [
+                    'area_visibilities' => MenuAreaVisibilities::orderBy('created_at', 'desc')->get(),
+                    'items' => Menu::orderBy('order', 'asc')->get()
                 ]
             ],
             'content'  => [

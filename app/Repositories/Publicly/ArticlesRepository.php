@@ -48,15 +48,15 @@ class ArticlesRepository extends Repository
 
         $subs     = $query->get()->pluck('subs');
         $list     = self::filterList($query, $params, $order);
-        $filters  = self::getFilter($subs, $list['data']->pluck('subs'));
+        $filters  = self::getFilter($subs, $list['data']->get()->pluck('subs'));
 
-        if ( !count($list['data']) && !$search ) {
+        if ( !$list['data']->exists() && !$search ) {
             abort(404);
         }
 
         return [
             'content'  => self::getContent($category, $list['selected'] ?? null, $_category),
-            'list'     => $list['data'],
+            'list'     => $list['data']->paginate(24),
             'search'   => $search,
             'template' => $category->template,
             'filters'  => [
@@ -133,7 +133,7 @@ class ArticlesRepository extends Repository
 
         return [
             'selected' => $selected,
-            'data'     => $list->orderBy('id', 'desc')->get()
+            'data'     => $list->orderBy('id', 'desc')
         ];
     }
 

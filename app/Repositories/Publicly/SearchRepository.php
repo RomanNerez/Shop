@@ -35,7 +35,7 @@ class SearchRepository extends Repository
             $products = $products->orderBy('price', $direction);
         }
 
-        return $products->orderBy('id', 'desc')->get();
+        return $products->orderBy('id', 'desc')->paginate(24);
     }
 
     public function getData($products, $query) {

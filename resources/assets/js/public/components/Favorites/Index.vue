@@ -83,7 +83,9 @@
                 }
             },
             availableProduct: function () {
-                return this.items.filter(item => !item.cart_check);
+                return this.items.filter(item => {
+                    return !item.cart_check && item.related_to === 'store';
+                });
             }
         },
         methods: {
@@ -109,7 +111,7 @@
                         return {
                             id: item.id,
                             attr: [],
-                            count: 1
+                            count: item.draw
                         }
                     });
 

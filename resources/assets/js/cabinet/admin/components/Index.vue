@@ -172,8 +172,8 @@
 </template>
 
 <script>
+    import SettingsBase from './Settings/Base/Index.vue'
     import SettingsCurrency from './Settings/Currency/Index.vue'
-
     import StoreCategories from './Store/Categories.vue'
     import StoreGroups from './Store/Groups.vue'
     import StoreCollection from './Store/Collection/Index.vue'
@@ -190,16 +190,18 @@
     import ContentArticles from './Content/Articles/Index.vue'
     import ContentPages from './Content/Pages/Index.vue'
 
+    import SettingsMenu from './Settings/Menu/Index.vue'
+
     export default {
         components: {
+            'settings-base': SettingsBase,
             'settings-currency': SettingsCurrency,
-
             'store-categories': StoreCategories,
             'store-groups': StoreGroups,
             'store-collection': StoreCollection,
             'store-attributes': StoreAttributes,
+            //'blog-categories': BlogCategories,
             'store-products': StoreProducts,
-
             'services-categories': ServicesCategories,
             'services-groups': ServicesGroups,
             'services-attributes': ServicesAttributes,
@@ -208,12 +210,13 @@
             'content-categories': ContentCategories,
             'content-groups': ContentGroups,
             'content-articles': ContentArticles,
-            'content-pages': ContentPages
+            'content-pages': ContentPages,
+            'settings-menu': SettingsMenu
         },
         data: function() {
             return {
                 location: window.location.origin,
-                selectItem: this.$store.state.data.divide ? this.$store.state.data.divide : 'settings-currency',
+                selectItem: this.$store.state.data.divide ? this.$store.state.data.divide : 'settings-base',
                 drawer: null,
                 user: this.$store.getters.userData,
                 selected: {
@@ -234,9 +237,18 @@
                         icon: 'mdi-format-list-bulleted',
                         child: [
                             {
+                                title: 'Основное',
+                                icon: 'mdi-cube-outline',
+                                component: 'settings-base',
+                            },{
                                 title: 'Валюты',
                                 icon: 'mdi-currency-usd',
                                 component: 'settings-currency',
+                            },
+                            {
+                                title: 'Меню',
+                                icon: 'mdi-menu-open',
+                                component: 'settings-menu',
                             }
                         ]
                     },{

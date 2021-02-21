@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $request;
     protected $table    = 'products';
-    protected $fillable = ['categories_id', 'slug', 'status', 'new', 'hit', 'currency', 'price', 'count', 'images', 'bulk_price', 'related_to', 'draw'];
+    protected $fillable = ['categories_id', 'slug', 'status', 'new', 'hit', 'sale', 'currency', 'price', 'count', 'images', 'bulk_price', 'related_to', 'draw'];
     protected $hidden   = ['reviews', 'category', 'currency', 'product_trans', 'bulk_price', 'product_attr', 'product_subs', 'currency_data'];
     protected $appends  = ['content', 'subs', 'url'];
     protected $casts    = [

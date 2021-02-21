@@ -133,6 +133,14 @@
     import ServiceContent from '../../Tabs/Pages/Content/Services.vue';
     import StandingContent from '../../Tabs/Pages/Content/Standing.vue';
     import VinylsContent from '../../Tabs/Pages/Content/Vinyls.vue';
+    import DeliveryContent from '../../Tabs/Pages/Content/Delivery.vue';
+    import ReturnsContent from '../../Tabs/Pages/Content/Returns.vue';
+    import CertificatesContent from '../../Tabs/Pages/Content/Certificates.vue';
+    import PartnershipContent from '../../Tabs/Pages/Content/Partnership.vue';
+    import HomeContent from '../../Tabs/Pages/Content/Home.vue';
+    import ContactsContent from '../../Tabs/Pages/Content/Contacts.vue';
+    import PolicyContent from '../../Tabs/Pages/Content/Policy.vue';
+    import DescContent from '../../Tabs/Pages/Content/DescPage.vue';
 
     export default {
         props: [
@@ -148,7 +156,15 @@
             'create-meta': Meta,
             'service-content': ServiceContent,
             'standing-content': StandingContent,
-            'vinyls-content': VinylsContent
+            'vinyls-content': VinylsContent,
+            'delivery-content': DeliveryContent,
+            'returns-content': ReturnsContent,
+            'certificates-content': CertificatesContent,
+            'partnership-content': PartnershipContent,
+            'home-content': HomeContent,
+            'contacts-content': ContactsContent,
+            'policy-content': PolicyContent,
+            'desc-content': DescContent
         },
         data: function() {
             return {
@@ -202,13 +218,10 @@
                 }
             },
             formDialog: function(a){
-                if(a){
-                    setTimeout(()=>{
-                        this.formDialogRight = a;
-                    },100)
-                }else{
+                setTimeout(()=>{
                     this.formDialogRight = a;
-                }
+                    html_hidden('editor');
+                },10)
             },
             'alert.option': {
                 deep: true,

@@ -47,10 +47,13 @@
             </svg>
 
             <div class="phone__box">
-                <a href="tel:+380639737304" class="phone__title">+38 (063) 973-73-04</a>
-                <a href="tel:+380503463476" class="phone__title">+38 (050) 346-34-76</a>
-                <a href="tel:+380445467809" class="phone__title">+38 (044) 546-78-09</a>
-                <span class="phone__info">Ежедневно<br>с 9:00 до 22:00</span>
+                <a class="phone__title"
+                   v-for="phone in data.options.phones"
+                   :href="'tel:'+ phone"
+                >
+                    {{ phone }}
+                </a>
+                <span class="phone__info">{{ data.options.content.schedule }}</span>
             </div>
         </div>
     </div>
