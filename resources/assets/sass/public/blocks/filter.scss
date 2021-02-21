@@ -1,0 +1,39 @@
+.catalog-filter {
+    &__box {
+    }
+    &__btn {
+        padding: 10px 0;
+    }
+    &__title {
+        font-size: 16px;
+        color: #000;
+        font-weight: 500;
+    }
+    &__show {
+    }
+    &__price {
+    }
+}
+.checked {
+    display: flex;
+    align-self: center;
+    padding: 10px 0;
+    &__inout {
+        display: none;
+    }
+    input[type="checkbox"]:checked + span {
+        background: url("../../svg/check-solid.svg") no-repeat center;
+        background-size: 80%;
+    }
+    &__square {
+        margin-right: 20px;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid $text-grey;
+        border-radius: 4px;
+    }
+    &__text {
+        vertical-align: middle;
+    }
+}

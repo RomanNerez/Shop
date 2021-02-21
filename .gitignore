@@ -3,6 +3,7 @@
 /public/hot
 /public/upload
 /public/assets
+/public/mix-manifest.json
 /storage/*.key
 /vendor
 .env

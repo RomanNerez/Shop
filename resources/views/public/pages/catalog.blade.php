@@ -3,6 +3,10 @@
 @section('content')
 <main class="products">
     <div class="container">
+        <div class="products__title">
+            <h1>Lorem ipsum dolor sit amet.</h1>
+            <p class="search-result">Найдено <span>10</span> товаров</p>
+        </div>
         <div class="breadcrumbs">
             <ul class="breadcrumbs__wrapper">
                 <li class="breadcrumbs__item">

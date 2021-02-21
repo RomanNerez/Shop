@@ -13,19 +13,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <svg>
-                                <use xlink:href="#phone"></use>
-                            </svg>
-                            +(38)-099-036-80-44
-                        </a>
-                    </li>
-                    <li>
                         <a href="mailto:yuriy.zieit@gmail.com">
                             <svg>
                                 <use xlink:href="#mail"></use>
                             </svg>
-                            yuriy.zieit@gmail.com
+                            support@freez.com.ua
                         </a>
                     </li>
                 </ul>
@@ -45,11 +37,11 @@
                     <li>
                         <ul class="top__socials">
                             <li class="top__insta">
-                                <a href="#">
-                                    <svg>
+                                <a href="#usd">
+                                    <svg width="20" height="20">
                                         <use xlink:href="#insta"></use>
                                     </svg>
-                                    Instagram.com</a>
+                                </a>
                             </li>
                             <li class="top__facebook">
                                 <a href="#">
@@ -59,12 +51,12 @@
                                     Facebook
                                 </a>
                             </li>
-                            <li class="top__telegram">
+                            <li class="top__facebook">
                                 <a href="#">
                                     <svg>
                                         <use xlink:href="#telegram"></use>
                                     </svg>
-                                    telegram
+                                    Facebook
                                 </a>
                             </li>
                             <li class="top__login">
