@@ -26,8 +26,8 @@
                 <ul>
                     <li>
                         @if(Auth::check())
-                            <a 
-                                href="{{route(Auth::user()->role . '-cabinet')}}" 
+                            <a
+                                href="{{route(Auth::user()->role . '-cabinet')}}"
                                 class="sign"
                             >
                                 {{Auth::user()->name }}
@@ -122,30 +122,39 @@
             </ul>
         </div>
         <div class="search">
-            <form action="#" class="search__form">
-                <input type="text" placeholder="пошук" />
-            </form>
+            <search-layout></search-layout>
+        </div>
+        <div class="comparison-btn">
+            <a href="{{ url('compare') }}">
+                <svg width="32" height="26" viewBox="0 0 32 26" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26.6667 25V1H30.9333V25M18.1333 25V11.9091H22.4V25M9.6 25V7.54545H13.8667V25M1.06667 25V18.4545H5.33333V25M32 25H0"
+                          stroke="#0A7CCD" stroke-width="2" stroke-miterlimit="10"/>
+                </svg>
+                <template>
+                    <span class="info-circle--red" v-if="compare.count">@{{ compare.count }}</span>
+                </template>
+            </a>
+        </div>
+        <div class="bookmarks-btn">
+            <a href="{{ url('favorites') }}">
+                <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 26L11 20.1667L1 26V1H21V26Z" stroke="#0A7CCD" stroke-width="2" stroke-miterlimit="10"/>
+                </svg>
+                <template>
+                    <span class="info-circle--red" v-if="favorites.count">@{{ favorites.count }}</span>
+                </template>
+            </a>
         </div>
         <div class="cart">
             <a href="{{ url('cart') }}" class="cart__link">
                 <svg>
                     <use xlink:href="#cart"></use>
                 </svg>
-               <!--  <template>
-                    <span v-if="carts.length >= 1">@{{summeryCart.allCount}}</span>
-                </template> -->
+                <template>
+                    <span class="info-circle--red" v-if="cart.count >= 1">@{{ cart.count }}</span>
+                </template>
             </a>
-            <!--<div class="cart__popup">
-                <p>
-                    <span class="cart__popup-total">@{{carts.length}}</span> товар
-                    на сумму
-                    <span class="cart__popup-price">@{{summeryCart.allPrice}}</span
-                    >грн.
-                </p>
-                <a href="#" class="btn cart__popup-btn"
-                    >Оформити</a
-                >
-            </div>-->
         </div>
     </div>
 </nav>

@@ -20,7 +20,7 @@ function openMenu() {
     menu.classList.add("active");
     body.classList.add("blocked");
 }
-burger.addEventListener("click", openMenu);
+//burger.addEventListener("click", openMenu);
 //close manu function
 function closeMenu() {
     menu.classList.remove("active");

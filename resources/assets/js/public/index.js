@@ -32,6 +32,7 @@ Vue.use(VueTelInput);
 
 if (response.component === 'cart') {
     Vue.component('cart-layout', require('./components/Cart/Index.vue').default);
+    Vue.component('cart-order', require('./components/Cart/Order.vue').default);
 }
 if (response.component === 'favorites') {
     Vue.component('favorites-layout', require('./components/Favorites/Index.vue').default);
