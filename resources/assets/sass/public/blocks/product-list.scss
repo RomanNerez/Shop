@@ -19,7 +19,6 @@
     }
     &__list-wrapper {
         flex-grow: 1;
-        padding: 50px 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 5px;
@@ -30,10 +29,10 @@
     }
 }
 .product {
+    max-width: 296px;
     padding: 15px;
     margin: 0 4px 10px 0;
     border: 1px solid rgb(230, 230, 230);
-    border-radius: 10px;
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-flow: column;
@@ -47,13 +46,13 @@
     &__img {
         position: relative;
         width: 100%;
-        height: 200px;
+        min-height: 200px;
         border: 1px solid rgb(230, 230, 230);
-        border-radius: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        background: rgb(202, 202, 202);
         img {
             width: 80%;
             border-radius: 10px;
@@ -82,17 +81,34 @@
             }
         }
     }
+    &__buttons {
+        display: none;
+    }
+    &__compare {
+        display: inline-block;
+    }
     &__name {
-        padding: 20px 0 5px 0;
-        font-size: 18px;
+        padding: 5px 0 5px 0;
+        font-size: 14px;
         font-weight: 500;
     }
     &__description {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         padding: 5px 0 10px 0;
+        height: 100%;
     }
     &__price {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-size: 18px;
         font-weight: 700;
+        p {
+            font-size: 12px;
+        }
     }
     &__btn {
         max-width: 90px;
@@ -101,6 +117,7 @@
         background: $text-red;
         text-align: center;
         border: 1px solid $text-red;
+        text-transform: uppercase;
         &:hover {
             background-color: darken($text-red, 10%);
             color: #fff;
@@ -146,6 +163,16 @@
                 fill: gold;
             }
         }
+    }
+    .block-four__status {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        display: block;
+        padding: 10px;
+        background-color: $text-red;
+        color: #fff;
+        text-transform: uppercase;
     }
 }
 

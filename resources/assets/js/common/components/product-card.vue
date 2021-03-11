@@ -1,12 +1,12 @@
 <template>
-    <div class="block-four"
+    <a :href="item.url" class="block-four product"
          :class="{'block-four--not-bulk': !item.price.bulk.length || !item.count.base}"
     >
         <slot name="removeFavorites"></slot>
 
-        <div class="block-four__img">
-            <div class="block-four__group">
-                <button type="button" class="block-four__сompare"
+        <div class="block-four__img product__img">
+            <div class="block-four__group product__buttons">
+                <button type="button" class="block-four__сompare product__compare"
                         :class="{'is-compare': item.compare_check}"
                         :disabled="item.compare_pending"
                         v-on:click="addToCompare"
@@ -17,7 +17,7 @@
                     <span class="block-four__сompare-title">{{ __( getCompareBtn ) }}</span>
                 </button>
 
-                <button type="button" class="block-four__сompare"
+                <button type="button" class="block-four__сompare product__compare"
                         :class="{'is-favorites': item.favorites_check}"
                         :disabled="item.favorites_pending"
                         v-on:click="addToFavorites"
@@ -50,9 +50,8 @@
             </a>
         </div>
 
-        <div class="block-four__text">
-            <a class="block-four__descript"
-               :href="item.url"
+        <div class="block-four__text product__description">
+            <a class="block-four__descript product__name"
             >{{ item.content.title }}</a>
             <span class="block-four__line"></span>
 
@@ -64,7 +63,7 @@
                     <span>{{ price.sale.view }} <b>{{ item.price.currency.content.abbrev }}</b></span>
                 </div>
             </div>
-            <div class="block-four__text-bottom">
+            <div class="block-four__text-bottom product__price">
                 <div class="block-four__price">
                     <p>{{ __('Цена за') }} 1 {{ __('шт.') }}</p>
                     <span>{{ item.price.base.view }} <b>{{ item.price.currency.content.abbrev }}</b></span>
@@ -76,7 +75,7 @@
                     </div>
                 </template>
                 <template v-else>
-                    <button class="btn-border red text-upper"
+                    <button class="btn-border red text-upper product__btn"
                             :disabled="!item.count.base || item.cart_pending"
                             :class="{'is-cart': item.cart_check}"
                             v-on:click="addToCart"
@@ -86,7 +85,7 @@
                 </template>
             </div>
         </div>
-    </div>
+    </a>
 </template>
 
 <script>
