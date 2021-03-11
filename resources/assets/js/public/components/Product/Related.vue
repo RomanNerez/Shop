@@ -4,8 +4,9 @@
             :show="!init"
         ></load-content>
 
-        <h2 class="unselectable">{{ __('С этим товаром также покупают') }}</h2>
-        <transition-group name="slider" tag="div" class="also-buy__slider"
+        <div class="container">
+            <h2 class="unselectable">{{ __('С этим товаром также покупают') }}</h2>
+            <transition-group name="slider" tag="div" class="also-buy__slider"
                           :class="{'before-load': !init}"
         >
             <product-card
@@ -39,6 +40,9 @@
                 </div>
             </div>
         </transition-group>
+
+        </div>
+        
     </section>
 </template>
 

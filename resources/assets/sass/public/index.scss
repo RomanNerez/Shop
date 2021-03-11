@@ -89,7 +89,6 @@ button {
     background-color: $main-color;
     border: none;
     color: #fff;
-    border-radius: 5px;
     text-transform: uppercase;
     transition: $hover-transition;
     cursor: pointer;
@@ -143,3 +142,4 @@ button {
 @import "./blocks/cart-modal.scss";
 @import "./blocks/user.scss";
 @import "./blocks/filter.scss";
+@import "./blocks/card.scss";

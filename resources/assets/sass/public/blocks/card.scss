@@ -1,0 +1,267 @@
+.card {
+    &__cont {
+        display: flex;
+    }
+    &__left {
+        width: 60%;
+        padding: 0 15px 15px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__right {
+        padding: 15px;
+        width: 40%;
+        border: 1px solid rgb(177, 177, 177);
+    }
+    &__product-code {
+        display: block;
+    }
+    &__main-title {
+        display: block;
+        font-size: 35px;
+        line-height: 34px;
+        padding: 20px 0;
+    }
+    &__price {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .price-colum {
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            width: 25%;
+            display: none;
+        }
+        .price-colum:first-child {
+            display: block;
+        }
+        .price-title {
+            padding: 5px 0;
+        }
+        .price-number {
+            font-size: 30px;
+            font-weight: 300;
+            b {
+                font-size: 20px;
+                font-weight: 300;
+            }
+        }
+    }
+    &__order {
+        display: flex;
+        padding: 10px 0;
+        & > button {
+            height: 45px;
+            margin-left: auto;
+            background-color: $text-red;
+        }
+    }
+    &__order-phone {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        button {
+            width: 200px;
+        }
+    }
+    &__info-wrapper {
+        padding: 10px 0;
+    }
+    &__info {
+        padding: 10px 0;
+    }
+    &__info-show {
+    }
+    &__info-text {
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__info-btn {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        background-color: rgb(197, 197, 197);
+        color: #fff;
+        cursor: pointer;
+        svg {
+            margin-right: 20px;
+            fill: #fff;
+            stroke: none;
+        }
+    }
+    &-compare__block {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    &-compare__box {
+        padding: 0;
+        text-align: center;
+        font-size: 12px;
+        background-color: #fff;
+        color: $text-red;
+        font-weight: 700;
+        outline: none;
+        svg {
+            display: none;
+        }
+        &:hover {
+            background-color: #fff;
+            color: $text-black;
+        }
+    }
+    &__description {
+        padding: 15px;
+        border: 1px solid rgb(177, 177, 177);
+        margin: 10px 0;
+        p {
+            padding: 5px 0;
+            line-height: 1.2;
+        }
+    }
+    &__desktop {
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+        button {
+            padding: 10px 30px;
+            background-color: $text-red;
+            color: #fff;
+            text-align: center;
+            border: none;
+            &:hover {
+                background-color: #fff;
+                color: $text-black;
+                border: 1px solid $text-red;
+            }
+        }
+        svg {
+            display: none;
+        }
+    }
+    &__mobile {
+        display: none;
+    }
+}
+.gallery {
+    &__main-img {
+        width: 100%;
+        height: 400px;
+        //удалить потом
+        background: url("https://images.indianexpress.com/2020/09/Nokia-newlaunches.jpg")
+            no-repeat;
+        background-size: contain;
+        cursor: pointer;
+    }
+    &__block {
+        padding: 5px 0;
+        width: 100%;
+        height: 50px;
+        display: flex;
+    }
+    &__mini-img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        cursor: pointer;
+        background: url("https://images.indianexpress.com/2020/09/Nokia-newlaunches.jpg")
+            no-repeat;
+        background-size: cover;
+        img {
+            width: 100%;
+            height: 50px;
+        }
+    }
+    &__status {
+        max-width: 100px;
+        display: block;
+        padding: 10px 10px;
+        background-color: $text-red;
+        color: #fff;
+        text-align: center;
+    }
+}
+.quantity {
+    &__box {
+    }
+    &__text {
+        display: block;
+        padding: 10px 0;
+    }
+    &__btn {
+        width: 45px;
+        height: 45px;
+        border: none;
+        padding: 0;
+        background-color: rgb(221, 221, 221);
+    }
+    &__input {
+        margin: 0 5px;
+        width: 45px;
+        height: 45px;
+        border: 1px solid rgb(221, 221, 221);
+        padding: 0;
+        text-align: center;
+    }
+}
+.also-buy {
+    padding: 40px 0;
+    overflow: hidden;
+    &__slider {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 20px 0;
+    }
+    .slide-item {
+        width: 24%;
+    }
+}
+.slider-btn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    &__arrow {
+        margin: 0 10px;
+        cursor: pointer;
+    }
+}
+.review__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+}
+.add-review {
+    width: 600px;
+    background-color: #fff;
+    padding: 30px;
+    &__row {
+        padding: 20px 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__colum {
+        width: 50%;
+        padding: 10px;
+        input,
+        textarea {
+            width: 100%;
+            padding: 5px;
+            margin: 10px 0;
+        }
+        textarea {
+            height: 100%;
+        }
+    }
+}

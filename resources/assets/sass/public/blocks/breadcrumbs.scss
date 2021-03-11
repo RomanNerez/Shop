@@ -1,94 +1,25 @@
 .breadcrumbs {
+    padding: 20px 0;
     &__wrapper {
         display: flex;
         align-items: center;
     }
     &__item {
+        margin: 0 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 10px 10px;
         cursor: pointer;
-        svg {
-            width: 30px;
-            height: 20px;
+        color: rgb(194, 194, 194);
+        &:hover {
+            color: $text-black;
         }
-        & > a {
-            position: relative;
-        }
-        & > a:after {
-            position: absolute;
-            content: "";
-            top: 50%;
-            right: -10px;
-            width: 1px;
-            height: 10px;
-            background-color: #ccc;
-            transform: translateY(-5px) rotate(15deg);
-        }
-        &:last-child > a:after {
-            display: none;
+        &:last-child {
+            color: $text-black;
         }
     }
-}
-.filter {
-    &__heading {
-        background: linear-gradient(to left, #7f00e2, #0095f9);
-        padding: 10px 10px;
-        span {
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 13px;
-        }
-    }
-    .aside__heading {
-        background-color: #0095f9 !important;
-        padding: 10px 10px;
-        span {
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 13px;
-        }
-    }
-}
-.sort {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &__link {
-        display: flex;
-        align-items: center;
-    }
-    &__btn {
-        border: none;
-        background-color: inherit;
-        color: #fff;
-        font-size: 15px;
-    }
-    &__arrows {
-        .arrow {
-            width: 15px;
-            height: 15px;
-            margin: 0 10px;
-            position: relative;
-            border: none;
-            background-color: transparent;
-            outline: none;
-            &:before {
-                position: absolute;
-                top: 20%;
-                left: 0;
-                content: "";
-                width: 0;
-                height: 0;
-                border: 10px solid #fff;
-                border-bottom-color: transparent;
-                border-left-color: transparent;
-                border-right-color: transparent;
-            }
-        }
-        .arrow__down {
-            transform: rotate(180deg);
-        }
+    &__separator {
+        color: rgb(194, 194, 194);
     }
 }

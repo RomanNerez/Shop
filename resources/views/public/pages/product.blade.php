@@ -17,7 +17,7 @@
                         <template>
 
                             <div class="card-compare__block">
-                                <button type="button" class="card-compare__box"
+                                <button type="button" class="card-compare__box btn"
                                         :disabled="data.compare_pending"
                                         :class="{'is-favorites': data.compare_check}"
                                         v-on:click="addToCompare"
@@ -28,7 +28,7 @@
                                     <span class="card-compare__box">@{{ __( compareBtn ) }}</span>
                                 </button>
 
-                                <button type="button" class="card-compare__box"
+                                <button type="button" class="card-compare__box btn"
                                         :disabled="data.favorites_pending"
                                         :class="{'is-favorites': data.favorites_check}"
                                         v-on:click="addToFavorites"
@@ -130,7 +130,7 @@
                                                v-on:validate="validateNumber"
                                 ></vue-tel-input>
 
-                                <button type="button" class="btn-border red text-upper big"
+                                <button type="button" class="btn-border btn red text-upper big"
                                         v-on:click="fastOrder"
                                         :disabled="phone.pending"
                                 >
